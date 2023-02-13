@@ -1,9 +1,26 @@
-import React from 'react'
+import React from "react";
+import { Link } from "react-router-dom";
+import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
+import tw from "tailwind-styled-components";
 
 const Main = () => {
   return (
-    <div>Main</div>
-  )
-}
+    <>
+      <Header>
+        <Link to={"/"}>
+          <MdOutlineKeyboardArrowLeft className="text-sub text-5xl font-bold" />
+        </Link>
+        <h1 className="text-xl font-bold">상세내역</h1>
+      </Header>
+    </>
+  );
+};
 
-export default Main
+const Header = tw.div`
+flex
+items-center
+w-full
+h-20
+`;
+
+export default Main;
