@@ -10,7 +10,7 @@ const Main = () => {
         <Link to={"/"}>
           <MdOutlineKeyboardArrowLeft className="text-sub text-5xl font-bold" />
         </Link>
-        <h1 className="text-xl font-bold">상세내역</h1>
+        <h1 className="text-xl font-bold text-main">나의 텅장</h1>
       </Header>
     </>
   );
