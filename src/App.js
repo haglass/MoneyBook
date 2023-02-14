@@ -5,6 +5,7 @@ import "./App.css";
 import Nav from "./components/Nav";
 import Main from "./pages/main/Main";
 import Login from "./pages/user/Login";
+import SignUp from "./pages/user/SignUp";
 import Chart from "./pages/chart/Chart";
 import Board from "./pages/Board/Board";
 
@@ -15,6 +16,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
           <Route path="/chart" element={<Chart />} />
           <Route path="/board" element={<Board />} />
         </Routes>
