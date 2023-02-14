@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const ChartMonth = () => {
   return (
-    <div>ChartMonth</div>
-  )
-}
+    <div>
 
-export default ChartMonth
+    </div>
+  );
+};
+
+export default ChartMonth;
