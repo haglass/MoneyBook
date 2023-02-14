@@ -9,8 +9,8 @@ const Chart = () => {
       <Header>
         <Link to={"/"}>
           <MdOutlineKeyboardArrowLeft className="text-sub text-5xl font-bold" />
-          <h1> 통 계 </h1>
         </Link>
+        <h1 className="text-xl font-bold text-main">통계</h1>
       </Header>
       <div className="my-20">
         <Bt>많이 쓴 카테고리</Bt>
