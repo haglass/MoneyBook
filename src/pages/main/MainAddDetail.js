@@ -8,6 +8,7 @@ import { FaThumbtack } from "react-icons/fa";
 import tw from "tailwind-styled-components";
 const MainAddD = () => {
   return (
+    <article>
     <div>
       <Header>
         <Link to={"/"}>
@@ -16,7 +17,7 @@ const MainAddD = () => {
         <h1 className="text-xl font-bold text-main">내역추가</h1>
       </Header>
       <div>
-        <div className="flex flex-col gap-2 p-8 pb-16">
+        <input className="flex flex-col gap-2 p-8 pb-16">
           <MainBt className="flex justify-between text-xl">
             - 소비금액 <p>원</p>
           </MainBt>
@@ -24,7 +25,7 @@ const MainAddD = () => {
             <FaCapsules className="text-main text-3xl font-bold " />
             <span className="pl-2">내용</span>
           </MainBt>
-        </div>
+        </input>
       </div>
       <h1 className="text-xl  text-main pl-8 ">최근 소비</h1>
 
@@ -66,5 +67,3 @@ rounded-xl
 w-90
 
 `;
-
-export default MainAddDetail;
