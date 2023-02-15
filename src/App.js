@@ -8,6 +8,8 @@ import Login from "./pages/user/Login";
 import SignUp from "./pages/user/SignUp";
 import Chart from "./pages/chart/Chart";
 import Board from "./pages/Board/Board";
+import MainAddDetail from "./pages/main/MainAddDetail";
+import ChartCate from "./pages/chart/ChartCate";
 
 const App = () => {
   return (
@@ -19,6 +21,9 @@ const App = () => {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/chart" element={<Chart />} />
           <Route path="/board" element={<Board />} />
+          <Route path="/mainadddetail" element={<MainAddDetail />} />
+          <Route path="/chart" element={<Chart />} />
+          <Route path="/chartcate" element={<ChartCate />} />
         </Routes>
         <Nav />
       </div>

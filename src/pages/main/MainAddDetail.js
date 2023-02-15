@@ -1,7 +1,19 @@
-import React from "react";
+// 내역추가
 
-const MainAddD = () => {
-  return <div>MainAddD</div>;
+import React from "react";
+import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
+
+import { useNavigate } from "react-router";
+
+const MainAddDetail = () => {
+  const navigate = useNavigate();
+  return (
+    <>
+      <button onClick={() => navigate(-1)}>
+        <MdOutlineKeyboardArrowLeft className="text-sub text-5xl font-bold" />
+      </button>
+    </>
+  );
 };
 
-export default MainAddD;
+export default MainAddDetail;
