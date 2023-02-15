@@ -21,7 +21,7 @@ const Nav = () => {
           </button>
         </Link>
         {/* <AiFillHome/> */}
-        <Link to="/Cart">
+        <Link to="/Chart">
           <button className="text-main">
             <BsBarChart />
           </button>
