@@ -17,7 +17,6 @@ const Main = () => {
           예산 진행률 70%
         </span>
         <MainEdit>목표금액 수정</MainEdit>
-
         <div className="absolute top-[100px] z-1">
           <div className="flex flex-col items-center ">
             <MainText>40,000원</MainText>
@@ -26,10 +25,6 @@ const Main = () => {
         </div>
         <MainChart />
         <div className="flex flex-col gap-7">
-
-
-
-
           <Link to="/MainAddDetail">
             <MainBt>내역추가</MainBt>
           </Link>
