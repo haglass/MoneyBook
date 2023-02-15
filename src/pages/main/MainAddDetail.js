@@ -7,45 +7,57 @@ import tw from "tailwind-styled-components";
 const MainAddD = () => {
   return (
     <article>
-    <div>
-      <Header>
-        <Link to={"/"}>
-          <MdOutlineKeyboardArrowLeft className="text-sub text-5xl font-bold" />
-        </Link>
-        <h1 className="text-xl font-bold text-main">내역추가</h1>
-      </Header>
       <div>
-        <div className="flex flex-col gap-2 p-8 pb-16">
-          <MainBt className="flex justify-between text-xl">
-            - 소비금액 <p>원</p>
+        <Header>
+          <Link to={"/"}>
+            <MdOutlineKeyboardArrowLeft className="text-sub text-5xl font-bold" />
+          </Link>
+          <h1 className="text-xl font-bold text-main">내역추가</h1>
+        </Header>
+        <div>
+          <div className="flex flex-col gap-2 p-8 pb-16">
+            <MainBt className="flex justify-between text-xl">
+              <input
+                placeholder="- 소비금액 원"
+                className="hover:outline-white ml-3 outline-white"
+              />
+            </MainBt>
+            <MainBt className="flex text-xl">
+              <FaCapsules className="text-main text-3xl font-bold " />
+              <input
+                placeholder="내역"
+                className="ml-3 hover:outline-white outline-white"
+              />
+            </MainBt>
+            <MainBt className="flex text-xl ">
+              <input type="date" className="ml-3 hover:outline-white outline-white"/>
+            </MainBt>
+          </div>
+        </div>
+
+        <h1 className="text-xl  text-main pl-8 ">최근 소비</h1>
+
+        <div className="  px-8 pt-5">
+          <MainBt className="w-full ">
+            <div className="flex items-center mb-3">
+              <FaThumbtack className=" text-main text-base font-bold " />
+              <span className="text-base font-bol text-main">
+                고정지출입니다
+              </span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-xs  text-sub">2월 14일</span>
+              <span className="text-base text-sub pl-20">50,000 원</span>
+            </div>
           </MainBt>
-          <MainBt className="flex text-xl">
-            <FaCapsules className="text-main text-3xl font-bold " />
-            <span className="pl-2">내용</span>
+        </div>
+        <div className="  p-8 ">
+          <MainBt className="w-5/6 absolute bottom-36 inline-block bg-main  text-white">
+            저장하기
           </MainBt>
         </div>
       </div>
-      <h1 className="text-xl  text-main pl-8 ">최근 소비</h1>
-
-      <div className="  px-8 pt-5">
-        <MainBt className="w-full ">
-          <div className="flex items-center mb-3">
-            <FaThumbtack className=" text-main text-base font-bold " />
-            <span className="text-base font-bol text-main">고정지출입니다</span>
-          </div>
-          <div className="flex justify-between items-center">
-            <span className="text-xs  text-sub">2월 14일</span>
-            <span className="text-base text-sub pl-20">50,000 원</span>
-          </div>
-        </MainBt>
-      </div>
-      <div className="  p-8 ">
-        <MainBt className="w-5/6 absolute bottom-36 inline-block bg-main  text-white">
-          저장하기
-        </MainBt>
-      </div>
-    </div>
-</article>
+    </article>
   );
 };
 const Header = tw.div`
