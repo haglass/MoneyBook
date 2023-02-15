@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 // tailwind 적용
 import tw from "tailwind-styled-components";
@@ -15,7 +16,9 @@ const Main = () => {
         <MainChart />
         <div className="flex flex-col gap-7">
           <MainBt>내역추가</MainBt>
-          <MainBt>상세내역</MainBt>
+          <Link to={"/maindetail"}>
+            <MainBt>상세내역</MainBt>
+          </Link>
         </div>
       </div>
     </div>

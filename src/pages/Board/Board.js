@@ -2,17 +2,33 @@ import React from "react";
 import { Link } from "react-router-dom";
 import * as css from "../../styles/Styles";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
+import { BiSearchAlt } from "react-icons/bi";
 import tw from "tailwind-styled-components";
+import BoardList from "./BoardList";
 
 const Board = () => {
   return (
     <div>
-      <Header>
-        <Link to={"/"}>
-          <MdOutlineKeyboardArrowLeft className="text-sub text-5xl font-bold" />
-        </Link>
-        <h1 className="text-xl font-bold text-main">게시판</h1>
-      </Header>
+      <css.BoardDiv>
+        <Header>
+          <Link to={"/"}>
+            <MdOutlineKeyboardArrowLeft className="text-sub text-5xl font-bold" />
+          </Link>
+          <h1 className="text-xl font-bold text-main">게시판</h1>
+        </Header>
+        <div className="board-inner">
+          <div className="postTop">
+            <button className="writeBt">글쓰기</button>
+            <form>
+              <input type="text" placeholder="검색" />
+              <button>
+                <BiSearchAlt className="text-sub text-3xl font-bold " />
+              </button>
+            </form>
+          </div>
+          <BoardList />
+        </div>
+      </css.BoardDiv>
     </div>
   );
 };
