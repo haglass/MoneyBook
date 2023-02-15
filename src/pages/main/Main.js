@@ -6,7 +6,6 @@ import tw from "tailwind-styled-components";
 
 // Chart import
 import MainChart from "./MainChart";
-
 const Main = () => {
   return (
     <div>
@@ -27,6 +26,7 @@ const Main = () => {
         </div>
         <MainChart />
         <div className="flex flex-col gap-7">
+
           <Link to="/MainAddDetail">
             <MainBt>내역추가</MainBt>
           </Link>
