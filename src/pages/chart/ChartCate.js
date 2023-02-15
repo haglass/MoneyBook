@@ -2,6 +2,9 @@ import React from "react";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import { ResponsivePie } from "@nivo/pie";
 
+// tailwind
+import tw from "tailwind-styled-components";
+
 // ReactIcon
 import { FaCapsules } from "react-icons/fa";
 import { FaCarSide } from "react-icons/fa";
@@ -110,15 +113,46 @@ const ChartCate = () => {
           />
         </div>
       </div>
-      <FaCarSide className="text-main text-[50px] " />
-      <FaCapsules className="text-main text-[50px] " />
-      <FaTicketAlt className="text-main text-[50px] " />
-      <FaShoppingBag className="text-main text-[50px] " />
-      <FaUtensils className="text-main text-[50px] " />
-      <FaThumbtack className="text-main text-[50px] " />
-      <FaCoins className="text-main text-[50px] " />
+      <div className=" flex flex-col  mt-[100px] gap-y-8">
+        <div className="flex justify-around">
+          <div className="flex items-center gap-5">
+            <FaCarSide className="text-main text-[50px] " />
+            <Won>10,000원</Won>
+          </div>
+          <div className="flex items-center gap-5">
+            <FaCapsules className="text-main text-[50px] " />
+            <Won>30,000원</Won>
+          </div>
+        </div>
+        <div className="flex justify-around">
+          <div className="flex items-center gap-5">
+            <FaTicketAlt className="text-main text-[50px] " />
+            <Won>20,000원</Won>
+          </div>
+          <div className="flex items-center gap-5">
+            <FaShoppingBag className="text-main text-[50px] " />
+            <Won>9,000원</Won>
+          </div>
+        </div>
+        <div className="flex justify-around">
+          <div className="flex items-center gap-5">
+            <FaUtensils className="text-main text-[50px] " />
+            <Won>16,000원</Won>
+          </div>
+          <div className="flex items-center gap-5">
+            <FaThumbtack className="text-main text-[50px] " />
+            <Won>33,000원</Won>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
+
+const Won = tw.span`
+font-medium
+text-[16px]
+text-sub
+`;
 
 export default ChartCate;

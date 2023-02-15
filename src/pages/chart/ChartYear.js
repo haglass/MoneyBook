@@ -1,9 +1,22 @@
-import React from 'react'
+import React, { useState } from "react";
 
 const ChartYear = () => {
-  return (
-    <div>ChartYear</div>
-  )
-}
+  const initData = [
+    {
+      category: "star",
+      title: "가장 많이 쓴날",
+      content: 150000,
+      date: "2023-02-13",
+    },
+    {
+      category: "star",
+      title: "가장 적게 쓴 날",
+      content: 0,
+      date: "2023-02-01",
+    },
+  ];
+  const [todoData, setTodoData] = useState(initData);
+  return <div></div>;
+};
 
-export default ChartYear
+export default ChartYear;
