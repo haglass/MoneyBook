@@ -1,3 +1,5 @@
+// 내역추가
+
 import React from "react";
 import { Link } from "react-router-dom";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
@@ -45,7 +47,7 @@ const MainAddD = () => {
         </MainBt>
       </div>
     </div>
-</article>
+
   );
 };
 const Header = tw.div`
@@ -65,4 +67,3 @@ rounded-xl
 w-90
 
 `;
-export default MainAddD;
