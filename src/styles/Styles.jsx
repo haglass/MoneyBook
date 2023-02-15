@@ -6,8 +6,22 @@ export const navInner = styled.div`
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 80px;
-  background: red;
+  height: 100px;
+  /* background: red; */
+  a {
+    &::before {
+      content: "";
+      width: 100%;
+      height: 5px;
+      background-color: #ad5299;
+      display: block;
+      margin-bottom: 10px;
+      border-radius: 20px;
+    }
+    svg {
+      color: #ad5299;
+    }
+  }
 `;
 
 //Login
@@ -63,7 +77,7 @@ export const LoginDiv = styled.div`
     }
     .sns-area {
       width: 100%;
-      margin-top: 100px;
+      margin-top: 50px;
       position: relative;
       span {
         background: #fff;
@@ -101,4 +115,52 @@ export const LoginDiv = styled.div`
 
 //SighUp
 export const SignUpDiv = styled.div`
+  .signup-inner {
+    width: 100%;
+    padding: 0 20px;
+    form {
+      display: flex;
+      flex-direction: column;
+      margin-top: 100px;
+      input {
+        background-color: whitesmoke;
+        outline: none;
+        border: 1px solid #ad5299;
+        border-radius: 20px;
+        padding: 5px 10px;
+        color: #ad5299;
+        margin-bottom: 10px;
+        &:focus {
+          background-color: #fff;
+        }
+      }
+      span {
+        display: block;
+        margin-left: 10px;
+        color: red;
+        margin-bottom: 10px;
+      }
+      select {
+        background-color: whitesmoke;
+        outline: none;
+        border: 1px solid #ad5299;
+        border-radius: 20px;
+        padding: 5px 10px;
+        color: #ad5299;
+        &:focus {
+          background-color: #fff;
+        }
+      }
+    }
+    button {
+      display: block;
+      padding: 5px 20px;
+      background: #ad5299;
+      border-radius: 15px;
+      color: #fff;
+      font-size: 1.2rem;
+      margin: 0 auto;
+      margin-top: 40px;
+    }
+  }
 `;
