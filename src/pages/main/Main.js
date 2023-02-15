@@ -1,11 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 // tailwind 적용
 import tw from "tailwind-styled-components";
 
 // Chart import
 import MainChart from "./MainChart";
-
 const Main = () => {
   return (
     <div>
@@ -14,8 +14,10 @@ const Main = () => {
         <MainEdit>목표금액 수정</MainEdit>
         <MainChart />
         <div className="flex flex-col gap-7">
-          <MainBt>내역추가</MainBt>
-          <MainBt>상세내역</MainBt>
+          <Link to="MainAddDetail">
+          <MainBt>내역추가</MainBt></Link>
+          <Link to="MainDetail">
+          <MainBt>상세내역</MainBt></Link>
         </div>
       </div>
     </div>
