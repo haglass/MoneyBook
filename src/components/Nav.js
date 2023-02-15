@@ -33,10 +33,12 @@ const Nav = () => {
             {navIcon.focus ? <AiOutlineHome /> : <AiFillHome />}
           </div>
         </Link>
+
         <Link to="/Chart">
           <div onClick={handleNavIcon}>
             {navIcon.focus ? <BsBarChart /> : <BsBarChartFill />}
           </div>
+
         </Link>
         <Link to="/Login">
           <div onClick={handleNavIcon}>
