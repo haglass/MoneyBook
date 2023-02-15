@@ -10,10 +10,7 @@ import Login from "./pages/user/Login";
 import SignUp from "./pages/user/SignUp";
 import Chart from "./pages/chart/Chart";
 import Board from "./pages/Board/Board";
-import MainAddDetail from "./pages/main/MainAddDetail";
 import ChartCate from "./pages/chart/ChartCate";
-
-import MainDetail from "./pages/main/MainDetail";
 
 const App = () => {
   return (
@@ -23,9 +20,7 @@ const App = () => {
           <Route path="/" element={<Main />} />
           <Route path="/maindetail" element={<MainDetail />} />
 
-
           <Route path="/mainadddetail" element={<MainAddDetail />} />
-
 
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />

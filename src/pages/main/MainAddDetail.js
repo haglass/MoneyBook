@@ -1,5 +1,3 @@
-// 내역추가
-
 import React from "react";
 import { Link } from "react-router-dom";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
@@ -17,7 +15,7 @@ const MainAddD = () => {
         <h1 className="text-xl font-bold text-main">내역추가</h1>
       </Header>
       <div>
-        <input className="flex flex-col gap-2 p-8 pb-16">
+        <div className="flex flex-col gap-2 p-8 pb-16">
           <MainBt className="flex justify-between text-xl">
             - 소비금액 <p>원</p>
           </MainBt>
@@ -25,7 +23,7 @@ const MainAddD = () => {
             <FaCapsules className="text-main text-3xl font-bold " />
             <span className="pl-2">내용</span>
           </MainBt>
-        </input>
+        </div>
       </div>
       <h1 className="text-xl  text-main pl-8 ">최근 소비</h1>
 
@@ -47,7 +45,7 @@ const MainAddD = () => {
         </MainBt>
       </div>
     </div>
-
+</article>
   );
 };
 const Header = tw.div`
@@ -67,3 +65,4 @@ rounded-xl
 w-90
 
 `;
+export default MainAddD;
