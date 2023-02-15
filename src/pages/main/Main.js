@@ -27,6 +27,9 @@ const Main = () => {
         <MainChart />
         <div className="flex flex-col gap-7">
 
+
+
+
           <Link to="/MainAddDetail">
             <MainBt>내역추가</MainBt>
           </Link>

@@ -13,6 +13,8 @@ import Board from "./pages/Board/Board";
 import MainAddDetail from "./pages/main/MainAddDetail";
 import ChartCate from "./pages/chart/ChartCate";
 
+import MainDetail from "./pages/main/MainDetail";
+
 const App = () => {
   return (
     <Router>
@@ -20,7 +22,10 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/maindetail" element={<MainDetail />} />
+
+
           <Route path="/mainadddetail" element={<MainAddDetail />} />
+
 
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />

@@ -164,3 +164,66 @@ export const SignUpDiv = styled.div`
     }
   }
 `;
+
+//Board
+export const BoardDiv = styled.div`
+  .board-inner {
+    width: 100%;
+    padding: 0 20px;
+    .postTop {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .writeBt {
+        padding: 5px 10px;
+        border: 1px solid #ad5299;
+        border-radius: 20px;
+      }
+      form {
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        input {
+          width: 50%;
+          background: whitesmoke;
+          padding: 5px 10px;
+          border-radius: 20px;
+          outline: none;
+          border: 1px solid #ad5299;
+          color: #ad5299;
+          &:focus {
+            background-color: #fff;
+          }
+        }
+      }
+    }
+  }
+`;
+//BoardList
+export const BoardList = styled.div`
+  .postList {
+    margin-top: 30px;
+    .post {
+      width: 100%;
+      border-bottom: 1px solid #ad5299;
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+      p {
+        padding-bottom: 10px;
+      }
+      .postDetail {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .postIcon {
+          display: flex;
+          justify-content: start;
+          align-items: center;
+          span {
+            padding: 0 8px;
+          }
+        }
+      }
+    }
+  }
+`;
