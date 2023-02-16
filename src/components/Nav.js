@@ -25,31 +25,46 @@ const Nav = () => {
       return { focus: false };
     });
   };
-
-  const selected = {
-    background: "red",
-    border: "5px solid green",
-  };
   return (
     <>
       <css.navInner className="flex justify-around py-4 text-5xl ">
-        <NavLink to="/" activeClassName="selected">
+        <NavLink
+          to="/"
+          activeStyle={{
+            colre: "red",
+          }}
+        >
           <div onClick={handleNavIcon}>
             {navIcon.focus ? <AiOutlineHome /> : <AiFillHome />}
           </div>
         </NavLink>
 
-        <NavLink to="/Chart" activeClassName="selected">
+        <NavLink
+          to="/Chart"
+          activeStyle={{
+            colre: "red",
+          }}
+        >
           <div onClick={handleNavIcon}>
             {navIcon.focus ? <BsBarChart /> : <BsBarChartFill />}
           </div>
         </NavLink>
-        <NavLink to="/Login" activeClassName="selected">
+        <NavLink
+          to="/Login"
+          activeStyle={{
+            colre: "red",
+          }}
+        >
           <div onClick={handleNavIcon}>
             {navIcon.focus ? <RiUserLine /> : <RiUserFill />}
           </div>
         </NavLink>
-        <NavLink to="/Board" activeClassName="selected">
+        <NavLink
+          to="/Board"
+          activeStyle={{
+            colre: "red",
+          }}
+        >
           <div onClick={handleNavIcon}>
             {navIcon.focus ? <FaRegComments /> : <FaComments />}
           </div>
