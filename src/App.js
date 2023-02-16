@@ -11,13 +11,15 @@ import SignUp from "./pages/user/SignUp";
 import Chart from "./pages/chart/Chart";
 import Board from "./pages/Board/Board";
 import ChartCate from "./pages/chart/ChartCate";
+import MainPage from "./pages/main/MainPage";
 
 const App = () => {
   return (
     <Router>
       <div className="wrap">
         <Routes>
-          <Route path="/" element={<Main />} />
+          <Route path="/" element={<MainPage />} />
+          <Route path="/main" element={<Main />} />
           <Route path="/maindetail" element={<MainDetail />} />
           <Route path="/mainadddetail" element={<MainAddDetail />} />
           <Route path="/login" element={<Login />} />

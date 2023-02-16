@@ -8,20 +8,20 @@ export const navInner = styled.div`
   width: 100%;
   height: 100px;
   /* background: red; */
-  a {
-    &::before {
-      content: "";
-      width: 100%;
-      height: 5px;
-      background-color: #ad5299;
-      display: block;
-      margin-bottom: 10px;
-      border-radius: 20px;
-    }
-    svg {
-      color: #ad5299;
-    }
-  }
+  // a {
+  //   &::before {
+  //     content: "";
+  //     width: 100%;
+  //     height: 5px;
+  //     background-color: #ad5299;
+  //     display: block;
+  //     margin-bottom: 10px;
+  //     border-radius: 20px;
+  //   }
+  //   svg {
+  //     color: #ad5299;
+  //   }
+  // }
 `;
 
 //Login

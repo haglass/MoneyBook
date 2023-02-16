@@ -1,6 +1,6 @@
 import React from "react";
 import * as css from "../styles/Styles";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 //icon
 import { AiOutlineHome } from "react-icons/ai";
 import { AiFillHome } from "react-icons/ai";
@@ -25,31 +25,35 @@ const Nav = () => {
       return { focus: false };
     });
   };
+
+  const selected = {
+    background: "red",
+    border: "5px solid green",
+  };
   return (
     <>
       <css.navInner className="flex justify-around py-4 text-5xl ">
-        <Link to="/">
+        <NavLink to="/" activeClassName="selected">
           <div onClick={handleNavIcon}>
             {navIcon.focus ? <AiOutlineHome /> : <AiFillHome />}
           </div>
-        </Link>
+        </NavLink>
 
-        <Link to="/Chart">
+        <NavLink to="/Chart" activeClassName="selected">
           <div onClick={handleNavIcon}>
             {navIcon.focus ? <BsBarChart /> : <BsBarChartFill />}
           </div>
-
-        </Link>
-        <Link to="/Login">
+        </NavLink>
+        <NavLink to="/Login" activeClassName="selected">
           <div onClick={handleNavIcon}>
             {navIcon.focus ? <RiUserLine /> : <RiUserFill />}
           </div>
-        </Link>
-        <Link to="/Board">
+        </NavLink>
+        <NavLink to="/Board" activeClassName="selected">
           <div onClick={handleNavIcon}>
             {navIcon.focus ? <FaRegComments /> : <FaComments />}
           </div>
-        </Link>
+        </NavLink>
       </css.navInner>
     </>
   );
