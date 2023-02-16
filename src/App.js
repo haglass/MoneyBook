@@ -7,10 +7,11 @@ import Main from "./pages/main/Main";
 import MainDetail from "./pages/main/MainDetail";
 import MainAddDetail from "./pages/main/MainAddDetail";
 import Login from "./pages/user/Login";
-import SignUp from "./pages/user/SignUp";
+import Join from "./pages/user/Join";
 import Chart from "./pages/chart/Chart";
 import Board from "./pages/Board/Board";
 import ChartCate from "./pages/chart/ChartCate";
+import ChartMonth from "./pages/chart/ChartMonth";
 
 const App = () => {
   return (
@@ -21,12 +22,13 @@ const App = () => {
           <Route path="/maindetail" element={<MainDetail />} />
           <Route path="/mainadddetail" element={<MainAddDetail />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
+          <Route path="/join" element={<Join />} />
           <Route path="/chart" element={<Chart />} />
           <Route path="/board" element={<Board />} />
           <Route path="/mainadddetail" element={<MainAddDetail />} />
           <Route path="/chart" element={<Chart />} />
           <Route path="/chartcate" element={<ChartCate />} />
+          <Route path="/chartmonth" element={<ChartMonth />} />
         </Routes>
         <Nav />
       </div>
