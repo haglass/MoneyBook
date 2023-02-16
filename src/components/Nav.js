@@ -1,6 +1,6 @@
 import React from "react";
 import * as css from "../styles/Styles";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 //icon
 import { AiOutlineHome } from "react-icons/ai";
 import { AiFillHome } from "react-icons/ai";
@@ -25,31 +25,38 @@ const Nav = () => {
       return { focus: false };
     });
   };
+
   return (
     <>
       <css.navInner className="flex justify-around py-4 text-5xl ">
-        <Link to="/">
-          <div onClick={handleNavIcon}>
-            {navIcon.focus ? <AiOutlineHome /> : <AiFillHome />}
-          </div>
-        </Link>
-
-        <Link to="/Chart">
-          <div onClick={handleNavIcon}>
-            {navIcon.focus ? <BsBarChart /> : <BsBarChartFill />}
-          </div>
-
-        </Link>
-        <Link to="/Login">
-          <div onClick={handleNavIcon}>
-            {navIcon.focus ? <RiUserLine /> : <RiUserFill />}
-          </div>
-        </Link>
-        <Link to="/Board">
-          <div onClick={handleNavIcon}>
-            {navIcon.focus ? <FaRegComments /> : <FaComments />}
-          </div>
-        </Link>
+        <css.NavStyle
+          className={({ isActive }) => (isActive ? "active" : "")}
+          to="/"
+        >
+          <AiFillHome />
+        </css.NavStyle>
+        <css.NavStyle
+          className={({ isActive }) => (isActive ? "active" : "")}
+          to="/Chart"
+        >
+          <BsBarChartFill />
+        </css.NavStyle>
+        <css.NavStyle
+          className={({ isActive }) => (isActive ? "active" : "")}
+          to="/MyPage"
+        >
+         
+            <RiUserFill />
+        
+        </css.NavStyle>
+        <css.NavStyle
+          className={({ isActive }) => (isActive ? "active" : "")}
+          to="/Board"
+        >
+         
+        <FaComments />
+         
+        </css.NavStyle>
       </css.navInner>
     </>
   );

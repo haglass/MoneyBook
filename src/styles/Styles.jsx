@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
 //nav
 export const navInner = styled.div`
@@ -7,20 +8,24 @@ export const navInner = styled.div`
   left: 0;
   width: 100%;
   height: 100px;
-  /* background: red; */
   a {
-    &::before {
-      content: "";
-      width: 100%;
-      height: 5px;
-      background-color: #ad5299;
-      display: block;
-      margin-bottom: 10px;
-      border-radius: 20px;
-    }
     svg {
-      color: #ad5299;
+      color: #b8a6b3;
     }
+  }
+`;
+export const NavStyle = styled(NavLink)`
+  &.active::before {
+    content: "";
+    width: 100%;
+    height: 5px;
+    background-color: #ad5299;
+    display: block;
+    margin-bottom: 10px;
+    border-radius: 20px;
+  }
+  &.active >svg {
+    color: #ad5299;
   }
 `;
 
