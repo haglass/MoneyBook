@@ -25,50 +25,38 @@ const Nav = () => {
       return { focus: false };
     });
   };
+
   return (
     <>
       <css.navInner className="flex justify-around py-4 text-5xl ">
-        <NavLink
+        <css.NavStyle
+          className={({ isActive }) => (isActive ? "active" : "")}
           to="/"
-          activeStyle={{
-            colre: "red",
-          }}
         >
-          <div onClick={handleNavIcon}>
-            {navIcon.focus ? <AiOutlineHome /> : <AiFillHome />}
-          </div>
-        </NavLink>
-
-        <NavLink
+          <AiFillHome />
+        </css.NavStyle>
+        <css.NavStyle
+          className={({ isActive }) => (isActive ? "active" : "")}
           to="/Chart"
-          activeStyle={{
-            colre: "red",
-          }}
         >
-          <div onClick={handleNavIcon}>
-            {navIcon.focus ? <BsBarChart /> : <BsBarChartFill />}
-          </div>
-        </NavLink>
-        <NavLink
+          <BsBarChartFill />
+        </css.NavStyle>
+        <css.NavStyle
+          className={({ isActive }) => (isActive ? "active" : "")}
           to="/Login"
-          activeStyle={{
-            colre: "red",
-          }}
         >
-          <div onClick={handleNavIcon}>
-            {navIcon.focus ? <RiUserLine /> : <RiUserFill />}
-          </div>
-        </NavLink>
-        <NavLink
+         
+            <RiUserFill />
+        
+        </css.NavStyle>
+        <css.NavStyle
+          className={({ isActive }) => (isActive ? "active" : "")}
           to="/Board"
-          activeStyle={{
-            colre: "red",
-          }}
         >
-          <div onClick={handleNavIcon}>
-            {navIcon.focus ? <FaRegComments /> : <FaComments />}
-          </div>
-        </NavLink>
+         
+        <FaComments />
+         
+        </css.NavStyle>
       </css.navInner>
     </>
   );
