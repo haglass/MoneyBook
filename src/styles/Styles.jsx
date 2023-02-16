@@ -24,7 +24,7 @@ export const NavStyle = styled(NavLink)`
     margin-bottom: 10px;
     border-radius: 20px;
   }
-  &.active >svg {
+  &.active > svg {
     color: #ad5299;
   }
 `;
@@ -118,6 +118,57 @@ export const LoginDiv = styled.div`
   }
 `;
 
+// Mainpage
+export const MyPageDiv = styled.div`
+  .myPage-inner {
+    width: 100%;
+    padding: 0 20px;
+    form {
+      display: flex;
+      flex-direction: column;
+      margin-top: 100px;
+      input {
+        background-color: whitesmoke;
+        outline: none;
+        border: 1px solid #ad5299;
+        border-radius: 20px;
+        padding: 5px 10px;
+        color: #ad5299;
+        margin-bottom: 10px;
+        &:focus {
+          background-color: #fff;
+        }
+      }
+      span {
+        display: block;
+        margin-left: 10px;
+        color: red;
+        margin-bottom: 10px;
+      }
+      select {
+        background-color: whitesmoke;
+        outline: none;
+        border: 1px solid #ad5299;
+        border-radius: 20px;
+        padding: 5px 10px;
+        color: #ad5299;
+        &:focus {
+          background-color: #fff;
+        }
+      }
+    }
+    button {
+      display: block;
+      padding: 5px 20px;
+      background: #ad5299;
+      border-radius: 15px;
+      color: #fff;
+      font-size: 1.2rem;
+      margin: 0 20px;
+      margin-top: 40px;
+    }
+  }
+`;
 //SighUp
 export const SignUpDiv = styled.div`
   .signup-inner {

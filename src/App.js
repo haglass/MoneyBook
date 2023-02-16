@@ -10,6 +10,7 @@ import Login from "./pages/user/Login";
 import MyPage from "./pages/user/MyPage";
 import SignUp from "./pages/user/SignUp";
 import Chart from "./pages/chart/Chart";
+import ChartMonth from "./pages/chart/ChartMonth";
 import Board from "./pages/Board/Board";
 import ChartCate from "./pages/chart/ChartCate";
 import MainPage from "./pages/main/MainPage";
@@ -28,6 +29,7 @@ const App = () => {
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/chart" element={<Chart />} />
+          <Route path="/chartMonth" element={<ChartMonth />} />
           <Route path="/board" element={<Board />} />
           <Route path="/mainadddetail" element={<MainAddDetail />} />
           <Route path="/chart" element={<Chart />} />
