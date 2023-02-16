@@ -43,7 +43,7 @@ const Nav = () => {
         </css.NavStyle>
         <css.NavStyle
           className={({ isActive }) => (isActive ? "active" : "")}
-          to="/Login"
+          to="/MyPage"
         >
          
             <RiUserFill />
