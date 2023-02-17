@@ -14,7 +14,9 @@ const Chart = () => {
       </Header>
       <div className="my-20">
         <Bt>많이 쓴 카테고리</Bt>
-        <Bt>월간 사용 금액</Bt>
+        <Link to={"/ChartMonth"}>
+          <Bt>월간 사용 금액</Bt>
+        </Link>
         <Bt>연간 사용 금액</Bt>
       </div>
     </>
