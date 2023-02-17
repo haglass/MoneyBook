@@ -7,12 +7,12 @@ import MainDetail from "./pages/main/MainDetail";
 import MainAddDetail from "./pages/main/MainAddDetail";
 import Login from "./pages/user/Login";
 import Join from "./pages/user/Join";
-import Chart from "./pages/chart/Chart";
-import ChartYear from "./pages/chart/ChartYear";
 import Board from "./pages/Board/Board";
 import BoardWrite from "./pages/Board/BoardWrite";
+import Chart from "./pages/chart/Chart";
 import ChartCate from "./pages/chart/ChartCate";
 import ChartMonth from "./pages/chart/ChartMonth";
+import ChartYear from "./pages/chart/ChartYear";
 import MyPage from "./pages/user/MyPage";
 import MainPage from "./pages/main/MainPage";
 const App = () => {

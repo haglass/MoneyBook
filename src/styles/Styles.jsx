@@ -63,7 +63,6 @@ export const LoginDiv = styled.div`
           height: 100px;
           background: #ad5299;
           border-radius: 20px;
-          
           color: #fff;
           font-size: 1.2rem;
         }
@@ -259,7 +258,7 @@ export const BoardDiv = styled.div`
 //BoardList
 export const BoardList = styled.div`
   .postList {
-    margin-top: 30px;
+    margin-top: 20px;
     height: calc(84px * 8);
     overflow: hidden;
     .post {

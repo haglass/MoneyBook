@@ -1,6 +1,7 @@
 import React from "react";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import { ResponsivePie } from "@nivo/pie";
+import { Link, useNavigate } from "react-router-dom";
 
 // tailwind
 import tw from "tailwind-styled-components";
@@ -14,7 +15,6 @@ import { FaUtensils } from "react-icons/fa";
 import { FaThumbtack } from "react-icons/fa";
 import { FaCoins } from "react-icons/fa";
 
-import { useNavigate } from "react-router";
 const ChartCate = () => {
   const navigate = useNavigate();
   const chartData = [
@@ -63,9 +63,12 @@ const ChartCate = () => {
   ];
   return (
     <>
-      <button onClick={() => navigate(-1)}>
-        <MdOutlineKeyboardArrowLeft className="text-sub text-5xl font-bold" />
-      </button>
+      <Header>
+        <Link to={"/chart"}>
+          <MdOutlineKeyboardArrowLeft className="text-sub text-5xl font-bold" />
+        </Link>
+        <h1 className="text-xl font-bold text-main">카테고리별 통계</h1>
+      </Header>
       <div className="flex justify-center items-center">
         <div className="w-[342px] h-[342px]">
           <ResponsivePie
@@ -155,4 +158,10 @@ text-[16px]
 text-sub
 `;
 
+const Header = tw.div`
+flex
+items-center
+w-full
+h-20
+`;
 export default ChartCate;

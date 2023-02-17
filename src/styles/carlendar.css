@@ -94,11 +94,12 @@
   text-align: center;
   line-height: 16px;
 }
-button,
-input,
-optgroup,
-select,
-textarea {
+
+.calCss button,
+.calCss input,
+.calCss optgroup,
+.calCss select,
+.calCss textarea {
   font-size: 12px;
 
   padding: 20px 6.6667px;
