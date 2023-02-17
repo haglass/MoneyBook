@@ -71,11 +71,14 @@ absolute
 border
 border-main
 text-sub
+
 w-[100px]
-h-[18px]
+h-[30px]
 rounded-full
 text-xs
+
 font-bold
+
 z-10
 `;
 

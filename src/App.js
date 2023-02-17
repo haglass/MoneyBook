@@ -8,6 +8,7 @@ import MainAddDetail from "./pages/main/MainAddDetail";
 import Login from "./pages/user/Login";
 import Join from "./pages/user/Join";
 import Chart from "./pages/chart/Chart";
+import ChartYear from "./pages/chart/ChartYear";
 import Board from "./pages/Board/Board";
 import ChartCate from "./pages/chart/ChartCate";
 import ChartMonth from "./pages/chart/ChartMonth";
@@ -30,6 +31,7 @@ const App = () => {
           <Route path="/chart" element={<Chart />} />
           <Route path="/chartcate" element={<ChartCate />} />
           <Route path="/chartmonth" element={<ChartMonth />} />
+          <Route path="/chartYear" element={<ChartYear />} />
           <Route path="/myPage" element={<MyPage />} />
         </Routes>
         <Nav />

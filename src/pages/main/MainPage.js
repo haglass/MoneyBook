@@ -5,19 +5,21 @@ import tw from "tailwind-styled-components";
 const MainPage = () => {
   return (
     <div className=" ">
-      <h1
-        className="absolute font-bold text-main text-[50px]
-       right-[100px] top-[250px]"
-      >
-        나의 텅장
-      </h1>
+      <Link to={"/Main"}>
+        <h1
+          className="absolute font-bold text-main text-[50px]
+       right-[100px] top-[250px] "
+        >
+          나의 텅장
+        </h1>
+      </Link>
       <h1
         className="absolute font-medium text-sub text-[24px]
-       right-[70px] top-[320px]"
+       right-[70px] top-[330px] "
       >
         지출 가계부
       </h1>
-      <Link to={"/"}>
+      <Link to={"/Main"}>
         <img
           src="/images/logo-2.png"
           alt="로고"
