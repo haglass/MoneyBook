@@ -12,12 +12,14 @@ import Board from "./pages/Board/Board";
 import ChartCate from "./pages/chart/ChartCate";
 import ChartMonth from "./pages/chart/ChartMonth";
 import MyPage from "./pages/user/MyPage";
+import MainPage from "./pages/main/MainPage";
 const App = () => {
   return (
     <Router>
       <div className="wrap">
         <Routes>
-          <Route path="/" element={<Main />} />
+          <Route path="/" element={<MainPage />} />
+          <Route path="/main" element={<Main />} />
           <Route path="/maindetail" element={<MainDetail />} />
           <Route path="/mainadddetail" element={<MainAddDetail />} />
           <Route path="/login" element={<Login />} />
