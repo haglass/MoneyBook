@@ -8,9 +8,18 @@ import axios from "axios";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [pw, setPw] = useState("");
-  const loginFn = (e) => {
-    axios.post().then().catch();
+  const [errMsg, setErrMsg] = useState("");
+
+  const SignInFunc = (event) => {
+    event.preventDefault();
+    if (!email) {
+      return setErrMsg("이메일을 입력하세요.");
+    }
+    if (!pw) {
+      return setErrMsg("비밀번호를 입력하세요.");
+    }
   };
+
   return (
     <div>
       <css.LoginDiv>
@@ -26,7 +35,7 @@ const Login = () => {
               <div className="left">
                 <input
                   type="text"
-                  placeholder="아이디"
+                  placeholder="이메일"
                   required
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -39,9 +48,9 @@ const Login = () => {
                   minLength={6}
                 />
               </div>
-              <button>로그인</button>
+              <button onClick={(e) => SignInFunc(e)}>로그인</button>
             </form>
-            <span>유효성메세지</span>
+            {errMsg !== "" && <span>{errMsg}</span>}
             <Link to={"/join"}>
               <button className="btSignUp">회원가입</button>
             </Link>
