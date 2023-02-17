@@ -10,6 +10,7 @@ import moment from "moment/moment";
 // 한글로 출력하게 해줌.
 import "moment/locale/ko";
 const ChartMonth = () => {
+
   const initData = [
     {
       category: "star",
@@ -19,23 +20,13 @@ const ChartMonth = () => {
     },
     {
       category: "star",
-      title: "스타벅스간날1",
-      content: "스타벅스 맛있어요",
+      title: "적게 쓴날",
+      content: "15,000",
       date: "2023-02-01",
     },
-    {
-      category: "star",
-      title: "스타벅스간날2",
-      content: "스타벅스 맛있어요",
-      date: "2023-02-06",
-    },
-    {
-      category: "star",
-      title: "스타벅스간날3",
-      content: "스타벅스 맛있어요",
-      date: "2023-02-07",
-    },
   ];
+  
+
   const getLocalPost = () => {
     const data = localStorage.getItem("post");
     if (data === null) {
@@ -49,6 +40,8 @@ const ChartMonth = () => {
   const [date, setDate] = useState(new Date());
   // 이미지 출력
   const publicFolder = process.env.PUBLIC_URL;
+
+
 
   return (
     <div>
