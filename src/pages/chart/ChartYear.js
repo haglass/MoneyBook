@@ -111,6 +111,7 @@ const ChartYear = () => {
       donutColor: "hsl(178, 70%, 50%)",
     },
   ];
+
   return (
     <div>
       <Header>
