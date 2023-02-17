@@ -1,5 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
+
+import { Link, useNavigate } from "react-router-dom";
 
 // tailwind 적용
 import tw from "tailwind-styled-components";
@@ -7,6 +8,10 @@ import tw from "tailwind-styled-components";
 // Chart import
 import MainChart from "./MainChart";
 const Main = () => {
+  const navigate = useNavigate();
+  const cashBt = (e) => {
+    navigate("/mypage");
+  };
   return (
     <div>
       <span className="absolute font-medium text-main text-[24px] right-[162px] top-[220px]">
@@ -16,7 +21,13 @@ const Main = () => {
         <span className="absolute font-medium text-sub text-[16px] top-[210px]">
           예산 진행률 70%
         </span>
-        <MainEdit>목표금액 수정</MainEdit>
+        <MainEdit
+          onClick={(e) => {
+            cashBt();
+          }}
+        >
+          목표금액 수정
+        </MainEdit>
         <div className="absolute top-[100px] z-1">
           <div className="flex flex-col items-center ">
             <MainText>40,000원</MainText>
@@ -60,11 +71,14 @@ absolute
 border
 border-main
 text-sub
+
 w-[100px]
-h-[18px]
+h-[30px]
 rounded-full
 text-xs
+
 font-bold
+
 z-10
 `;
 
