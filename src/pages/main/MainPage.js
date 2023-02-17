@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import tw from "tailwind-styled-components";
 const MainPage = () => {
   return (
+
     <div className=" ">
       <h1
         className="absolute font-bold text-main text-[50px]
@@ -17,7 +18,7 @@ const MainPage = () => {
       >
         지출 가계부
       </h1>
-      <Link to={"/"}>
+      <Link to={"/Main"}>
         <img
           src="/images/logo-2.png"
           alt="로고"

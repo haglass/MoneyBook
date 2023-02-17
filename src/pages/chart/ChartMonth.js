@@ -2,15 +2,14 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Calendar from "react-calendar";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
-import "react-calendar/dist/Calendar.css";
 import tw from "tailwind-styled-components";
 import "react-calendar/dist/Calendar.css"; // css import
+import "../../styles/carlendar.css";
 // 날짜 관련 라이브러리
 import moment from "moment/moment";
 // 한글로 출력하게 해줌.
 import "moment/locale/ko";
 const ChartMonth = () => {
-
   const initData = [
     {
       category: "star",
@@ -25,7 +24,6 @@ const ChartMonth = () => {
       date: "2023-02-01",
     },
   ];
-  
 
   const getLocalPost = () => {
     const data = localStorage.getItem("post");
@@ -41,8 +39,6 @@ const ChartMonth = () => {
   // 이미지 출력
   const publicFolder = process.env.PUBLIC_URL;
 
-
-
   return (
     <div>
       <Header>
@@ -51,8 +47,14 @@ const ChartMonth = () => {
         </Link>
         <h1 className="text-xl font-bold text-main">월간 사용 금액</h1>
       </Header>
+      <img
+        src="/images/logo-2.png"
+        alt="로고"
+        className="absolute left-[50px] top-[135px]   w-10 h-10"
+      />
       <div className="ml-9 mt-20">
         <Calendar
+          title={"Schedule"}
           // 일요일부터 출력
           calendarType="US"
           // 날짜 선택시 날짜변경
@@ -104,7 +106,22 @@ const ChartMonth = () => {
       </div>
       <div>{moment(date).format("YYYY년 MM월 DD일")}</div>
       <div>{todoData.map((item, index) => item.title)}</div> */}
-      <div>가장 많이 쓴날 1,5000,000 원</div>
+      <div className="  m-9 mt-20 ">
+        <div className="flex justify-between items-center mb-3">
+          <h1 className="text-l font-bold text-main">가장 많이 쓴날</h1>
+          <span className="text-sm font-bold text-sub2">
+            {moment(date).format("MM월 DD일")}
+          </span>
+          <span className="text-sm font-bold text-sub">250,000원</span>
+        </div>
+        <div className="flex justify-between items-center">
+          <h1 className="text-l font-bold text-main">가장 적게 쓴날</h1>
+          <span className="text-sm font-bold text-sub2">
+            {moment(date).format("MM월 DD일")}
+          </span>
+          <span className="text-sm font-bold text-sub">20,000원</span>
+        </div>
+      </div>
     </div>
   );
 };
