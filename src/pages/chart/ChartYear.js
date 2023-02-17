@@ -115,13 +115,12 @@ const ChartYear = () => {
   return (
     <div>
       <Header>
-        <Link to={"/"}>
+        <Link to={"/chart"}>
           <MdOutlineKeyboardArrowLeft className="text-sub text-5xl font-bold" />
         </Link>
         <h1 className="text-xl font-bold text-main">연간 사용 금액</h1>
       </Header>
-      <div style={{ width: "100%", height: 350}}>
-       
+      <div style={{ width: "100%", height: 350 }}>
         <ResponsiveBar
           data={chartData}
           keys={["hot dog", "burger", "sandwich", "kebab", "fries", "donut"]}

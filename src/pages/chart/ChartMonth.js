@@ -42,7 +42,7 @@ const ChartMonth = () => {
   return (
     <div>
       <Header>
-        <Link to={"/"}>
+        <Link to={"/chart"}>
           <MdOutlineKeyboardArrowLeft className="text-sub text-5xl font-bold" />
         </Link>
         <h1 className="text-xl font-bold text-main">월간 사용 금액</h1>
@@ -54,6 +54,7 @@ const ChartMonth = () => {
       />
       <div className="ml-9 mt-20 mb-10">
         <Calendar
+        className="calCss"
           title={"Schedule"}
           // 일요일부터 출력
           calendarType="US"

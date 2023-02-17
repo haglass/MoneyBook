@@ -10,9 +10,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 
 const BoardWrite = () => {
-  
-  let fileNme = document.getElementById("file").value;
-  document.getElementsByClassName("upload-name").value(fileNme);
+  // let fileNme = document.getElementById("file").value;
+  // document.getElementsByClassName("upload-name").value(fileNme);
 
   // $("#file").on("change", function () {
   //   var fileName = $("#file").val();
