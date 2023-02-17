@@ -17,12 +17,14 @@ const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [pw, setPw] = useState("");
+  const [errMsg, setErrMsg] = useState("");
+
   const loginFn = (e) => {
     if (!email) {
-      return alert("이메일을 입력해 주세요.");
+      return setErrMsg("이메일을 입력하세요.");
     }
     if (!pw) {
-      return alert("비밀번호를 입력해 주세요");
+      return setErrMsg("비밀번호를 입력하세요.");
     }
     let body = {
       miEmail: email,
@@ -41,6 +43,7 @@ const Login = () => {
   };
 
   useEffect(() => {}, []);
+
   return (
     <div>
       <css.LoginDiv>
@@ -78,6 +81,7 @@ const Login = () => {
                 로그인
               </button>
             </form>
+            {errMsg !== "" && <span>{errMsg}</span>}
 
             <Link to={"/join"}>
               <button className="btSignUp">회원가입</button>

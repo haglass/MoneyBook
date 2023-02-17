@@ -10,6 +10,7 @@ import Join from "./pages/user/Join";
 import Chart from "./pages/chart/Chart";
 import ChartYear from "./pages/chart/ChartYear";
 import Board from "./pages/Board/Board";
+import BoardWrite from "./pages/Board/BoardWrite";
 import ChartCate from "./pages/chart/ChartCate";
 import ChartMonth from "./pages/chart/ChartMonth";
 import MyPage from "./pages/user/MyPage";
@@ -27,6 +28,7 @@ const App = () => {
           <Route path="/join" element={<Join />} />
           <Route path="/chart" element={<Chart />} />
           <Route path="/board" element={<Board />} />
+          <Route path="/boardwrite" element={<BoardWrite />} />
           <Route path="/mainadddetail" element={<MainAddDetail />} />
           <Route path="/chart" element={<Chart />} />
           <Route path="/chartcate" element={<ChartCate />} />

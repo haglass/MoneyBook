@@ -260,6 +260,8 @@ export const BoardDiv = styled.div`
 export const BoardList = styled.div`
   .postList {
     margin-top: 30px;
+    height: calc(84px * 8);
+    overflow: hidden;
     .post {
       width: 100%;
       border-bottom: 1px solid #ad5299;
@@ -280,6 +282,85 @@ export const BoardList = styled.div`
             padding: 0 8px;
           }
         }
+      }
+    }
+  }
+`;
+//BoardWrite
+export const write = styled.div`
+  .write-inner {
+    width: 100%;
+    padding: 0 20px;
+    text-align: center;
+    form {
+      margin-top: 50px;
+      .writetitle {
+        outline: none;
+        padding: 5px 10px;
+        border: 1px solid #ad5299;
+        border-radius: 15px;
+        width: 94%;
+        margin-bottom: 20px;
+      }
+      textarea {
+        background-color: whitesmoke;
+        outline: none;
+        padding: 5px 10px;
+        border-radius: 15px;
+      }
+      .imgup {
+        img {
+          width: 355px;
+          height: 100px;
+          background-color: #ad5299;
+          margin: 0 auto;
+          margin-top: 20px;
+          border-radius: 15px;
+        }
+        .filebox {
+          margin-top: 10px;
+          .upload-name {
+            display: inline-block;
+            width: 70%;
+            padding: 5px 10px;
+            border: 1px solid #ad5299;
+            border-radius: 15px;
+            vertical-align: middle;
+            color: #52424d;
+            outline: none;
+          }
+          label {
+            display: inline-block;
+            padding: 5px 10px;
+            margin-left: 10px;
+            border-radius: 15px;
+            vertical-align: middle;
+            color: #fff;
+            background-color: #ad5299;
+            cursor: pointer;
+          }
+          input[type="file"] {
+            position: absolute;
+            width: 0;
+            height: 0;
+            padding: 0;
+            overflow: hidden;
+            border: 0;
+          }
+        }
+      }
+    }
+    .btsunmit {
+      position: absolute;
+      bottom: 170px;
+      right: 50px;
+      padding: 5px 10px;
+      border: 1px solid #ad5299;
+      border-radius: 15px;
+
+      &:hover {
+        background-color: #ad5299;
+        color: #fff;
       }
     }
   }
