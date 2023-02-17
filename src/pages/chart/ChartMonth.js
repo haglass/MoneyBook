@@ -52,7 +52,7 @@ const ChartMonth = () => {
         alt="로고"
         className="absolute left-[50px] top-[135px]   w-10 h-10"
       />
-      <div className="ml-9 mt-20">
+      <div className="ml-9 mt-20 mb-10">
         <Calendar
           title={"Schedule"}
           // 일요일부터 출력
@@ -106,7 +106,7 @@ const ChartMonth = () => {
       </div>
       <div>{moment(date).format("YYYY년 MM월 DD일")}</div>
       <div>{todoData.map((item, index) => item.title)}</div> */}
-      <div className="  m-9 mt-20 ">
+      <div className="  m-20 m-14 ">
         <div className="flex justify-between items-center mb-3">
           <h1 className="text-l font-bold text-main">가장 많이 쓴날</h1>
           <span className="text-sm font-bold text-sub2">
