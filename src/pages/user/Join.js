@@ -8,59 +8,101 @@ import { useEffect } from "react";
 import axios from "axios";
 const Join = () => {
   const navigate = useNavigate();
-  const [btFlag, setBtFlag] = useState(false);
-  const [nickName, setNickName] = useState("");
-  const [email, setEmail] = useState("");
-  const [pw, setPw] = useState("");
-  const [pwCheck, setPwCheck] = useState("");
-  const [gender, setGender] = useState(0);
+  let body = {
+    nickName: "",
+    email: "",
+    password: "",
+    password2: "",
+    gender: "",
+  };
+  const [val, setVal] = useState(body);
+  const [selected, setSelected] = useState(0);
 
   const handleSelect = (e) => {
-    setGender(e.target.value);
+    setSelected(e.target.value);
   };
 
-  const registFunc = (e) => {
-    if (!nickName) {
-      alert("닉네임을 입력하세요.");
-    }
-    if (!email) {
-      alert("이메일을 입력하세요.");
-    }
-    if (!pw) {
-      alert("비밀번호을 입력하세요.");
-    } else if (pw.length < 6) {
-      alert("비밀번호를 6자리 이상 12자리 이하입니다.");
-    }
-    if (!pwCheck) {
-      alert("비밀번호 확인을 입력하세요.");
-    }
-    if (pw !== pwCheck) {
-      alert("비밀번호는 같아야 합니다.");
-    }
-    if (!gender) {
-      alert("성별을 선택하세요.");
-    }
-    setBtFlag(true);
-    let body = {
-      miNickname: nickName,
-      miEmail: email,
-      miPwd: pw,
-      miCheckPwd: pwCheck,
-      miGen: gender,
+  const handleChange = (e) => {
+    // console.log(e.target); // tag = {name:"userid", value:"123"}
+    // console.log(e.target.name); // tag name="userid"
+    // console.log(e.target.value);// tag value
+    const { name, value } = e.target;
+    setVal({ ...val, [name]: value });
+  };
+  const registFunc = () => {
+    body = {
+      miNickname: val.nickName,
+      miEmail: val.email,
+      miPwd: val.password,
+      miCheckPwd: val.password2,
+      miGen: selected,
     };
     axios
       .post("http://192.168.0.151:9898/member/join", body)
       .then((res) => {
         console.log(res.data);
+        alert("회원가입 완료");
         navigate("/Login");
       })
       .catch((err) => {
         console.log(err);
-        setBtFlag(false);
+        // setBtFlag(false);
       });
   };
+  // 에러 정보 관리 객체
+  const [Err, setErr] = useState({});
+  const check = (_val) => {
+    const errs = {};
+    // 아이디 체크
+    if (_val.nickName.length < 3) {
+      errs.nickName = "아이디를 3글자 이상 입력해주세요.";
+    }
+    // 이메일 체크/이메일 정규표현식 이용한 처리
+    if (_val.email.length < 8 || !/@/.test(_val.email)) {
+      errs.email = "이메일은 최소 8글자 이상 @을 포함해 주세요.";
+    }
+    // 비밀번호
+    const eng = /[a-zA-Z]/;
+    const num = /[0-9]/;
+    const spc = /[!@#$%^&*()_+]/;
+    if (
+      _val.password.length < 5 ||
+      !eng.test(_val.password) ||
+      !num.test(_val.password) ||
+      !spc.test(_val.password)
+    ) {
+      errs.password =
+        "비밀번호는 5글자 이상, 영문, 숫자, 특수문자를 모두 포함해 주세요.";
+    }
+    // 비밀번호2 체크
+    if (_val.password !== _val.password2 || !_val.password2) {
+      errs.password2 = "비밀번호를 동일하게 입력해주세요.";
+    }
+    // 성별 체크
+    if (_val.gender === "") {
+      errs.gender = "성별을 선택하세요.";
+    }
+    return errs;
+  };
 
-  useEffect(() => {}, []);
+  // 디버깅용
+  useEffect(() => {
+    console.log(val);
+  }, [val]);
+  useEffect(() => {
+    console.log(Err);
+  }, [Err]);
+
+  // 전송 실행시 각 항목의 내용 체크
+  const handleSubmit = (e) => {
+    // 웹브라우저가 갱신된다.
+    // SPA 컨셉과 맞지 않는다.
+    // state 도 초기화가 된다.
+    e.preventDefault();
+    // 필요항목에 대한 체크 실행
+    // 각 항목 체크용 객체를 생성해 진행
+    setErr(check(val));
+  };
   return (
     <div>
       <css.SignUpDiv>
@@ -71,44 +113,50 @@ const Join = () => {
           <h1 className="text-xl font-bold text-main">회원가입</h1>
         </Header>
         <div className="signup-inner">
-          <input
-            type="text"
-            placeholder="닉네임을 입력하세요."
-            required
-            onChange={(e) => setNickName(e.target.value)}
-          />
-          <span className="err text-xs"></span>
-          <input
-            type="text"
-            placeholder="이메일 주소를 입력해주세요."
-            required
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <span className="err text-xs"></span>
-          <input
-            type="password"
-            placeholder="비밀번호를 입력하세요"
-            required
-            onChange={(e) => setPw(e.target.value)}
-            maxLength={12}
-            minLength={6}
-          />
-          <span className="err text-xs"></span>
-          <input
-            type="password"
-            placeholder="비밀번호를 입력하세요"
-            required
-            onChange={(e) => setPwCheck(e.target.value)}
-            maxLength={12}
-            minLength={6}
-          />
-          <span className="err text-xs"></span>
-          <select placeholder="성별" required onChange={handleSelect}>
-            <option value={0}>선택안함</option>
-            <option value={1}>남자</option>
-            <option value={2}>여자</option>
-          </select>
-          <span className="err text-xs"></span>
+          <form onSubmit={handleSubmit}>
+            <input
+              required
+              type="text"
+              id="nickName"
+              name="nickName"
+              placeholder="닉네임을 입력하세요."
+              onChange={handleChange}
+            />
+            <span className="err text-xs">{Err.nickName}</span>
+            <input
+              required
+              type="text"
+              id="email"
+              name="email"
+              placeholder="이메일 주소를 입력해주세요."
+              onChange={handleChange}
+            />
+            <span className="err text-xs">{Err.email}</span>
+            <input
+              required
+              type="password"
+              id="password"
+              name="password"
+              placeholder="비밀번호를 입력하세요"
+              onChange={handleChange}
+            />
+            <span className="err text-xs">{Err.password}</span>
+            <input
+              required
+              type="password"
+              id="password2"
+              name="password2"
+              placeholder="비밀번호를 입력하세요"
+              onChange={handleChange}
+            />
+            <span className="err text-xs">{Err.password2}</span>
+            <select placeholder="성별" required onChange={handleSelect}>
+              <option value={0}>선택안함</option>
+              <option value={1}>남자</option>
+              <option value={2}>여자</option>
+            </select>
+            <span className="err text-xs">{Err.gender}</span>
+          </form>
           <button
             onClick={(e) => {
               registFunc();
@@ -121,6 +169,7 @@ const Join = () => {
     </div>
   );
 };
+
 const Header = tw.div`
 flex
 items-center

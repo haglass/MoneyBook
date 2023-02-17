@@ -1,17 +1,35 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import { FaCapsules } from "react-icons/fa";
 import { FaThumbtack } from "react-icons/fa";
 import tw from "tailwind-styled-components";
 const MainAddD = () => {
+  const navigate = useNavigate();
+  let initVal = {
+    edtitle: "",
+    cateSeq: "",
+    edDate: "",
+    edAmont: "",
+  };
+  const [val, setVal] = useState(initVal);
+
+  const handleChange = (e) => {
+    // console.log(e.target); // tag = {name:"userid", value:"123"}
+    // console.log(e.target.name); // tag name="userid"
+    // console.log(e.target.value);// tag value
+    const { name, value } = e.target;
+    setVal({ ...val, [name]: value });
+  };
+
   return (
     <article>
       <div>
         <Header>
-          <Link to={"/"}>
+          <button onClick={() => navigate(-1)}>
             <MdOutlineKeyboardArrowLeft className="text-sub text-5xl font-bold" />
-          </Link>
+          </button>
+          
           <h1 className="text-xl font-bold text-main">내역추가</h1>
         </Header>
         <div>
@@ -20,6 +38,7 @@ const MainAddD = () => {
               <input
                 placeholder="- 소비금액 원"
                 className="hover:outline-white ml-3 outline-white"
+                onChange={handleChange}
               />
             </MainBt>
             <MainBt className="flex text-xl">
@@ -27,10 +46,15 @@ const MainAddD = () => {
               <input
                 placeholder="내역"
                 className="ml-3 hover:outline-white outline-white"
+                onChange={handleChange}
               />
             </MainBt>
             <MainBt className="flex text-xl ">
-              <input type="date" className="ml-3 hover:outline-white outline-white"/>
+              <input
+                type="date"
+                className="ml-3 hover:outline-white outline-white"
+                onChange={handleChange}
+              />
             </MainBt>
           </div>
         </div>

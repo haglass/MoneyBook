@@ -1,16 +1,46 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
 import * as css from "../../styles/Styles";
+
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
+
 import tw from "tailwind-styled-components";
 import axios from "axios";
 
+// user 정보 업데이트
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../reducer/userSlice";
+
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [pw, setPw] = useState("");
   const loginFn = (e) => {
-    axios.post().then().catch();
+    if (!email) {
+      return alert("이메일을 입력해 주세요.");
+    }
+    if (!pw) {
+      return alert("비밀번호를 입력해 주세요");
+    }
+    let body = {
+      miEmail: email,
+      miPwd: pw,
+    };
+    axios
+      .post("http://192.168.0.151:9898/member/login", body)
+      .then((res) => {
+        console.log(res.data.loginUser);
+        dispatch(loginUser(res.data.loginUser));
+        navigate("/main");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
+
+  useEffect(() => {}, []);
   return (
     <div>
       <css.LoginDiv>
@@ -26,7 +56,7 @@ const Login = () => {
               <div className="left">
                 <input
                   type="text"
-                  placeholder="아이디"
+                  placeholder="이메일"
                   required
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -39,9 +69,16 @@ const Login = () => {
                   minLength={6}
                 />
               </div>
-              <button>로그인</button>
+              <button
+                type="button"
+                onClick={(e) => {
+                  loginFn();
+                }}
+              >
+                로그인
+              </button>
             </form>
-            <span>유효성메세지</span>
+
             <Link to={"/join"}>
               <button className="btSignUp">회원가입</button>
             </Link>
@@ -53,6 +90,7 @@ const Login = () => {
               <Link to={"/"}>
                 <img src="/images/snslogo1.jpg" alt="kakao" />
               </Link>
+
               <Link to={"/"}>
                 <img src="/images/snslogo2.jpg" alt="google" />
               </Link>

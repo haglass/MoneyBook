@@ -15,7 +15,8 @@ const ChartYear = () => {
       date: "2023-02-01",
     },
   ];
-  const [todoData, setTodoData] = useState(initData);
+
+  
   return <div></div>;
 };
 

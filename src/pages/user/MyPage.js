@@ -1,4 +1,5 @@
 import React from "react";
+
 import { Link } from "react-router-dom";
 import * as css from "../../styles/Styles";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
@@ -12,11 +13,9 @@ const MyPage = () => {
     password: "",
     password2: "",
     gender: "",
-    comment: "",
+
   };
   const [val, setVal] = useState(initVal);
-
-  const selectList = ["선택안함", "남성", "여성"];
   const [Selected, setSelected] = useState("");
   const handleSelect = (e) => {
     setSelected(e.target.value);
@@ -28,13 +27,7 @@ const MyPage = () => {
     const { name, value } = e.target;
     setVal({ ...val, [name]: value });
   };
-  // 성별 라디오 이벤트 핸들러
-  const handleRadio = (e) => {
-    // id 를 받아서 처리할까? 고민중
-    const { name, id } = e.target;
-    // const isCheck = e.target.checked;
-    setVal({ ...val, [name]: id });
-  };
+
   // 에러 정보 관리 객체
   const [Err, setErr] = useState({});
   const check = (_val) => {
@@ -104,72 +97,67 @@ const MyPage = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <css.MyPageDiv>
-          <Header>
-            <Link to={"/login"}>
-              <MdOutlineKeyboardArrowLeft className="text-sub text-5xl font-bold" />
-            </Link>
-            <h1 className="text-xl font-bold text-main">마이페이지</h1>
-          </Header>
-          <div className="signup-inner">
-            <form onSubmit={handleSubmit}>
-              <input
-                type="text"
-                id="userid"
-                name="userid"
-                placeholder="닉네임을 입력하세요."
-                onChange={handleChange}
-              />
-              <span className="err text-xs">{Err.userid}</span>
-              <input
-                type="text"
-                id="email"
-                name="email"
-                placeholder="이메일 주소를 입력해주세요."
-                onChange={handleChange}
-              />
-              <span className="err text-xs">{Err.email}</span>
-              <input
-                type="text"
-                id="password"
-                name="password"
-                placeholder="비밀번호를 입력하세요"
-                onChange={handleChange}
-              />
-              <span className="err text-xs">{Err.password}</span>
-              <input
-                type="password"
-                id="password2"
-                name="password2"
-                placeholder="비밀번호를 입력하세요"
-                onChange={handleChange}
-              />
-              <span className="err text-xs">{Err.password2}</span>
-
-              <select
-                placeholder="성별"
-                onChange={handleSelect}
-                value={Selected}
-              >
-                {selectList.map((item) => (
-                  <option value={item} key={item}>
-                    {item}
-                  </option>
-                ))}
-              </select>
-              <span className="err text-xs">{Err.gender}</span>
-            </form>
-            <div className="flex ">
-            <button type="submit" value="SUBMIT" >
-              정보수정
-            </button>
-            <button type="reset" onClick={handleReset} value="RESET">
-              회원탈퇴
-            </button></div>
-          </div>
-        </css.MyPageDiv>
-      </form>
+      <css.SignUpDiv>
+        <Header>
+          <Link to={"/login"}>
+            <MdOutlineKeyboardArrowLeft className="text-sub text-5xl font-bold" />
+          </Link>
+          <h1 className="text-xl font-bold text-main">회원가입</h1>
+        </Header>
+        <div className="signup-inner">
+          <form onSubmit={handleSubmit}>
+            <input
+              required
+              type="text"
+              id="nickName"
+              name="nickName"
+              placeholder="닉네임을 입력하세요."
+              onChange={handleChange}
+            />
+            <span className="err text-xs">{Err.nickName}</span>
+            <input
+              required
+              type="text"
+              id="email"
+              name="email"
+              placeholder="이메일 주소를 입력해주세요."
+              onChange={handleChange}
+            />
+            <span className="err text-xs">{Err.email}</span>
+            <input
+              required
+              type="password"
+              id="password"
+              name="password"
+              placeholder="비밀번호를 입력하세요"
+              onChange={handleChange}
+            />
+            <span className="err text-xs">{Err.password}</span>
+            <input
+              required
+              type="password"
+              id="password2"
+              name="password2"
+              placeholder="비밀번호를 입력하세요"
+              onChange={handleChange}
+            />
+            <span className="err text-xs">{Err.password2}</span>
+            <select placeholder="성별" required onChange={handleSelect}>
+              <option value={0}>선택안함</option>
+              <option value={1}>남자</option>
+              <option value={2}>여자</option>
+            </select>
+            <span className="err text-xs">{Err.gender}</span>
+          </form>
+          <button
+            onClick={(e) => {
+              // registFunc();
+            }}
+          >
+            회원가입
+          </button>
+        </div>
+      </css.SignUpDiv>
     </div>
   );
 };
