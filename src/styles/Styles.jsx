@@ -123,6 +123,20 @@ export const MyPageDiv = styled.div`
   .myPage-inner {
     width: 100%;
     padding: 0 20px;
+    input {
+      background-color: whitesmoke;
+      outline: none;
+      border: 1px solid #ad5299;
+      border-radius: 20px;
+      padding: 5px 10px;
+      color: #ad5299;
+      // &:first-child {
+      //   margin-bottom: 15px;
+      // }
+      &:focus {
+        background-color: #fff;
+      }
+    }
     .rewrite {
       padding: 5px 13px;
       border: 1px solid #ad5299;
