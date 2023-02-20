@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as css from "../../styles/Styles";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import tw from "tailwind-styled-components";
@@ -103,7 +103,7 @@ const MyPage = () => {
     // 각 항목 체크용 객체를 생성해 진행
     setErr(check(val));
   };
-
+  const navigate = useNavigate();
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -115,6 +115,25 @@ const MyPage = () => {
             <h1 className="text-xl font-bold text-main">마이페이지</h1>
           </Header>
           <div className="myPage-inner">
+            <div className="ml-3 mt-5">
+              <h1 className="tex-2xl text-sub text-2xl font-bold">
+                내꿈은 부자 <span className=" text-main text-xs">님</span>
+              </h1>
+              <div className=" mt-5">
+                <span className=" text-main text-xl font-bold ">예산</span>
+                <div className="flex justify-between items-center">
+                  <span className="flex tex-2xl text-sub text-2xl font-bold items-center">
+                    80,000 원
+                  </span>
+                  <button
+                    className="rewrite"
+                    onClick={(e) => navigate("/boardwrite")}
+                  >
+                    수 정
+                  </button>
+                </div>
+              </div>
+            </div>
             <form onSubmit={handleSubmit}>
               <input
                 type="text"
@@ -162,8 +181,8 @@ const MyPage = () => {
               </select>
               <span className="err text-xs">{Err.gender}</span>
             </form>
-            <div className="flex ">
-              <button type="submit" value="SUBMIT">
+            <div className="flex justify-center">
+              <button type="submit" value="SUBMIT" className="ml-3">
                 정보수정
               </button>
               <button type="reset" onClick={handleReset} value="RESET">
