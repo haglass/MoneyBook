@@ -137,6 +137,7 @@ export const MyPageDiv = styled.div`
         background-color: #fff;
       }
     }
+    
     .rewrite {
       padding: 5px 13px;
       border: 1px solid #ad5299;

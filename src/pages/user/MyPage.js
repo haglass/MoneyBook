@@ -6,11 +6,23 @@ import tw from "tailwind-styled-components";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
+
+// 정보를 redux 에서 참조할 때 사용 코드
 import { useSelector } from "react-redux";
+// 정보를 redux 에서 업데이트 할 때 사용 코드
+import { useDispatch } from "react-redux";
+import { clearUser } from "../../reducer/userSlice";
+
+import { type } from "@testing-library/user-event/dist/type";
+// 회원테스트 정보 : aaa1@aaa.net    QWERt12!
 const MyPage = () => {
+  // 정보를 redux 에서 참조할 때 사용 코드
   const user = useSelector((state) => state.user);
+  // 정보를 redux 에서 업데이트 할 때 사용 코드
+  const dispatch = useDispatch();
+
   let initVal = {
-    userid: "",
+    nickname: "",
     email: "",
     nowPassword: "",
     password: "",
@@ -19,6 +31,10 @@ const MyPage = () => {
 
   // 설정 금액
   const cash = () => {
+    console.log("예산: ", don);
+    console.log("user: ", user);
+    console.log("user.miSeq: ", user.miSeq);
+
     let body = {
       miTargetAmount: don,
     };
@@ -34,12 +50,10 @@ const MyPage = () => {
 
   const [don, setDon] = useState(0);
   const [val, setVal] = useState(initVal);
-  const onChange = (e) => {
-    setDon(e.target.value);
-  };
   const handleChange = (e) => {
-    // console.log(e.target); // tag = {name:"userid", value:"123"}
-    // console.log(e.target.name); // tag name="userid"
+    // console.log(e.target);
+    // tag = {name:"nickname", value:"123"}
+    // console.log(e.target.name); // tag name="nickname"
     // console.log(e.target.value);// tag value
     const { name, value } = e.target;
     setVal({ ...val, [name]: value });
@@ -49,8 +63,8 @@ const MyPage = () => {
   const check = (_val) => {
     const errs = {};
     // 닉네임 체크
-    if (_val.nickName.length < 3) {
-      errs.nickName = "닉네임을 5글자 이상 입력해주세요.";
+    if (_val.nickname.length < 3) {
+      errs.nickname = "닉네임을 5글자 이상 입력해주세요.";
     }
     // 이메일 체크/이메일 정규표현식 이용한 처리
     if (_val.email.length < 8 || !/@/.test(_val.email)) {
@@ -85,9 +99,16 @@ const MyPage = () => {
   useEffect(() => {
     console.log(Err);
   }, [Err]);
+
+  // 예산을 수정시 항목 체크
+  const handleDonSubmit = (e) => {
+    e.preventDefault();
+    if (don === 0) return alert("0원 이상 입력하세요.");
+    // 서버로 updatemoney 를 한다.
+    cash();
+  };
   // 전송 실행시 각 항목의 내용 체크
   const handleSubmit = (e) => {
-    alert("업데이트 해요");
     // 웹브라우저가 갱신된다.
     // SPA 컨셉과 맞지 않는다.
     // state 도 초기화가 된다.
@@ -95,8 +116,6 @@ const MyPage = () => {
     // 필요항목에 대한 체크 실행
     // 각 항목 체크용 객체를 생성해 진행
     setErr(check(val));
-    // 서버로 updatemoney 를 한다.
-    cash();
   };
   const navigate = useNavigate();
   const userDeleteBt = (e) => {
@@ -151,28 +170,30 @@ const MyPage = () => {
             <div className=" mt-5">
               <span className=" text-main text-xl font-bold ">예산</span>
               <div className="flex justify-between items-center mt-3">
-                <input
-                  type="text"
-                  placeholder="수정금액"
-                  value={don}
-                  required
-                  onChange={(e) => setDon(e.target.value)}
-                />
-                <button onClick={onChange} className="rewrite">
-                  수 정
-                </button>
+                <form onSubmit={handleDonSubmit}>
+                  <input
+                    type="text"
+                    placeholder="수정금액"
+                    value={don}
+                    required
+                    onChange={(e) => setDon(parseInt(e.target.value))}
+                  />
+                  <button type="submit" className="rewrite">
+                    수 정
+                  </button>
+                </form>
               </div>
             </div>
           </div>
           <form onSubmit={handleSubmit}>
             <input
               type="text"
-              id="userid"
-              name="userid"
+              id="nickname"
+              name="nickname"
               placeholder="닉네임을 입력하세요."
               onChange={handleChange}
             />
-            <span className="err text-xs">{Err.userid}</span>
+            <span className="err text-xs">{Err.nickname}</span>
             <input
               type="text"
               id="email"
@@ -222,6 +243,14 @@ const MyPage = () => {
               }}
             >
               회원탈퇴
+            </button>
+            <button
+              type="button"
+              onClick={(e) => {
+                dispatch(clearUser());
+              }}
+            >
+              로그아웃
             </button>
           </div>
         </div>

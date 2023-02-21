@@ -10,10 +10,15 @@ import { RiUserLine } from "react-icons/ri";
 import { RiUserFill } from "react-icons/ri";
 import { FaRegComments } from "react-icons/fa";
 import { FaComments } from "react-icons/fa";
+// 정보를 redux 에서 참조할 때 사용 코드
+import { useSelector } from "react-redux";
 
 import { useState } from "react";
 
 const Nav = () => {
+  // 정보를 redux 에서 참조할 때 사용 코드
+  const user = useSelector((state) => state.user);
+
   const [navIcon, setNavIcon] = useState({
     focus: false,
   });
@@ -31,7 +36,7 @@ const Nav = () => {
       <css.navInner className="flex justify-around py-4 text-5xl ">
         <css.NavStyle
           className={({ isActive }) => (isActive ? "active" : "")}
-          to="/"
+          to={user.miSeq ? "/Main" : "/Login"}
         >
           <AiFillHome />
         </css.NavStyle>
@@ -45,17 +50,13 @@ const Nav = () => {
           className={({ isActive }) => (isActive ? "active" : "")}
           to="/MyPage"
         >
-         
-            <RiUserFill />
-        
+          <RiUserFill />
         </css.NavStyle>
         <css.NavStyle
           className={({ isActive }) => (isActive ? "active" : "")}
           to="/Board"
         >
-         
-        <FaComments />
-         
+          <FaComments />
         </css.NavStyle>
       </css.navInner>
     </>
