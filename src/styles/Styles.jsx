@@ -8,20 +8,31 @@ export const navInner = styled.div`
   left: 0;
   width: 100%;
   height: 100px;
-  a {
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem 0;
+  font-size: 3rem;
+  li {
+    cursor: pointer;
+    width: calc(100% / 4);
+    position: relative;
     svg {
       color: #b8a6b3;
+      margin: 0 auto;
+      height: 100%;
     }
   }
 `;
 export const NavStyle = styled(NavLink)`
   &.active::before {
     content: "";
-    width: 100%;
-    height: 5px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    height: 4px;
     background-color: #ad5299;
-    display: block;
-    margin-bottom: 10px;
     border-radius: 20px;
   }
   &.active > svg {
@@ -118,7 +129,7 @@ export const LoginDiv = styled.div`
   }
 `;
 
-// Mainpage
+// MyPage
 export const MyPageDiv = styled.div`
   .myPage-inner {
     width: 100%;
@@ -281,6 +292,50 @@ export const BoardList = styled.div`
             padding: 0 8px;
           }
         }
+      }
+    }
+  }
+`;
+//pagination
+export const Paging = styled.div`
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    li {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      border: 1px solid #e2e2e2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1rem;
+      &:first-child {
+        border-radius: 5px 0 0 5px;
+      }
+      &:last-child {
+        border-radius: 0 5px 5px 0;
+      }
+      &.active {
+        background-color: #52424d;
+      }
+      &.active a {
+        color: #fff;
+      }
+      a {
+        color: #52424d;
+        &:hover {
+          color: #ad5299;
+        }
+        &.active {
+          color: #ad5299;
+        }
+      }
+      .page-selection {
+        width: 48px;
+        height: 30px;
+        color: #52424d;
       }
     }
   }
