@@ -7,32 +7,32 @@ const ChartYear = () => {
   const chartData = [
     {
       country: "1월",
-      "hot dog": 95,
+      "hot dog": 9500,
       "hot dogColor": "hsl(38, 70%, 50%)",
-      burger: 137,
+      burger: 13700,
       burgerColor: "hsl(86, 70%, 50%)",
-      sandwich: 172,
+      sandwich: 17200,
       sandwichColor: "hsl(93, 70%, 50%)",
-      kebab: 18,
+      kebab: 1800,
       kebabColor: "hsl(77, 70%, 50%)",
-      fries: 76,
+      fries: 7600,
       friesColor: "hsl(233, 70%, 50%)",
-      donut: 160,
+      donut: 16000,
       donutColor: "hsl(357, 70%, 50%)",
     },
     {
       country: "2월",
       "hot dog": 164,
       "hot dogColor": "hsl(72, 70%, 50%)",
-      burger: 51,
+      burger: 5100,
       burgerColor: "hsl(351, 70%, 50%)",
-      sandwich: 49,
+      sandwich: 4900,
       sandwichColor: "hsl(49, 70%, 50%)",
-      kebab: 45,
+      kebab: 4500,
       kebabColor: "hsl(321, 70%, 50%)",
-      fries: 2,
+      fries: 2000,
       friesColor: "hsl(93, 70%, 50%)",
-      donut: 184,
+      donut: 18400,
       donutColor: "hsl(66, 70%, 50%)",
     },
     {
@@ -110,6 +110,81 @@ const ChartYear = () => {
       donut: 51,
       donutColor: "hsl(178, 70%, 50%)",
     },
+    {
+      country: "8월",
+      "hot dog": 101,
+      "hot dogColor": "hsl(240, 70%, 50%)",
+      burger: 128,
+      burgerColor: "hsl(56, 70%, 50%)",
+      sandwich: 141,
+      sandwichColor: "hsl(324, 70%, 50%)",
+      kebab: 77,
+      kebabColor: "hsl(176, 70%, 50%)",
+      fries: 93,
+      friesColor: "hsl(151, 70%, 50%)",
+      donut: 51,
+      donutColor: "hsl(178, 70%, 50%)",
+    },
+    {
+      country: "9월",
+      "hot dog": 101,
+      "hot dogColor": "hsl(240, 70%, 50%)",
+      burger: 128,
+      burgerColor: "hsl(56, 70%, 50%)",
+      sandwich: 141,
+      sandwichColor: "hsl(324, 70%, 50%)",
+      kebab: 77,
+      kebabColor: "hsl(176, 70%, 50%)",
+      fries: 93,
+      friesColor: "hsl(151, 70%, 50%)",
+      donut: 51,
+      donutColor: "hsl(178, 70%, 50%)",
+    },
+    {
+      country: "10월",
+      "hot dog": 101,
+      "hot dogColor": "hsl(240, 70%, 50%)",
+      burger: 128,
+      burgerColor: "hsl(56, 70%, 50%)",
+      sandwich: 141,
+      sandwichColor: "hsl(324, 70%, 50%)",
+      kebab: 77,
+      kebabColor: "hsl(176, 70%, 50%)",
+      fries: 93,
+      friesColor: "hsl(151, 70%, 50%)",
+      donut: 51,
+      donutColor: "hsl(178, 70%, 50%)",
+    },
+    {
+      country: "11월",
+      "hot dog": 101,
+      "hot dogColor": "hsl(240, 70%, 50%)",
+      burger: 128,
+      burgerColor: "hsl(56, 70%, 50%)",
+      sandwich: 141,
+      sandwichColor: "hsl(324, 70%, 50%)",
+      kebab: 77,
+      kebabColor: "hsl(176, 70%, 50%)",
+      fries: 93,
+      friesColor: "hsl(151, 70%, 50%)",
+      donut: 51,
+      donutColor: "hsl(178, 70%, 50%)",
+    },
+    {
+      country: "12월",
+      "hot dog": 101,
+      "hot dogColor": "hsl(240, 70%, 50%)",
+      burger: 128,
+      burgerColor: "hsl(56, 70%, 50%)",
+      sandwich: 141,
+      sandwichColor: "hsl(324, 70%, 50%)",
+      kebab: 77,
+      kebabColor: "hsl(176, 70%, 50%)",
+      fries: 93,
+      friesColor: "hsl(151, 70%, 50%)",
+      donut: 51,
+      donutColor: "hsl(178, 70%, 50%)",
+    },
   ];
 
   return (
@@ -120,94 +195,96 @@ const ChartYear = () => {
         </Link>
         <h1 className="text-xl font-bold text-main">연간 사용 금액</h1>
       </Header>
-      <div style={{ width: "100%", height: 350 }}>
-        <ResponsiveBar
-          data={chartData}
-          keys={["hot dog", "burger", "sandwich", "kebab", "fries", "donut"]}
-          indexBy="country"
-          margin={{ top: 90, right: 10, bottom: 50, left: 50 }}
-          padding={0.25}
-          innerPadding={2}
-          valueScale={{ type: "linear" }}
-          indexScale={{ type: "band", round: true }}
-          colors={{ scheme: "greens" }}
-          defs={[
-            {
-              id: "dots",
-              type: "patternDots",
-              background: "inherit",
-              color: "#38bcb2",
-              size: 4,
-              padding: 1,
-              stagger: true,
-            },
-            {
-              id: "lines",
-              type: "patternLines",
-              background: "inherit",
-              color: "#eed312",
-              rotation: -45,
-              lineWidth: 6,
-              spacing: 10,
-            },
-          ]}
-          fill={[
-            {
-              match: {
-                id: "fries",
+      <div className="px-5">
+        <div style={{ width: "100%", height: 350 }}>
+          <ResponsiveBar
+            data={chartData}
+            keys={["hot dog", "burger", "sandwich", "kebab", "fries", "donut"]}
+            indexBy="country"
+            margin={{ top: 90, right: 5, bottom: 50, left: 40 }}
+            padding={0.25}
+            innerPadding={2}
+            valueScale={{ type: "linear" }}
+            indexScale={{ type: "band", round: true }}
+            colors={{ scheme: "greens" }}
+            defs={[
+              {
+                id: "dots",
+                type: "patternDots",
+                background: "inherit",
+                color: "#38bcb2",
+                size: 4,
+                padding: 1,
+                stagger: true,
               },
-              id: "dots",
-            },
-            {
-              match: {
-                id: "sandwich",
+              {
+                id: "lines",
+                type: "patternLines",
+                background: "inherit",
+                color: "#eed312",
+                rotation: -45,
+                lineWidth: 6,
+                spacing: 10,
               },
-              id: "lines",
-            },
-          ]}
-          borderColor={{
-            from: "color",
-            modifiers: [["darker", "1"]],
-          }}
-          axisTop={null}
-          axisRight={null}
-          axisBottom={{
-            tickSize: "",
-            tickPadding: 5,
-            tickRotation: 0,
-            legend: "",
-            legendPosition: "middle",
-            legendOffset: 32,
-          }}
-          axisLeft={{
-            tickSize: "",
-            tickPadding: 5,
-            tickRotation: 0,
-            legend: "",
-            legendPosition: "middle",
-            legendOffset: -40,
-          }}
-          enableGridY={false}
-          enableLabel={false}
-          labelSkipWidth={8}
-          labelSkipHeight={5}
-          labelTextColor={{
-            from: "color",
-            modifiers: [["darker", 1.6]],
-          }}
-          role="application"
-          ariaLabel="Nivo bar chart demo"
-          barAriaLabel={function (e) {
-            return (
-              e.id + ": " + e.formattedValue + " in country: " + e.indexValue
-            );
-          }}
-        />
-      </div>
-      <div className="m-20 text-center">
-        <h1 className="text-sub text-2xl mb-2 font-bold">전년대비</h1>
-        <span className="text-main text-5xl  font-bold">70% 더</span>
-        <p className="text-sub2 text-2xl mt-3 font-bold">사용 하였습니다!</p>
+            ]}
+            fill={[
+              {
+                match: {
+                  id: "fries",
+                },
+                id: "dots",
+              },
+              {
+                match: {
+                  id: "sandwich",
+                },
+                id: "lines",
+              },
+            ]}
+            borderColor={{
+              from: "color",
+              modifiers: [["darker", "1"]],
+            }}
+            axisTop={null}
+            axisRight={null}
+            axisBottom={{
+              tickSize: "",
+              tickPadding: 5,
+              tickRotation: 0,
+              legend: "",
+              legendPosition: "middle",
+              legendOffset: 32,
+            }}
+            axisLeft={{
+              tickSize: "",
+              tickPadding: 5,
+              tickRotation: 0,
+              legend: "",
+              legendPosition: "middle",
+              legendOffset: -40,
+            }}
+            enableGridY={false}
+            enableLabel={false}
+            labelSkipWidth={8}
+            labelSkipHeight={5}
+            labelTextColor={{
+              from: "color",
+              modifiers: [["darker", 1.6]],
+            }}
+            role="application"
+            ariaLabel="Nivo bar chart demo"
+            barAriaLabel={function (e) {
+              return (
+                e.id + ": " + e.formattedValue + " in country: " + e.indexValue
+              );
+            }}
+          />
+        </div>
+        <div className="my-20 text-center">
+          <h1 className="text-sub text-2xl mb-2 font-bold">전년대비</h1>
+          <span className="text-main text-5xl  font-bold">70% 더</span>
+          <p className="text-sub2 text-2xl mt-3 font-bold">사용 하였습니다!</p>
+        </div>
       </div>
     </div>
   );
