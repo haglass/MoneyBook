@@ -9,6 +9,8 @@ import { FaComments } from "react-icons/fa";
 import { useSelector } from "react-redux";
 
 const Nav = () => {
+  // 정보를 redux 에서 참조할 때 사용 코드
+  const user = useSelector((state) => state.user);
 
   return (
     <>
@@ -16,7 +18,7 @@ const Nav = () => {
         <li>
           <css.NavStyle
             className={({ isActive }) => (isActive ? "active" : "")}
-            to="/"
+            to={user.miSeq ? "/Main" : "/Login"}
           >
             <AiFillHome />
           </css.NavStyle>
@@ -45,7 +47,6 @@ const Nav = () => {
             <FaComments />
           </css.NavStyle>
         </li>
-
       </css.navInner>
     </>
   );

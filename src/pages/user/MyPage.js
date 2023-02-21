@@ -109,12 +109,7 @@ const MyPage = () => {
   };
   // 전송 실행시 각 항목의 내용 체크
   const handleSubmit = (e) => {
-    // 웹브라우저가 갱신된다.
-    // SPA 컨셉과 맞지 않는다.
-    // state 도 초기화가 된다.
     e.preventDefault();
-    // 필요항목에 대한 체크 실행
-    // 각 항목 체크용 객체를 생성해 진행
     setErr(check(val));
   };
   const navigate = useNavigate();
@@ -163,13 +158,13 @@ const MyPage = () => {
           <h1 className="text-xl font-bold text-main">마이페이지</h1>
         </Header>
         <div className="myPage-inner">
-          <div className="ml-3 mt-5">
+          <div>
             <h1 className="tex-2xl text-sub text-2xl font-bold">
-              내꿈은 부자 <span className=" text-main text-xs">님</span>
+              {user.miNickname} <span className=" text-main text-lg">님</span>
             </h1>
             <div className=" mt-5">
               <span className=" text-main text-xl font-bold ">예산</span>
-              <div className="flex justify-between items-center mt-3">
+              <div className="editdon">
                 <form onSubmit={handleDonSubmit}>
                   <input
                     type="text"
@@ -227,19 +222,15 @@ const MyPage = () => {
             />
             <span className="err text-xs">{Err.password2}</span>
           </form>
-          <div className="flex justify-center">
-            <button
-              type="submit"
-              onClick={handleSubmit}
-              value="SUBMIT"
-              className="ml-3"
-            >
+          <div className="flex justify-between">
+            <button type="submit" onClick={handleSubmit} value="SUBMIT">
               정보수정
             </button>
             <button
               type="button"
               onClick={(e) => {
                 userDeleteBt();
+                navigate("/");
               }}
             >
               회원탈퇴
@@ -248,6 +239,7 @@ const MyPage = () => {
               type="button"
               onClick={(e) => {
                 dispatch(clearUser());
+                navigate("/");
               }}
             >
               로그아웃
