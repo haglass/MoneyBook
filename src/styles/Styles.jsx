@@ -134,6 +134,22 @@ export const MyPageDiv = styled.div`
   .myPage-inner {
     width: 100%;
     padding: 0 20px;
+    .editdon {
+      form {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+        input {
+          margin-bottom: 0;
+          width: 75%;
+        }
+        button {
+          margin: 0;
+        }
+      }
+    }
     input {
       background-color: whitesmoke;
       outline: none;
@@ -148,19 +164,19 @@ export const MyPageDiv = styled.div`
         background-color: #fff;
       }
     }
-    
+
     .rewrite {
-      padding: 5px 13px;
+      padding: 7px 15px;
       border: 1px solid #ad5299;
       border-radius: 20px;
       font-size: 14px;
-      text-alin: center;
+      text-align: center;
       margin-top: 5px;
     }
     form {
       display: flex;
       flex-direction: column;
-      margin-top: 70px;
+      margin-top: 50px;
       input {
         background-color: whitesmoke;
         outline: none;
@@ -179,17 +195,6 @@ export const MyPageDiv = styled.div`
         color: red;
         margin-bottom: 10px;
       }
-      select {
-        background-color: whitesmoke;
-        outline: none;
-        border: 1px solid #ad5299;
-        border-radius: 20px;
-        padding: 5px 10px;
-        color: #ad5299;
-        &:focus {
-          background-color: #fff;
-        }
-      }
     }
     button {
       display: block;
@@ -199,7 +204,6 @@ export const MyPageDiv = styled.div`
       color: #ad5299;
       font-weight: 500;
       font-size: 1.2rem;
-      margin: 0 20px;
       margin-top: 40px;
     }
   }
