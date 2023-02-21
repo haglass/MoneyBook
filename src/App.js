@@ -15,7 +15,14 @@ import ChartMonth from "./pages/chart/ChartMonth";
 import ChartYear from "./pages/chart/ChartYear";
 import MyPage from "./pages/user/MyPage";
 import MainPage from "./pages/main/MainPage";
+
+// 정보를 redux 에서 참조할 때 사용 코드
+import { useSelector } from "react-redux";
+
 const App = () => {
+  // 정보를 redux 에서 참조할 때 사용 코드
+  const user = useSelector((state) => state.user);
+
   return (
     <Router>
       <div className="wrap">
@@ -36,7 +43,7 @@ const App = () => {
           <Route path="/chartYear" element={<ChartYear />} />
           <Route path="/myPage" element={<MyPage />} />
         </Routes>
-        <Nav />
+        {user.miSeq ? <Nav /> : null}
       </div>
     </Router>
   );

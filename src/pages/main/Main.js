@@ -7,7 +7,14 @@ import tw from "tailwind-styled-components";
 
 // Chart import
 import MainChart from "./MainChart";
+
+// 정보를 redux 에서 참조할 때 사용 코드
+import { useSelector } from "react-redux";
+
 const Main = () => {
+  // 정보를 redux 에서 참조할 때 사용 코드
+  const user = useSelector((state) => state.user);
+
   const navigate = useNavigate();
   const cashBt = (e) => {
     navigate("/mypage");
@@ -30,8 +37,9 @@ const Main = () => {
         </MainEdit>
         <div className="absolute top-[100px] z-1">
           <div className="flex flex-col items-center ">
-            <MainText>40,000원</MainText>
-            <MainText2>/50,000원</MainText2>
+            {/* 소비된 금액을 userSlice.js 에서 추가할 필요성 있을까? */}
+            <MainText>{user.miTargetAmount}원</MainText>
+            <MainText2>/{user.miTargetAmount}원</MainText2>
           </div>
         </div>
         <MainChart />

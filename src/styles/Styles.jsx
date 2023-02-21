@@ -134,10 +134,33 @@ export const MyPageDiv = styled.div`
   .myPage-inner {
     width: 100%;
     padding: 0 20px;
+    input {
+      background-color: whitesmoke;
+      outline: none;
+      border: 1px solid #ad5299;
+      border-radius: 20px;
+      padding: 5px 10px;
+      color: #ad5299;
+      // &:first-child {
+      //   margin-bottom: 15px;
+      // }
+      &:focus {
+        background-color: #fff;
+      }
+    }
+    
+    .rewrite {
+      padding: 5px 13px;
+      border: 1px solid #ad5299;
+      border-radius: 20px;
+      font-size: 14px;
+      text-alin: center;
+      margin-top: 5px;
+    }
     form {
       display: flex;
       flex-direction: column;
-      margin-top: 100px;
+      margin-top: 70px;
       input {
         background-color: whitesmoke;
         outline: none;
@@ -171,9 +194,10 @@ export const MyPageDiv = styled.div`
     button {
       display: block;
       padding: 5px 20px;
-      background: #ad5299;
+      border: 1px solid #ad5299;
       border-radius: 15px;
-      color: #fff;
+      color: #ad5299;
+      font-weight: 500;
       font-size: 1.2rem;
       margin: 0 20px;
       margin-top: 40px;

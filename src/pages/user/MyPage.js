@@ -1,90 +1,96 @@
 import React from "react";
-
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as css from "../../styles/Styles";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import tw from "tailwind-styled-components";
 import { useState } from "react";
 import { useEffect } from "react";
+import axios from "axios";
 
+// 정보를 redux 에서 참조할 때 사용 코드
+import { useSelector } from "react-redux";
+// 정보를 redux 에서 업데이트 할 때 사용 코드
+import { useDispatch } from "react-redux";
+import { clearUser } from "../../reducer/userSlice";
+
+import { type } from "@testing-library/user-event/dist/type";
+// 회원테스트 정보 : aaa1@aaa.net    QWERt12!
 const MyPage = () => {
+  // 정보를 redux 에서 참조할 때 사용 코드
+  const user = useSelector((state) => state.user);
+  // 정보를 redux 에서 업데이트 할 때 사용 코드
+  const dispatch = useDispatch();
+
   let initVal = {
-    userid: "",
+    nickname: "",
     email: "",
+    nowPassword: "",
     password: "",
     password2: "",
-    gender: "",
-    comment: "",
   };
-  const [val, setVal] = useState(initVal);
 
-  const selectList = ["선택안함", "남성", "여성"];
-  const [Selected, setSelected] = useState("");
-  const handleSelect = (e) => {
-    setSelected(e.target.value);
+  // 설정 금액
+  const cash = () => {
+    console.log("예산: ", don);
+    console.log("user: ", user);
+    console.log("user.miSeq: ", user.miSeq);
+
+    let body = {
+      miTargetAmount: don,
+    };
+    axios
+      .post(`http://192.168.0.151:9898/member/updatemoney/${user.miSeq}`, body)
+      .then((res) => {
+        console.log("res", res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
+
+  const [don, setDon] = useState(0);
+  const [val, setVal] = useState(initVal);
   const handleChange = (e) => {
-    // console.log(e.target); // tag = {name:"userid", value:"123"}
-    // console.log(e.target.name); // tag name="userid"
+    // console.log(e.target);
+    // tag = {name:"nickname", value:"123"}
+    // console.log(e.target.name); // tag name="nickname"
     // console.log(e.target.value);// tag value
     const { name, value } = e.target;
     setVal({ ...val, [name]: value });
-  };
-  // 성별 라디오 이벤트 핸들러
-  const handleRadio = (e) => {
-    // id 를 받아서 처리할까? 고민중
-    const { name, id } = e.target;
-    // const isCheck = e.target.checked;
-    setVal({ ...val, [name]: id });
   };
   // 에러 정보 관리 객체
   const [Err, setErr] = useState({});
   const check = (_val) => {
     const errs = {};
-    // 아이디 체크
-    if (_val.userid.length < 5) {
-      errs.userid = "아이디를 5글자 이상 입력해주세요.";
+    // 닉네임 체크
+    if (_val.nickname.length < 3) {
+      errs.nickname = "닉네임을 5글자 이상 입력해주세요.";
     }
     // 이메일 체크/이메일 정규표현식 이용한 처리
     if (_val.email.length < 8 || !/@/.test(_val.email)) {
       errs.email = "이메일은 최소 8글자 이상 @을 포함해 주세요.";
     }
-    // 전화번호 체크
-    if (_val.phone === "") {
-      errs.phone = "전화번호를 입력해주세요.";
-    }
     // 비밀번호
     const eng = /[a-zA-Z]/;
     const num = /[0-9]/;
     const spc = /[!@#$%^&*()_+]/;
+    if (!_val.nowPassword) {
+      errs.nowPassword = "현재 비밀번호를 입력하세요.";
+    }
     if (
-      _val.password.length < 5 ||
+      _val.password.length < 6 ||
       !eng.test(_val.password) ||
       !num.test(_val.password) ||
       !spc.test(_val.password)
     ) {
       errs.password =
-        "비밀번호는 5글자 이상, 영문, 숫자, 특수문자를 모두 포함해 주세요.";
+        "비밀번호는 6글자 이상 12글자 이하, 영문, 숫자, 특수문자를 모두 포함해 주세요.";
     }
     // 비밀번호2 체크
     if (_val.password !== _val.password2 || !_val.password2) {
       errs.password2 = "비밀번호를 동일하게 입력해주세요.";
     }
-    // 생년월일체크
-    if (_val.birthday === "") {
-      errs.birthday = "생년월일을 선택하세요.";
-    }
-    // 성별 체크
-    if (_val.gender === "") {
-      errs.gender = "성별을 선택하세요.";
-    }
-
     return errs;
-  };
-  // 데이터 조기화
-  const handleReset = () => {
-    setVal(initVal);
-    setErr({});
   };
   // 디버깅용
   useEffect(() => {
@@ -93,6 +99,14 @@ const MyPage = () => {
   useEffect(() => {
     console.log(Err);
   }, [Err]);
+
+  // 예산을 수정시 항목 체크
+  const handleDonSubmit = (e) => {
+    e.preventDefault();
+    if (don === 0) return alert("0원 이상 입력하세요.");
+    // 서버로 updatemoney 를 한다.
+    cash();
+  };
   // 전송 실행시 각 항목의 내용 체크
   const handleSubmit = (e) => {
     // 웹브라우저가 갱신된다.
@@ -103,85 +117,151 @@ const MyPage = () => {
     // 각 항목 체크용 객체를 생성해 진행
     setErr(check(val));
   };
+  const navigate = useNavigate();
+  const userDeleteBt = (e) => {
+    e.preventDefault();
 
+    if (window.confirm("정말 탈퇴하겠습니까?")) {
+      axios
+        .post(`http://192.168.0.151:9898/member/delete?miSeq=${user.miSeq}`)
+        .then((res) => {})
+        .catch((err) => {
+          console.log(err);
+        });
+      alert("탈퇴 되었습니다.");
+    } else {
+      alert("취소 되었습니다.");
+    }
+  };
+  const pwEd = (e) => {
+    axios
+      .post(`http://192.168.0.151:9898/member/update/pwd/${user.miSeq}`)
+      .then((res) => {
+        alert("수정되었습니다.");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const nicknameEd = (e) => {
+    axios
+      .post(`http://192.168.0.151:9898/member/update/nickname/${user.miSeq}`)
+      .then((res) => {
+        alert("수정되었습니다.");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <css.MyPageDiv>
-          <Header>
-            <Link to={"/login"}>
-              <MdOutlineKeyboardArrowLeft className="text-sub text-5xl font-bold" />
-            </Link>
-            <h1 className="text-xl font-bold text-main">마이페이지</h1>
-          </Header>
-          <div className="myPage-inner">
-            <form onSubmit={handleSubmit}>
-              <input
-                type="text"
-                id="userid"
-                name="userid"
-                placeholder="닉네임을 입력하세요."
-                onChange={handleChange}
-              />
-              <span className="err text-xs">{Err.userid}</span>
-              <input
-                type="text"
-                id="email"
-                name="email"
-                placeholder="이메일 주소를 입력해주세요."
-                onChange={handleChange}
-              />
-              <span className="err text-xs">{Err.email}</span>
-              <input
-                type="text"
-                id="password"
-                name="password"
-                placeholder="비밀번호를 입력하세요"
-                onChange={handleChange}
-              />
-              <span className="err text-xs">{Err.password}</span>
-              <input
-                type="password"
-                id="password2"
-                name="password2"
-                placeholder="비밀번호를 입력하세요"
-                onChange={handleChange}
-              />
-              <span className="err text-xs">{Err.password2}</span>
-
-              <select
-                placeholder="성별"
-                onChange={handleSelect}
-                value={Selected}
-              >
-                {selectList.map((item) => (
-                  <option value={item} key={item}>
-                    {item}
-                  </option>
-                ))}
-              </select>
-              <span className="err text-xs">{Err.gender}</span>
-            </form>
-            <div className="flex ">
-              <button type="submit" value="SUBMIT">
-                정보수정
-              </button>
-              <button type="reset" onClick={handleReset} value="RESET">
-                회원탈퇴
-              </button>
+      <css.MyPageDiv>
+        <Header>
+          <Link to={"/login"}>
+            <MdOutlineKeyboardArrowLeft className="text-sub text-5xl font-bold" />
+          </Link>
+          <h1 className="text-xl font-bold text-main">마이페이지</h1>
+        </Header>
+        <div className="myPage-inner">
+          <div className="ml-3 mt-5">
+            <h1 className="tex-2xl text-sub text-2xl font-bold">
+              내꿈은 부자 <span className=" text-main text-xs">님</span>
+            </h1>
+            <div className=" mt-5">
+              <span className=" text-main text-xl font-bold ">예산</span>
+              <div className="flex justify-between items-center mt-3">
+                <form onSubmit={handleDonSubmit}>
+                  <input
+                    type="text"
+                    placeholder="수정금액"
+                    value={don}
+                    required
+                    onChange={(e) => setDon(parseInt(e.target.value))}
+                  />
+                  <button type="submit" className="rewrite">
+                    수 정
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
-        </css.MyPageDiv>
-      </form>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              id="nickname"
+              name="nickname"
+              placeholder="닉네임을 입력하세요."
+              onChange={handleChange}
+            />
+            <span className="err text-xs">{Err.nickname}</span>
+            <input
+              type="text"
+              id="email"
+              name="email"
+              placeholder="이메일 주소를 입력해주세요."
+              onChange={handleChange}
+            />
+            <span className="err text-xs">{Err.email}</span>
+            <input
+              type="text"
+              id="nowPassword"
+              name="nowPassword"
+              placeholder="현재 비밀번호를 입력하세요"
+              onChange={handleChange}
+            />
+            <span className="err text-xs">{Err.nowPassword}</span>
+            <input
+              type="text"
+              id="password"
+              name="password"
+              placeholder="수정 할 비밀번호를 입력하세요"
+              onChange={handleChange}
+            />
+            <span className="err text-xs">{Err.password}</span>
+            <input
+              type="password"
+              id="password2"
+              name="password2"
+              placeholder="비밀번호 확인을 입력하세요"
+              onChange={handleChange}
+            />
+            <span className="err text-xs">{Err.password2}</span>
+          </form>
+          <div className="flex justify-center">
+            <button
+              type="submit"
+              onClick={handleSubmit}
+              value="SUBMIT"
+              className="ml-3"
+            >
+              정보수정
+            </button>
+            <button
+              type="button"
+              onClick={(e) => {
+                userDeleteBt();
+              }}
+            >
+              회원탈퇴
+            </button>
+            <button
+              type="button"
+              onClick={(e) => {
+                dispatch(clearUser());
+              }}
+            >
+              로그아웃
+            </button>
+          </div>
+        </div>
+      </css.MyPageDiv>
     </div>
   );
 };
-
 const Header = tw.div`
 flex
 items-center
 w-full
 h-20
 `;
-
 export default MyPage;
