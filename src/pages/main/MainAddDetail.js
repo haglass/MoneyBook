@@ -16,6 +16,7 @@ const MainAddD = () => {
   const [category, setCategory] = useState([]);
   const [selected, setSelected] = useState("");
   const [top, setTop] = useState([]);
+
   const expenditure = (e) => {
     let body = {
       edtitle: history,
@@ -32,6 +33,7 @@ const MainAddD = () => {
         console.log(err);
       });
   };
+
   const cate = async () => {
     try {
       const res = await axios.get(

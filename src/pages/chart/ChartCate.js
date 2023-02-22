@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import { ResponsivePie } from "@nivo/pie";
 import { Link, useNavigate } from "react-router-dom";
@@ -14,53 +14,38 @@ import { FaShoppingBag } from "react-icons/fa";
 import { FaUtensils } from "react-icons/fa";
 import { FaThumbtack } from "react-icons/fa";
 import { FaCoins } from "react-icons/fa";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { BiCategory } from "react-icons/bi";
 
 const ChartCate = () => {
+  const user = useSelector((state) => state.user);
   const navigate = useNavigate();
-  const chartData = [
-    {
-      id: "고정지출",
-      label: "고정지출",
-      value: 512,
-      color: "hsl(162, 70%, 50%)",
-    },
-    {
-      id: "교통비",
-      label: "교통비",
-      value: 591,
-      color: "hsl(21, 70%, 50%)",
-    },
-    {
-      id: "식비",
-      label: "식비",
-      value: 563,
-      color: "hsl(287, 70%, 50%)",
-    },
-    {
-      id: "쇼핑",
-      label: "쇼핑",
-      value: 127,
-      color: "hsl(178, 70%, 50%)",
-    },
-    {
-      id: "저축",
-      label: "저축",
-      value: 233,
-      color: "hsl(101, 70%, 50%)",
-    },
-    {
-      id: "여가비",
-      label: "여가비",
-      value: 180,
-      color: "hsl(101, 70%, 50%)",
-    },
-    {
-      id: "의료비",
-      label: "의료비",
-      value: 100,
-      color: "hsl(101, 70%, 50%)",
-    },
-  ];
+  const [category, setCategory] = useState([]);
+  const cateData = async () => {
+    try {
+      const res = await axios.get(
+        `http://192.168.0.151:9898/expenses/cate/${user.miSeq}`
+      );
+      setCategory(res.data);
+      console.log(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const chartData = category.map((item) => {
+    let dd = {
+      id: item.cate,
+      label: item.rate,
+      value: item.price,
+    };
+    return dd;
+  });
+
+  useEffect(() => {
+    cateData();
+  }, []);
   return (
     <>
       <Header>

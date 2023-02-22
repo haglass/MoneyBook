@@ -18,6 +18,7 @@ import { type } from "@testing-library/user-event/dist/type";
 const MyPage = () => {
   // 정보를 redux 에서 참조할 때 사용 코드
   const user = useSelector((state) => state.user);
+  console.log(user.miSeq);
   // 정보를 redux 에서 업데이트 할 때 사용 코드
   const dispatch = useDispatch();
 
@@ -128,6 +129,7 @@ const MyPage = () => {
       alert("취소 되었습니다.");
     }
   };
+
   const pwEd = (e) => {
     axios
       .post(`http://192.168.0.151:9898/member/update/pwd/${user.miSeq}`)
@@ -138,6 +140,7 @@ const MyPage = () => {
         console.log(err);
       });
   };
+
   const nicknameEd = (e) => {
     axios
       .post(`http://192.168.0.151:9898/member/update/nickname/${user.miSeq}`)

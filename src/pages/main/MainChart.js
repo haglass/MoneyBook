@@ -1,17 +1,17 @@
 import React from "react";
 import { ResponsivePie } from "@nivo/pie";
 
-const MainChart = () => {
+const MainChart = ({ expenses }) => {
   const chartData = [
     {
       id: "lisp",
       label: "lisp",
-      value: 70,
+      value: parseInt(expenses.remainingRete),
     },
     {
       id: "stylus",
       label: "stylus",
-      value: 30,
+      value: parseInt(expenses.usedRate),
     },
   ];
   return (
