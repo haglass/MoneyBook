@@ -6,7 +6,13 @@ import tw from "tailwind-styled-components";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 const Join = () => {
+  // 정보를 redux 에서 참조할 때 사용 코드
+  const user = useSelector((state) => state.user);
+  console.log(user.miSeq);
+  // 정보를 redux 에서 업데이트 할 때 사용 코드
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   let body = {
     nickName: "",

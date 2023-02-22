@@ -79,13 +79,13 @@ const MyPage = () => {
       errs.nowPassword = "현재 비밀번호를 입력하세요.";
     }
     if (
-      _val.password.length < 6 ||
+      _val.password.length < 5 ||
       !eng.test(_val.password) ||
       !num.test(_val.password) ||
       !spc.test(_val.password)
     ) {
       errs.password =
-        "비밀번호는 6글자 이상 12글자 이하, 영문, 숫자, 특수문자를 모두 포함해 주세요.";
+        "비밀번호는 5글자 이상 12글자 이하, 영문, 숫자, 특수문자를 모두 포함해 주세요.";
     }
     // 비밀번호2 체크
     if (_val.password !== _val.password2 || !_val.password2) {
