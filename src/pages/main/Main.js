@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { Link, useNavigate } from "react-router-dom";
 
@@ -10,15 +10,33 @@ import MainChart from "./MainChart";
 
 // 정보를 redux 에서 참조할 때 사용 코드
 import { useSelector } from "react-redux";
+import axios from "axios";
 
 const Main = () => {
   // 정보를 redux 에서 참조할 때 사용 코드
   const user = useSelector((state) => state.user);
-
+  const [expenses, setExpenses] = useState([]);
   const navigate = useNavigate();
+
+  const eData = async () => {
+    try {
+      const res = await axios.get(
+        `http://192.168.0.151:9898/expenses/target/${user.miSeq}`
+      );
+      setExpenses(res.data);
+      console.log(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const cashBt = (e) => {
     navigate("/mypage");
   };
+
+  useEffect(() => {
+    eData();
+  }, []);
   return (
     <div>
       <span className="absolute font-medium text-main text-[24px] right-[162px] top-[220px]">
@@ -26,7 +44,7 @@ const Main = () => {
       </span>
       <div className="flex flex-col justify-center items-center mt-40 relative">
         <span className="absolute font-medium text-sub text-[16px] top-[210px]">
-          예산 진행률 70%
+          예산 진행률 {Math.floor(expenses.remainingRete)}%
         </span>
         <MainEdit
           onClick={(e) => {
@@ -38,11 +56,11 @@ const Main = () => {
         <div className="absolute top-[100px] z-1">
           <div className="flex flex-col items-center ">
             {/* 소비된 금액을 userSlice.js 에서 추가할 필요성 있을까? */}
-            <MainText>{user.miTargetAmount}원</MainText>
-            <MainText2>/{user.miTargetAmount}원</MainText2>
+            <MainText>{expenses.remaining}원</MainText>
+            <MainText2>/{expenses.target}원</MainText2>
           </div>
         </div>
-        <MainChart />
+        <MainChart expenses={expenses} />
         <div className="flex flex-col gap-7">
           <Link to="/MainAddDetail">
             <MainBt>내역추가</MainBt>

@@ -1,191 +1,63 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import tw from "tailwind-styled-components";
 import { ResponsiveBar } from "@nivo/bar";
+import { useSelector } from "react-redux";
+import axios from "axios";
 const ChartYear = () => {
-  const chartData = [
-    {
-      country: "1월",
-      "hot dog": 9500,
-      "hot dogColor": "hsl(38, 70%, 50%)",
-      burger: 13700,
-      burgerColor: "hsl(86, 70%, 50%)",
-      sandwich: 17200,
-      sandwichColor: "hsl(93, 70%, 50%)",
-      kebab: 1800,
-      kebabColor: "hsl(77, 70%, 50%)",
-      fries: 7600,
-      friesColor: "hsl(233, 70%, 50%)",
-      donut: 16000,
-      donutColor: "hsl(357, 70%, 50%)",
-    },
-    {
-      country: "2월",
-      "hot dog": 164,
-      "hot dogColor": "hsl(72, 70%, 50%)",
-      burger: 5100,
-      burgerColor: "hsl(351, 70%, 50%)",
-      sandwich: 4900,
-      sandwichColor: "hsl(49, 70%, 50%)",
-      kebab: 4500,
-      kebabColor: "hsl(321, 70%, 50%)",
-      fries: 2000,
-      friesColor: "hsl(93, 70%, 50%)",
-      donut: 18400,
-      donutColor: "hsl(66, 70%, 50%)",
-    },
-    {
-      country: "3월",
-      "hot dog": 64,
-      "hot dogColor": "hsl(82, 70%, 50%)",
-      burger: 104,
-      burgerColor: "hsl(316, 70%, 50%)",
-      sandwich: 103,
-      sandwichColor: "hsl(173, 70%, 50%)",
-      kebab: 132,
-      kebabColor: "hsl(58, 70%, 50%)",
-      fries: 127,
-      friesColor: "hsl(77, 70%, 50%)",
-      donut: 68,
-      donutColor: "hsl(287, 70%, 50%)",
-    },
-    {
-      country: "4월",
-      "hot dog": 52,
-      "hot dogColor": "hsl(307, 70%, 50%)",
-      burger: 176,
-      burgerColor: "hsl(65, 70%, 50%)",
-      sandwich: 60,
-      sandwichColor: "hsl(49, 70%, 50%)",
-      kebab: 26,
-      kebabColor: "hsl(60, 70%, 50%)",
-      fries: 142,
-      friesColor: "hsl(311, 70%, 50%)",
-      donut: 181,
-      donutColor: "hsl(267, 70%, 50%)",
-    },
-    {
-      country: "5월",
-      "hot dog": 119,
-      "hot dogColor": "hsl(65, 70%, 50%)",
-      burger: 24,
-      burgerColor: "hsl(65, 70%, 50%)",
-      sandwich: 104,
-      sandwichColor: "hsl(95, 70%, 50%)",
-      kebab: 50,
-      kebabColor: "hsl(202, 70%, 50%)",
-      fries: 120,
-      friesColor: "hsl(219, 70%, 50%)",
-      donut: 194,
-      donutColor: "hsl(7, 70%, 50%)",
-    },
-    {
-      country: "6월",
-      "hot dog": 42,
-      "hot dogColor": "hsl(48, 70%, 50%)",
-      burger: 139,
-      burgerColor: "hsl(95, 70%, 50%)",
-      sandwich: 1,
-      sandwichColor: "hsl(220, 70%, 50%)",
-      kebab: 141,
-      kebabColor: "hsl(116, 70%, 50%)",
-      fries: 86,
-      friesColor: "hsl(25, 70%, 50%)",
-      donut: 141,
-      donutColor: "hsl(71, 70%, 50%)",
-    },
-    {
-      country: "7월",
-      "hot dog": 101,
-      "hot dogColor": "hsl(240, 70%, 50%)",
-      burger: 128,
-      burgerColor: "hsl(56, 70%, 50%)",
-      sandwich: 141,
-      sandwichColor: "hsl(324, 70%, 50%)",
-      kebab: 77,
-      kebabColor: "hsl(176, 70%, 50%)",
-      fries: 93,
-      friesColor: "hsl(151, 70%, 50%)",
-      donut: 51,
-      donutColor: "hsl(178, 70%, 50%)",
-    },
-    {
-      country: "8월",
-      "hot dog": 101,
-      "hot dogColor": "hsl(240, 70%, 50%)",
-      burger: 128,
-      burgerColor: "hsl(56, 70%, 50%)",
-      sandwich: 141,
-      sandwichColor: "hsl(324, 70%, 50%)",
-      kebab: 77,
-      kebabColor: "hsl(176, 70%, 50%)",
-      fries: 93,
-      friesColor: "hsl(151, 70%, 50%)",
-      donut: 51,
-      donutColor: "hsl(178, 70%, 50%)",
-    },
-    {
-      country: "9월",
-      "hot dog": 101,
-      "hot dogColor": "hsl(240, 70%, 50%)",
-      burger: 128,
-      burgerColor: "hsl(56, 70%, 50%)",
-      sandwich: 141,
-      sandwichColor: "hsl(324, 70%, 50%)",
-      kebab: 77,
-      kebabColor: "hsl(176, 70%, 50%)",
-      fries: 93,
-      friesColor: "hsl(151, 70%, 50%)",
-      donut: 51,
-      donutColor: "hsl(178, 70%, 50%)",
-    },
-    {
-      country: "10월",
-      "hot dog": 101,
-      "hot dogColor": "hsl(240, 70%, 50%)",
-      burger: 128,
-      burgerColor: "hsl(56, 70%, 50%)",
-      sandwich: 141,
-      sandwichColor: "hsl(324, 70%, 50%)",
-      kebab: 77,
-      kebabColor: "hsl(176, 70%, 50%)",
-      fries: 93,
-      friesColor: "hsl(151, 70%, 50%)",
-      donut: 51,
-      donutColor: "hsl(178, 70%, 50%)",
-    },
-    {
-      country: "11월",
-      "hot dog": 101,
-      "hot dogColor": "hsl(240, 70%, 50%)",
-      burger: 128,
-      burgerColor: "hsl(56, 70%, 50%)",
-      sandwich: 141,
-      sandwichColor: "hsl(324, 70%, 50%)",
-      kebab: 77,
-      kebabColor: "hsl(176, 70%, 50%)",
-      fries: 93,
-      friesColor: "hsl(151, 70%, 50%)",
-      donut: 51,
-      donutColor: "hsl(178, 70%, 50%)",
-    },
-    {
-      country: "12월",
-      "hot dog": 101,
-      "hot dogColor": "hsl(240, 70%, 50%)",
-      burger: 128,
-      burgerColor: "hsl(56, 70%, 50%)",
-      sandwich: 141,
-      sandwichColor: "hsl(324, 70%, 50%)",
-      kebab: 77,
-      kebabColor: "hsl(176, 70%, 50%)",
-      fries: 93,
-      friesColor: "hsl(151, 70%, 50%)",
-      donut: 51,
-      donutColor: "hsl(178, 70%, 50%)",
-    },
-  ];
+  const user = useSelector((state) => state.user);
+  const [year, setYear] = useState([]);
+  const [dataYear, setDataYear] = useState([]);
+  const nowArr = [];
+  const yearData = async () => {
+    try {
+      const res = await axios.get(
+        `http://192.168.0.151:9898/expenses/year/${user.miSeq}`
+      );
+      setYear(res.data);
+      // console.log(res.data);
+      res.data.forEach((item) => {
+        // console.log("아이템", item);
+        let sortData = {};
+        for (let obj in item) {
+          if (obj !== "year") {
+            sortData[obj] = item[obj];
+          }
+        }
+        nowArr.push(sortData);
+      });
+      // console.log("정리된 데이터 ", nowArr);
+      setDataYear(nowArr);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const chartData = year.map((item) => {
+    let data = {
+      year: item.year,
+      jan: item.jan,
+      feb: item.feb,
+      mar: item.mar,
+      apr: item.apr,
+      may: item.may,
+      jun: item.jun,
+      jul: item.jul,
+      aug: item.aug,
+      sep: item.sep,
+      oct: item.oct,
+      nov: item.nov,
+    };
+    return data;
+  });
+  const y = year[0];
+  const d = year[1];
+  // console.log(y);
+  // console.log(d);
+  useEffect(() => {
+    yearData();
+  }, []);
 
   return (
     <div>
@@ -199,8 +71,18 @@ const ChartYear = () => {
         <div style={{ width: "100%", height: 350 }}>
           <ResponsiveBar
             data={chartData}
-            keys={["hot dog", "burger", "sandwich", "kebab", "fries", "donut"]}
-            indexBy="country"
+            keys={[
+              "jan",
+              "feb",
+              "mar",
+              "apr",
+              "may",
+              "jun",
+              "jul",
+              "aug",
+              "sep",
+            ]}
+            indexBy="year"
             margin={{ top: 90, right: 5, bottom: 50, left: 40 }}
             padding={0.25}
             innerPadding={2}
