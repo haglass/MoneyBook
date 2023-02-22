@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Calendar from "react-calendar";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
@@ -9,7 +9,14 @@ import "../../styles/carlendar.css";
 import moment from "moment/moment";
 // 한글로 출력하게 해줌.
 import "moment/locale/ko";
+import axios from "axios";
+// 정보를 redux 에서 참조할 때 사용 코드
+import { useSelector } from "react-redux";
+// 정보를 redux 에서 업데이트 할 때 사용 코드
+import { useDispatch } from "react-redux";
 const ChartMonth = () => {
+  const [month, setMonth] = useState([]);
+  const user = useSelector((state) => state.user);
   const initData = [
     {
       category: "star",
@@ -38,6 +45,39 @@ const ChartMonth = () => {
   const [date, setDate] = useState(new Date());
   // 이미지 출력
   const publicFolder = process.env.PUBLIC_URL;
+  const chartm = async () => {
+    try {
+      const res = await axios.get(
+        `http://192.168.0.151:9898/expenses/month/${user.miSeq}`
+      );
+      setMonth(res.data);
+      console.log("받아온데이터 res.data", res.data);
+      console.log("받아온데이터 res.data.daily", res.data.daily);
+      console.log("받아온데이터 res.data.maxDay", res.data.maxDay);
+      console.log("받아온데이터 res.data.minDay", res.data.minDay);
+      console.log("받아온데이터 res.data.total", res.data.total);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  useEffect(() => {
+    chartm();
+  }, []);
+  // 달력에 출력할 JSX 기능
+
+  const showTile = ({ date, view }) => {
+    let html = [];
+    let obj = month.daily.find((item, index) => {
+      if (item.date === moment(date).format("YYYY-MM-DD")) {
+        return item;
+      }
+    });
+    if (obj !== undefined) {
+      html.push(<div key={obj.date}>{obj.price}</div>);
+      return <div>{html}</div>;
+    }
+    return null;
+  };
 
   return (
     <div>
@@ -54,56 +94,41 @@ const ChartMonth = () => {
           className="absolute left-[50px] top-[135px]   w-10 h-10"
         />
         <div className="mt-20 mb-10">
-          <Calendar
-            className="calCss"
-            title={"Schedule"}
-            // 일요일부터 출력
-            calendarType="US"
-            // 날짜 선택시 날짜변경
-            onChange={setDate}
-            // 달력에 출력될 html 작성
-            tileContent={({ date, view }) => {
-              let html = [];
-              // date         : Mon Feb 28 2022 00:00:00 GMT+0900 (한국 표준시)
-              // item.date    : "2023-02-07"
-              // 각각의 날짜 영역에 출력하고 싶은 내용을 작성한다.
-              // 날짜를 비교해서 같으면 출력을 하겠다.
-              if (
-                todoData.find((item, index) => {
-                  // 현재 date 는 포맷이 다릅니다.
-                  return item.timestamp === moment(date).format("YYYY-MM-DD");
-                })
-              ) {
-                // 조건에 맞으므로 html 을 생성해 준다.
-                html.push(
-                  <img
-                    key={`todoData_${moment(date)}`}
-                    src={`${publicFolder}/images/starbucks.png`}
-                    alt="아이콘"
-                    style={{ width: 20, height: 20 }}
-                  />
-                );
-              }
-              return <div>{html}</div>;
-            }}
-          />
+          {month.daily && (
+            <Calendar
+              className="calCss"
+              title={"Schedule"}
+              // 일요일부터 출력
+              calendarType="US"
+              // 날짜 선택시 날짜변경
+              onChange={setDate}
+              // 달력에 출력될 html 작성
+              tileContent={showTile}
+            />
+          )}
         </div>
-        <div className="px-4">
-          <div className="flex justify-between items-center mb-3">
-            <h1 className="text-l font-bold text-main">가장 많이 쓴날</h1>
-            <span className="text-sm font-bold text-sub2">
-              {moment(date).format("MM월 DD일")}
-            </span>
-            <span className="text-sm font-bold text-sub">250,000원</span>
+        {month.maxDay && (
+          <div className="px-4">
+            <div className="flex justify-between items-center mb-3">
+              <h1 className="text-l font-bold text-main">가장 많이 쓴날</h1>
+              <span className="text-sm font-bold text-sub2">
+                {moment(month.maxDay.date).format("MM월 DD일")}
+              </span>
+              <span className="text-sm font-bold text-sub">
+                {month.maxDay.price}원
+              </span>
+            </div>
+            <div className="flex justify-between items-center">
+              <h1 className="text-l font-bold text-main">가장 적게 쓴날</h1>
+              <span className="text-sm font-bold text-sub2">
+                {moment(month.minDay.date).format("MM월 DD일")}
+              </span>
+              <span className="text-sm font-bold text-sub">
+                {month.minDay.price}원
+              </span>
+            </div>
           </div>
-          <div className="flex justify-between items-center">
-            <h1 className="text-l font-bold text-main">가장 적게 쓴날</h1>
-            <span className="text-sm font-bold text-sub2">
-              {moment(date).format("MM월 DD일")}
-            </span>
-            <span className="text-sm font-bold text-sub">20,000원</span>
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );
