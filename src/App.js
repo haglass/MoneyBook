@@ -9,6 +9,7 @@ import Login from "./pages/user/Login";
 import Join from "./pages/user/Join";
 import Board from "./pages/Board/Board";
 import BoardWrite from "./pages/Board/BoardWrite";
+import BoardView from "./pages/Board/BoardView";
 import Chart from "./pages/chart/Chart";
 import ChartCate from "./pages/chart/ChartCate";
 import ChartMonth from "./pages/chart/ChartMonth";
@@ -36,6 +37,7 @@ const App = () => {
           <Route path="/chart" element={<Chart />} />
           <Route path="/board" element={<Board />} />
           <Route path="/boardwrite" element={<BoardWrite />} />
+          <Route path="/boardview" element={<BoardView />} />
           <Route path="/mainadddetail" element={<MainAddDetail />} />
           <Route path="/chart" element={<Chart />} />
           <Route path="/chartcate" element={<ChartCate />} />

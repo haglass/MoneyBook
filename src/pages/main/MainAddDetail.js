@@ -58,89 +58,82 @@ const MainAddD = () => {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
   return (
-    <article>
-      <div>
-        <Header>
-          <button onClick={() => navigate(-1)}>
-            <MdOutlineKeyboardArrowLeft className="text-sub text-5xl font-bold" />
-          </button>
-
-          <h1 className="text-xl font-bold text-main">내역추가</h1>
-        </Header>
+    <div>
+      <Header>
+        <button onClick={() => navigate(-1)}>
+          <MdOutlineKeyboardArrowLeft className="text-sub text-5xl font-bold" />
+        </button>
+        <h1 className="text-xl font-bold text-main">내역추가</h1>
+      </Header>
+      <div className="px-5">
+        <div className="flex flex-col gap-2 py-8 pb-20">
+          <input
+            className="outline-none py-2 px-4 border-main border rounded-xl"
+            placeholder="지출 금액                                    -                     원"
+            onChange={(e) => {
+              setWon(e.target.value);
+            }}
+          />
+          <div className="flex items-center border border-main text-sub py-2 px-2 rounded-xl">
+            <select
+              onChange={(e) => {
+                setSelected(e.target.value);
+              }}
+            >
+              {category.map((item, index) => (
+                <option key={index} value={item.cateSeq}>
+                  {item.cateName}
+                </option>
+              ))}
+            </select>
+            <input
+              placeholder="내용 입력"
+              className="ml-5 outline-none px-4"
+              onChange={(e) => {
+                setHistory(e.target.value);
+              }}
+            />
+          </div>
+          <input
+            type="date"
+            className="outline-none py-2 px-4 text-sub border-main border rounded-xl cursor-pointer"
+            onChange={(e) => {
+              setDay(e.target.value);
+            }}
+          />
+        </div>
         <div>
-          <div className="flex flex-col gap-2 p-8 pb-16">
-            <MainBt className="flex justify-between text-xl">
-              <input
-                placeholder="- 소비금액 원"
-                className="hover:outline-white ml-3 outline-white"
-                onChange={(e) => {
-                  setWon(e.target.value);
-                }}
-              />
-            </MainBt>
-            <MainBt className="flex text-xl">
-              <FaCapsules className="text-main text-3xl font-bold " />
-              <select
-                onChange={(e) => {
-                  setSelected(e.target.value);
-                }}
-              >
-                {category.map((item, index) => (
-                  <option key={index} value={item.cateSeq}>
-                    {item.cateName}
-                  </option>
-                ))}
-              </select>
-              <input
-                placeholder="내역"
-                className="ml-3 hover:outline-white outline-white"
-                onChange={(e) => {
-                  setHistory(e.target.value);
-                }}
-              />
-            </MainBt>
-            <MainBt className="flex text-xl ">
-              <input
-                type="date"
-                className="ml-3 hover:outline-white outline-white"
-                onChange={(e) => {
-                  setDay(e.target.value);
-                }}
-              />
-            </MainBt>
-          </div>
-        </div>
-
-        <h1 className="text-xl  text-main pl-8 ">최근 소비</h1>
-        {top.map((item, index) => (
-          <div className="  px-8 pt-5" key={index}>
-            <MainBt className="w-full">
-              <div className="flex items-center mb-3">
-                <FaThumbtack className=" text-main text-base font-bold " />
-                <span className="text-base font-bol text-main">
-                  {item.edTitle}
-                </span>
+          <h1 className="text-xl  text-main mb-5">최근 소비</h1>
+          {top.map((item, index) => (
+            <div
+              className="border border-main py-2 px-4 rounded-xl mb-3"
+              key={index}
+            >
+              <div>
+                <div className="flex items-center mb-2">
+                  <FaThumbtack className=" text-main text-base font-bold mr-1" />
+                  <span className="text-base font-bol text-main mb-1">
+                    {item.edTitle}
+                  </span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-xs  text-sub">{item.edDate}</span>
+                  <span className="text-base text-sub pl-20">
+                    {priceToString(item.edAmount)} 원
+                  </span>
+                </div>
               </div>
-              <div className="flex justify-between items-center">
-                <span className="text-xs  text-sub">{item.edDate}</span>
-                <span className="text-base text-sub pl-20">
-                  {priceToString(item.edAmount)} 원
-                </span>
-              </div>
-            </MainBt>
-          </div>
-        ))}
-
-        <div className="  p-8 ">
-          <MainBt
-            className="w-5/6 absolute bottom-36 inline-block bg-main  text-white"
-            onClick={() => expenditure()}
-          >
-            저장하기
-          </MainBt>
+            </div>
+          ))}
         </div>
+        <button
+          className="w-full bg-main  text-white border border-main rounded-xl py-2 text-2xl mt-14"
+          onClick={() => expenditure()}
+        >
+          저장하기
+        </button>
       </div>
-    </article>
+    </div>
   );
 };
 const Header = tw.div`
@@ -149,15 +142,5 @@ items-center
 w-full
 h-20
 `;
-const MainBt = tw.button`
-border
-border-main
-text-sub
-text-2xl
-py-2
-px-4
-rounded-xl
-w-90
 
-`;
 export default MainAddD;

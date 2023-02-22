@@ -7,10 +7,12 @@ import { useEffect } from "react";
 // import Paging from "./Paging";
 import axios from "axios";
 import Pagination from "react-js-pagination";
+import { useNavigate } from "react-router";
 
 // http://192.168.0.151:9898/swagger-ui/index.html#/
 
 const BoardList = () => {
+  const navigate = useNavigate();
   const [postlist, setpostList] = useState([]);
   const [data, setData] = useState([]);
   const [page, setPage] = useState(0);
@@ -27,12 +29,18 @@ const BoardList = () => {
       console.log(err);
     }
   };
-  const handlePageChange = (page) => {
-    setPage(page);
-    console.log(page);
+  const handlePageChange = (count) => {
+    let tempPage = count - 1;
+    if (tempPage < 0) {
+      tempPage = 0;
+    }
+    console.log(tempPage);
+    setPage(tempPage);
+    // console.log(page);
   };
 
   useEffect(() => {
+    console.log("변경 현재페이지: ", page);
     post();
   }, [page]);
 
@@ -40,7 +48,13 @@ const BoardList = () => {
     <css.BoardList>
       <div className="postList">
         {postlist.map((item, index) => (
-          <div className="post" key={index}>
+          <div
+            className="post"
+            key={index}
+            onClick={() => {
+              navigate("/BoardView");
+            }}
+          >
             <p>{item.title}</p>
             <div className="postDetail">
               <div className="postIcon">
