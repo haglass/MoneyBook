@@ -43,8 +43,6 @@ const ChartMonth = () => {
   const [todoData, setTodoData] = useState(getLocalPost());
   // 선택된 날짜.
   const [date, setDate] = useState(new Date());
-  // 이미지 출력
-  const publicFolder = process.env.PUBLIC_URL;
   const chartm = async () => {
     try {
       const res = await axios.get(

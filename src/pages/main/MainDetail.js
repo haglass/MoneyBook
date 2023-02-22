@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 const MainDetail = () => {
   const user = useSelector((state) => state.user);
   const [month, setMonth] = useState([]);
+  const [top, setTop] = useState([]);
   const [total, setTotal] = useState([]);
   const monthList = async () => {
     try {
@@ -58,17 +59,24 @@ const MainDetail = () => {
           <MainBt>내역추가</MainBt>
         </Link>
       </div>
-
-      <div className="w-full p-8  flex flex-col gap-3">
-        <span className="text-xl font-bold  text-main ">2.28 화요일</span>
-        <div className="flex justify-between mb-5">
-          <FaCapsules className="text-main text-2xl font-bold " />
-          <span className="text-xl   text-sub font-bold"> -80,000원</span>
-        </div>
-        <span className="text-xl font-bold  text-main">2.28 화요일</span>
-        <div className="flex justify-between">
-          <FaCapsules className="text-main text-2xl font-bold " />
-          <span className="text-xl   text-sub font-bold"> -80,000원</span>
+      <div className="pt-4">
+        <div className="pt-7 overflow-auto  h-[32rem]">
+          {month.map((item, index) => (
+            <div className="w-full px-5  flex flex-col " key={index}>
+              <span className="text-s font-bold  text-sub2 ">
+                {item.edDate}
+              </span>
+              <div className="flex justify-between mb-3">
+                <span className="text-main text-m font-bold ">
+                  {item.edCateName}{" "}
+                </span>
+                <span className="text-m   text-sub font-bold">
+                  {" "}
+                  -{item.edAmount}원
+                </span>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
