@@ -447,3 +447,17 @@ export const write = styled.div`
     }
   }
 `;
+//BoardView
+export const View = styled.div`
+  .view-inner {
+    width: 100%;
+    padding: 0 20px;
+    height: calc(970px - 180px);
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    &::-webkit-scrollbar {
+      display: none; /* Chrome , Safari , Opera */
+    }
+  }
+`;

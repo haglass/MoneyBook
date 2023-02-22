@@ -155,7 +155,7 @@ const MyPage = () => {
     <div>
       <css.MyPageDiv>
         <Header>
-          <Link to={"/login"}>
+          <Link to={"/main"}>
             <MdOutlineKeyboardArrowLeft className="text-sub text-5xl font-bold" />
           </Link>
           <h1 className="text-xl font-bold text-main">마이페이지</h1>

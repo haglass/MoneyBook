@@ -43,7 +43,7 @@ const MainDetail = () => {
   return (
     <div>
       <Header>
-        <Link to={"/"}>
+        <Link to={"/main"}>
           <MdOutlineKeyboardArrowLeft className="text-sub text-5xl font-bold" />
         </Link>
         <h1 className="text-xl font-bold text-main">상세내역</h1>
