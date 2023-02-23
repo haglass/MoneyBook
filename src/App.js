@@ -23,6 +23,7 @@ import { useSelector } from "react-redux";
 const App = () => {
   // 정보를 redux 에서 참조할 때 사용 코드
   const user = useSelector((state) => state.user);
+  console.log(user);
 
   return (
     <Router>
@@ -45,7 +46,7 @@ const App = () => {
           <Route path="/chartYear" element={<ChartYear />} />
           <Route path="/myPage" element={<MyPage />} />
         </Routes>
-        {user.miSeq ? <Nav /> : null}
+        {user.miEmail !== "" ? <Nav /> : null}
       </div>
     </Router>
   );

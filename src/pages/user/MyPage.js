@@ -11,14 +11,14 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 // 정보를 redux 에서 업데이트 할 때 사용 코드
 import { useDispatch } from "react-redux";
-import { clearUser } from "../../reducer/userSlice";
+import { clearUser, loginUser } from "../../reducer/userSlice";
 
 import { type } from "@testing-library/user-event/dist/type";
 // 회원테스트 정보 : aaa1@aaa.net    QWERt12!
 const MyPage = () => {
   // 정보를 redux 에서 참조할 때 사용 코드
   const user = useSelector((state) => state.user);
-  console.log(user.miSeq);
+  // console.log(user.miSeq);
   // 정보를 redux 에서 업데이트 할 때 사용 코드
   const dispatch = useDispatch();
 
@@ -32,9 +32,9 @@ const MyPage = () => {
 
   // 설정 금액
   const cash = () => {
-    console.log("예산: ", don);
-    console.log("user: ", user);
-    console.log("user.miSeq: ", user.miSeq);
+    // console.log("예산: ", don);
+    // console.log("user: ", user);
+    // console.log("user.miSeq: ", user.miSeq);
 
     let body = {
       miTargetAmount: don,
@@ -43,6 +43,19 @@ const MyPage = () => {
       .post(`http://192.168.0.151:9898/member/updatemoney/${user.miSeq}`, body)
       .then((res) => {
         console.log("res", res);
+        const userInfo = {
+          miSeq: user.miSeq,
+          miNickname: user.miNickname,
+          miEmail: user.miEmail,
+          // 돈을 update 합니다.
+          miTargetAmount: don,
+          miGen: user.miGen,
+          miStatus: user.miStatus,
+          miSnsType: user.miSnsType,
+        };
+
+        dispatch(loginUser(userInfo));
+        navigate("/main");
       })
       .catch((err) => {
         console.log(err);
@@ -50,6 +63,9 @@ const MyPage = () => {
   };
 
   const [don, setDon] = useState(0);
+  useEffect(() => {
+    setDon(user.miTargetAmount);
+  }, []);
   const [val, setVal] = useState(initVal);
   const handleChange = (e) => {
     // console.log(e.target);
@@ -101,10 +117,16 @@ const MyPage = () => {
     console.log(Err);
   }, [Err]);
 
+  // useEffect(() => {
+  //   if (user.miTargetAmount < 1) {
+  //     alert("예산금액을 0원이상 설정하세요.");
+  //   }
+  // }, []);
+
   // 예산을 수정시 항목 체크
   const handleDonSubmit = (e) => {
     e.preventDefault();
-    if (don === 0) return alert("0원 이상 입력하세요.");
+    // if (don === 0) return alert("0원 이상 입력하세요.");
     // 서버로 updatemoney 를 한다.
     cash();
   };
