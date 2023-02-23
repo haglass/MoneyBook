@@ -81,11 +81,7 @@ const MyPage = () => {
     const errs = {};
     // 닉네임 체크
     if (_val.nickname.length < 3) {
-      errs.nickname = "닉네임을 5글자 이상 입력해주세요.";
-    }
-    // 이메일 체크/이메일 정규표현식 이용한 처리
-    if (_val.email.length < 8 || !/@/.test(_val.email)) {
-      errs.email = "이메일은 최소 8글자 이상 @을 포함해 주세요.";
+      errs.nickname = "닉네임을 3글자 이상 입력해주세요.";
     }
     // 비밀번호
     const eng = /[a-zA-Z]/;
@@ -137,8 +133,6 @@ const MyPage = () => {
   };
   const navigate = useNavigate();
   const userDeleteBt = (e) => {
-    e.preventDefault();
-
     if (window.confirm("정말 탈퇴하겠습니까?")) {
       axios
         .post(`http://192.168.0.151:9898/member/delete?miSeq=${user.miSeq}`)
@@ -147,12 +141,21 @@ const MyPage = () => {
           console.log(err);
         });
       alert("탈퇴 되었습니다.");
+      dispatch(clearUser());
+      navigate("/");
     } else {
       alert("취소 되었습니다.");
     }
   };
 
   const pwEd = (e) => {
+    let body = {
+      miPwd: "string",
+      miUpdatePwd: "string",
+      miCheckUpdatePwd: "string",
+      miNickname: "string",
+      miTargetAmount: 0,
+    };
     axios
       .post(`http://192.168.0.151:9898/member/update/pwd/${user.miSeq}`)
       .then((res) => {
@@ -173,6 +176,7 @@ const MyPage = () => {
         console.log(err);
       });
   };
+
   return (
     <div>
       <css.MyPageDiv>
@@ -216,14 +220,6 @@ const MyPage = () => {
             <span className="err text-xs">{Err.nickname}</span>
             <input
               type="text"
-              id="email"
-              name="email"
-              placeholder="이메일 주소를 입력해주세요."
-              onChange={handleChange}
-            />
-            <span className="err text-xs">{Err.email}</span>
-            <input
-              type="text"
               id="nowPassword"
               name="nowPassword"
               placeholder="현재 비밀번호를 입력하세요"
@@ -246,6 +242,7 @@ const MyPage = () => {
               onChange={handleChange}
             />
             <span className="err text-xs">{Err.password2}</span>
+            <button onClick={(e) => pwEd()}>비밀번호수정</button>
           </form>
           <div className="flex justify-between">
             <button type="submit" onClick={handleSubmit} value="SUBMIT">
@@ -255,7 +252,6 @@ const MyPage = () => {
               type="button"
               onClick={(e) => {
                 userDeleteBt();
-                navigate("/");
               }}
             >
               회원탈퇴
