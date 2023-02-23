@@ -46,6 +46,7 @@ const ChartCate = () => {
   useEffect(() => {
     cateData();
   }, []);
+
   return (
     <>
       <Header>

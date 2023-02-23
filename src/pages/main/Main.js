@@ -37,6 +37,12 @@ const Main = () => {
   useEffect(() => {
     eData();
   }, []);
+
+  function priceToString(price) {
+    if (price === undefined || price === null) return;
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
   return (
     <div>
       <span className="absolute font-medium text-main text-[24px] right-[162px] top-[220px]">
@@ -56,8 +62,8 @@ const Main = () => {
         <div className="absolute top-[100px] z-1">
           <div className="flex flex-col items-center ">
             {/* 소비된 금액을 userSlice.js 에서 추가할 필요성 있을까? */}
-            <MainText>{expenses.remaining}원</MainText>
-            <MainText2>/{expenses.target}원</MainText2>
+            <MainText>{priceToString(expenses.remaining)}원</MainText>
+            <MainText2>/ {priceToString(expenses.target)}원</MainText2>
           </div>
         </div>
         <MainChart expenses={expenses} />

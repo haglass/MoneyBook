@@ -28,9 +28,11 @@ const MainAddD = () => {
       .put(`http://192.168.0.151:9898/expenses/insert/${user.miSeq}`, body)
       .then((res) => {
         console.log(res.data);
+        alert("추가 되었습니다");
       })
       .catch((err) => {
         console.log(err);
+        alert("다시 시도해 주세요.");
       });
   };
 

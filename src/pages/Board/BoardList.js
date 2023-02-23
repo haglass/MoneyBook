@@ -11,7 +11,7 @@ import { useNavigate } from "react-router";
 
 // http://192.168.0.151:9898/swagger-ui/index.html#/
 
-const BoardList = () => {
+const BoardList = ({ search, onChange }) => {
   const navigate = useNavigate();
   const [postlist, setpostList] = useState([]);
   const [data, setData] = useState([]);
@@ -44,10 +44,17 @@ const BoardList = () => {
     post();
   }, [page]);
 
+  const filterPost = postlist.filter((item) => {
+    return item.title
+      .replace(" ", "")
+      .toLocaleLowerCase()
+      .includes(search.toLocaleLowerCase());
+  });
+
   return (
     <css.BoardList>
       <div className="postList">
-        {postlist.map((item, index) => (
+        {filterPost.map((item, index) => (
           <div
             className="post"
             key={index}

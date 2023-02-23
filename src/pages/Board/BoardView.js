@@ -30,11 +30,22 @@ const BoardView = () => {
             <div className="py-2 px-4 border border-main rounded-xl mb-5">
               제목
             </div>
-            <div className="bg-[whitesmoke] rounded-xl py-2 px-4 w-full h-auto">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Reiciendis odio aut eligendi? Minima excepturi facere in
-              perferendis recusandae obcaecati aliquid. Vitae doloremque sint
-              sed, laboriosam atque est quasi esse rerum?
+            <div className="bg-[whitesmoke] rounded-xl py-2 px-4 w-full h-[200px]">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor
+              vero mollitia veritatis ducimus blanditiis. Quis atque quidem
+              dolor. Animi exercitationem fuga ex dolore eos minima ea quos
+              deleniti veritatis dicta? Veniam distinctio eveniet explicabo,
+              numquam error vitae dignissimos voluptatum soluta maiores incidunt
+              animi! Placeat odio, commodi aspernatur repellendus quod sint
+              possimus quam itaque voluptatem unde cupiditate earum, laboriosam
+              atque voluptates? Amet rerum quas dignissimos placeat illum,
+              excepturi odit quos corporis delectus doloribus tenetur vel sint
+              alias assumenda voluptatem! Minus ab incidunt magnam saepe
+              doloremque dolore, numquam quis similique suscipit libero! Vel
+              debitis, veritatis repudiandae deserunt nulla molestiae officia
+              expedita inventore! Ducimus est nulla atque velit possimus aliquam
+              esse, recusandae quia sit architecto ipsum quo, quaerat quisquam
+              voluptatem necessitatibus magnam distinctio.
             </div>
             <img
               src={`${path}/images/starbucks.png`}
