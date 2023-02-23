@@ -14,7 +14,7 @@ const MainAddD = () => {
   const [history, setHistory] = useState("");
   const [day, setDay] = useState("");
   const [category, setCategory] = useState([]);
-  const [selected, setSelected] = useState("");
+  const [selected, setSelected] = useState(1);
   const [top, setTop] = useState([]);
 
   const expenditure = (e) => {

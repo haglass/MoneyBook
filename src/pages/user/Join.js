@@ -36,6 +36,7 @@ const Join = () => {
       miPwd: val.password,
       miCheckPwd: val.password2,
       miGen: selected,
+      miTargetAmount: 0,
     };
     axios
       .post("http://192.168.0.151:9898/member/join", body)

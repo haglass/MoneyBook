@@ -8,34 +8,32 @@ import axios from "axios";
 const ChartYear = () => {
   const user = useSelector((state) => state.user);
   const [year, setYear] = useState([]);
-  const [dataYear, setDataYear] = useState([]);
-  const nowArr = [];
-  const yearData = async () => {
-    try {
-      const res = await axios.get(
-        `http://192.168.0.151:9898/expenses/year/${user.miSeq}`
-      );
-      setYear(res.data);
-      // console.log(res.data);
-      res.data.forEach((item) => {
-        // console.log("아이템", item);
-        let sortData = {};
-        for (let obj in item) {
-          if (obj !== "year") {
-            sortData[obj] = item[obj];
-          }
-        }
-        nowArr.push(sortData);
+
+  const yearData = () => {
+    axios
+      .get(`http://192.168.0.151:9898/expenses/year/${user.miSeq}`)
+      .then((res) => {
+        setYear(res.data);
+        // console.log(res.data);
+
+        const newData = res.data.map((obj) => {
+          const { year, ...rest } = obj;
+          return rest;
+        });
+
+        let one = Object.values(newData[0]).reduce((acc, curr) => acc + curr);
+        console.log(one);
+        let two = Object.values(newData[1]).reduce((acc, curr) => acc + curr);
+        console.log(two);
+      })
+      .catch((err) => {
+        console.log(err);
       });
-      // console.log("정리된 데이터 ", nowArr);
-      setDataYear(nowArr);
-    } catch (err) {
-      console.log(err);
-    }
   };
+  console.log(year);
 
   const chartData = year.map((item) => {
-    let data = {
+    let yData = {
       year: item.year,
       jan: item.jan,
       feb: item.feb,
@@ -48,13 +46,11 @@ const ChartYear = () => {
       sep: item.sep,
       oct: item.oct,
       nov: item.nov,
+      dec: item.dec,
     };
-    return data;
+    return yData;
   });
-  const y = year[0];
-  const d = year[1];
-  // console.log(y);
-  // console.log(d);
+
   useEffect(() => {
     yearData();
   }, []);
@@ -81,6 +77,9 @@ const ChartYear = () => {
               "jul",
               "aug",
               "sep",
+              "oct",
+              "nov",
+              "dec",
             ]}
             indexBy="year"
             margin={{ top: 90, right: 5, bottom: 50, left: 40 }}
