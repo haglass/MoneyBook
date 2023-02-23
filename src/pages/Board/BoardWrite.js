@@ -3,20 +3,18 @@ import { Link } from "react-router-dom";
 import * as css from "../../styles/Styles";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import tw from "tailwind-styled-components";
-
-import { useForm } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
+import axios from "axios";
 
 const BoardWrite = () => {
-  // let fileNme = document.getElementById("file").value;
-  // document.getElementsByClassName("upload-name").value(fileNme);
-
-  // $("#file").on("change", function () {
-  //   var fileName = $("#file").val();
-  //   $(".upload-name").val(fileName);
-  // });
+  const [fileImage, setFileImage] = useState("");
+  const saveFileImage = (e) => {
+    setFileImage(URL.createObjectURL(e.target.files[0]));
+  };
+  const deleteFileImage = () => {
+    URL.revokeObjectURL(fileImage);
+    setFileImage("");
+  };
 
   return (
     <div>
@@ -30,17 +28,12 @@ const BoardWrite = () => {
         <div className="write-inner">
           <form>
             <input type="text" placeholder="제목" className="writetitle" />
-            <textarea cols="40" rows="7" placeholder="내용"></textarea>
+            <textarea cols="40" rows="10" placeholder="내용"></textarea>
             <div className="imgup">
-              <img src="" alt="이미지" />
               <div className="filebox">
-                <input
-                  className="upload-name"
-                  value="첨부파일"
-                  placeholder="첨부파일"
-                />
-                <label for="file">파일찾기</label>
-                <input type="file" id="file" accept="image/*" />
+                <input type="file" accept="image/*" onChange={saveFileImage} />
+                <button onClick={() => deleteFileImage()}>초기화</button>
+                {fileImage && <img src={fileImage} alt="preview-img" />}
               </div>
             </div>
           </form>

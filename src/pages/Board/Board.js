@@ -5,9 +5,16 @@ import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import { BiSearchAlt } from "react-icons/bi";
 import tw from "tailwind-styled-components";
 import BoardList from "./BoardList";
+import { useState } from "react";
 
 const Board = (props) => {
   const navigate = useNavigate();
+
+  const [search, setSearch] = useState("");
+  const onChange = (e) => {
+    setSearch(e.target.value);
+  };
+
   return (
     <div>
       <css.BoardDiv>
@@ -26,7 +33,12 @@ const Board = (props) => {
               글쓰기
             </button>
             <form>
-              <input type="text" placeholder="검색" />
+              <input
+                type="text"
+                placeholder="검색"
+                value={search}
+                onChange={onChange}
+              />
               <button>
                 <BiSearchAlt
                   className="text-sub text-3xl font-bold "
@@ -35,7 +47,7 @@ const Board = (props) => {
               </button>
             </form>
           </div>
-          <BoardList />
+          <BoardList search={search} onChange={onChange} />
         </div>
       </css.BoardDiv>
     </div>

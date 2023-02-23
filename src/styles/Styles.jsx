@@ -128,7 +128,6 @@ export const LoginDiv = styled.div`
     }
   }
 `;
-
 // MyPage
 export const MyPageDiv = styled.div`
   .myPage-inner {
@@ -381,7 +380,7 @@ export const write = styled.div`
         padding: 5px 10px;
         border: 1px solid #ad5299;
         border-radius: 15px;
-        width: 94%;
+        width: 100%;
         margin-bottom: 20px;
       }
       textarea {
@@ -389,45 +388,37 @@ export const write = styled.div`
         outline: none;
         padding: 5px 10px;
         border-radius: 15px;
+        width: 100%;
       }
       .imgup {
-        img {
-          width: 355px;
-          height: 100px;
-          background-color: #ad5299;
-          margin: 0 auto;
-          margin-top: 20px;
-          border-radius: 15px;
-        }
         .filebox {
-          margin-top: 10px;
-          .upload-name {
+          margin-top: 30px;
+          img {
+            width: 100%;
+            height: 200px;
+            margin: 0 auto;
+            margin-top: 20px;
+            border-radius: 15px;
+            object-fit: contain;
+            vertical-align: middle;
+            background-color: rgba(184, 166, 179, 0.3);
+          }
+          input {
             display: inline-block;
-            width: 70%;
+            width: 75%;
             padding: 5px 10px;
-            border: 1px solid #ad5299;
+            /* border: 1px solid #ad5299; */
             border-radius: 15px;
             vertical-align: middle;
             color: #52424d;
             outline: none;
+            margin-right: 20px;
           }
-          label {
-            display: inline-block;
-            padding: 5px 10px;
-            margin-left: 10px;
-            border-radius: 15px;
-            vertical-align: middle;
-            color: #fff;
+          button {
             background-color: #ad5299;
-            cursor: pointer;
-          }
-          input[type="file"] {
-            position: absolute;
-            width: 0;
-            height: 0;
-            padding: 0;
-            overflow: hidden;
-            border: 0;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 15px;
           }
         }
       }
@@ -458,6 +449,33 @@ export const View = styled.div`
     -ms-overflow-style: none; /* IE and Edge */
     &::-webkit-scrollbar {
       display: none; /* Chrome , Safari , Opera */
+    }
+    div {
+      overflow-y: scroll;
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE and Edge */
+      &::-webkit-scrollbar {
+        display: none; /* Chrome , Safari , Opera */
+      }
+    }
+  }
+`;
+
+//MainDetail
+export const Detaillist = styled.div`
+  .detaillist-inner {
+    width: 100%;
+    padding: 0 20px;
+    .scrbar {
+      width: 100%;
+      height: calc(970px - 180px - 250px);
+      margin: 25px 0;
+      overflow-y: scroll;
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE and Edge */
+      &::-webkit-scrollbar {
+        display: none; /* Chrome , Safari , Opera */
+      }
     }
   }
 `;

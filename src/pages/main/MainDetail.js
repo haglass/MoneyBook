@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
-
+import * as css from "../../styles/Styles";
 import { FaCapsules } from "react-icons/fa";
 
 import tw from "tailwind-styled-components";
@@ -42,43 +42,45 @@ const MainDetail = () => {
 
   return (
     <div>
-      <Header>
-        <Link to={"/main"}>
-          <MdOutlineKeyboardArrowLeft className="text-sub text-5xl font-bold" />
-        </Link>
-        <h1 className="text-xl font-bold text-main">상세내역</h1>
-      </Header>
-
-      <div className="w-full h-60 p-8 flex flex-col gap-1 border-b-4 border-sub2">
-        <span className="text-l font-bold  text-main">소비 합계</span>
-        <span className="text-3xl pt-5  text-sub font-bold">
-          {priceToString(sumWithInitial)} 원
-        </span>
-        <br />
-        <Link to={"/MainAddDetail"}>
-          <MainBt>내역추가</MainBt>
-        </Link>
-      </div>
-      <div className="pt-4">
-        <div className="pt-7 overflow-auto  h-[32rem]">
-          {month.map((item, index) => (
-            <div className="w-full px-5  flex flex-col " key={index}>
-              <span className="text-s font-bold  text-sub2 ">
-                {item.edDate}
-              </span>
-              <div className="flex justify-between mb-3">
-                <span className="text-main text-m font-bold ">
-                  {item.edCateName}{" "}
+      <css.Detaillist>
+        <Header>
+          <Link to={"/main"}>
+            <MdOutlineKeyboardArrowLeft className="text-sub text-5xl font-bold" />
+          </Link>
+          <h1 className="text-xl font-bold text-main">상세내역</h1>
+        </Header>
+        <div className="detaillist-inner">
+          <div className="w-full h-60 p-8 flex flex-col gap-1 border-b-2 border-sub2">
+            <span className="text-l font-bold  text-main">소비 합계</span>
+            <span className="text-3xl pt-5  text-sub font-bold">
+              {priceToString(sumWithInitial)} 원
+            </span>
+            <br />
+            <Link to={"/MainAddDetail"}>
+              <MainBt>내역추가</MainBt>
+            </Link>
+          </div>
+          <div className="scrbar">
+            {month.map((item, index) => (
+              <div className="w-full px-5  flex flex-col " key={index}>
+                <span className="text-s font-bold  text-sub2 ">
+                  {item.edDate}
                 </span>
-                <span className="text-m   text-sub font-bold">
-                  {" "}
-                  -{item.edAmount}원
-                </span>
+                <div className="flex justify-between mb-3">
+                  <span className="text-main text-m font-bold ">
+                    {item.edCateName}{" "}
+                    <span className="text-sub font-medium">{item.edTitle}</span>
+                  </span>
+                  <span className="text-m   text-sub font-bold">
+                    {" "}
+                    -{priceToString(item.edAmount)}원
+                  </span>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
+      </css.Detaillist>
     </div>
   );
 };

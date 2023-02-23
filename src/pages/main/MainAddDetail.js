@@ -73,9 +73,11 @@ const MainAddD = () => {
         .then((res) => {
           console.log(res.data);
           if (res.data.status) {
+          alert("추가 되었습니다");
             navigate("/maindetail");
           } else {
             console.log("항목을 채워주세요.");
+            alert("다시 시도해 주세요.");
           }
         })
         .catch((err) => {
