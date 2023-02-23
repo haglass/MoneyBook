@@ -33,9 +33,16 @@ const Login = () => {
     axios
       .post("http://192.168.0.151:9898/member/login", body)
       .then((res) => {
-        console.log(res.data.loginUser);
+        // console.log("로그인 : ", res.data);
+        // console.log(res.data.loginUser);
+
         dispatch(loginUser(res.data.loginUser));
         navigate("/main");
+        // if (res.data.loginUser.miTargetAmount < 1) {
+        //   navigate("/myPage");
+        // } else {
+        //   navigate("/main");
+        // }
       })
       .catch((err) => {
         console.log(err);

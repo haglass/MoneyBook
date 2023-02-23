@@ -32,7 +32,7 @@ const userSlice = createSlice({
       state.miGen = "";
       state.miStatus = "";
       state.miSnsType = "";
-    },
+    }
   },
 });
 

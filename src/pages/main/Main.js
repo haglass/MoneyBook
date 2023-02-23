@@ -50,15 +50,33 @@ const Main = () => {
       </span>
       <div className="flex flex-col justify-center items-center mt-40 relative">
         <span className="absolute font-medium text-sub text-[16px] top-[210px]">
-          예산 진행률 {Math.floor(expenses.remainingRete)}%
+          {user.miTargetAmount < 1 ? (
+            <>
+              <span>현재 목표 금액이 없습니다.</span>
+              <br />
+              <MainEdit
+                onClick={(e) => {
+                  cashBt();
+                }}
+              >
+                목표금액 설정
+              </MainEdit>
+            </>
+          ) : (
+            <>
+              <span>예산 진행률 {Math.floor(expenses.remainingRete)}%</span>
+              <br />
+              <MainEdit
+                onClick={(e) => {
+                  cashBt();
+                }}
+              >
+                목표금액 수정
+              </MainEdit>
+            </>
+          )}
         </span>
-        <MainEdit
-          onClick={(e) => {
-            cashBt();
-          }}
-        >
-          목표금액 수정
-        </MainEdit>
+
         <div className="absolute top-[100px] z-1">
           <div className="flex flex-col items-center ">
             {/* 소비된 금액을 userSlice.js 에서 추가할 필요성 있을까? */}
