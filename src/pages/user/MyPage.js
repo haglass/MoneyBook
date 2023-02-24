@@ -6,13 +6,11 @@ import tw from "tailwind-styled-components";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
-
 // 정보를 redux 에서 참조할 때 사용 코드
 import { useSelector } from "react-redux";
 // 정보를 redux 에서 업데이트 할 때 사용 코드
 import { useDispatch } from "react-redux";
 import { clearUser, loginUser } from "../../reducer/userSlice";
-
 import { type } from "@testing-library/user-event/dist/type";
 // 회원테스트 정보 : aaa1@aaa.net    QWERt12!
 const MyPage = () => {
@@ -21,21 +19,17 @@ const MyPage = () => {
   // console.log(user.miSeq);
   // 정보를 redux 에서 업데이트 할 때 사용 코드
   const dispatch = useDispatch();
-
   let initVal = {
     nickname: "",
-    email: "",
     nowPassword: "",
     password: "",
     password2: "",
   };
-
   // 설정 금액
   const cash = () => {
     // console.log("예산: ", don);
     // console.log("user: ", user);
     // console.log("user.miSeq: ", user.miSeq);
-
     let body = {
       miTargetAmount: don,
     };
@@ -53,7 +47,6 @@ const MyPage = () => {
           miStatus: user.miStatus,
           miSnsType: user.miSnsType,
         };
-
         dispatch(loginUser(userInfo));
         navigate("/main");
       })
@@ -61,12 +54,12 @@ const MyPage = () => {
         console.log(err);
       });
   };
-
   const [don, setDon] = useState(0);
   useEffect(() => {
     setDon(user.miTargetAmount);
   }, []);
   const [val, setVal] = useState(initVal);
+  console.log(val);
   const handleChange = (e) => {
     // console.log(e.target);
     // tag = {name:"nickname", value:"123"}
@@ -112,13 +105,11 @@ const MyPage = () => {
   useEffect(() => {
     console.log(Err);
   }, [Err]);
-
   // useEffect(() => {
   //   if (user.miTargetAmount < 1) {
   //     alert("예산금액을 0원이상 설정하세요.");
   //   }
   // }, []);
-
   // 예산을 수정시 항목 체크
   const handleDonSubmit = (e) => {
     e.preventDefault();
@@ -147,36 +138,44 @@ const MyPage = () => {
       alert("취소 되었습니다.");
     }
   };
-
+  let body = {
+    miPwd: val.nowPassword,
+    miUpdatePwd: val.password,
+    miCheckUpdatePwd: val.password2,
+    miNickname: val.nickname,
+  };
+  const [nickErr, setNickErr] = useState([]);
+  const [pwErr, setPwErr] = useState([]);
   const pwEd = (e) => {
-    let body = {
-      miPwd: "string",
-      miUpdatePwd: "string",
-      miCheckUpdatePwd: "string",
-      miNickname: "string",
-      miTargetAmount: 0,
-    };
     axios
-      .post(`http://192.168.0.151:9898/member/update/pwd/${user.miSeq}`)
+      .post(`http://192.168.0.151:9898/member/update/pwd/${user.miSeq}`, body)
       .then((res) => {
         alert("수정되었습니다.");
       })
       .catch((err) => {
         console.log(err);
+        setPwErr(err.data);
       });
   };
-
   const nicknameEd = (e) => {
     axios
-      .post(`http://192.168.0.151:9898/member/update/nickname/${user.miSeq}`)
+      .post(
+        `http://192.168.0.151:9898/member/update/nickname/${user.miSeq}`,
+        body
+      )
       .then((res) => {
         alert("수정되었습니다.");
       })
       .catch((err) => {
         console.log(err);
+        setNickErr(err.data);
       });
   };
-
+  console.log(nickErr);
+  function priceToString(price) {
+    if (price === undefined || price === null) return;
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
   return (
     <div>
       <css.MyPageDiv>
@@ -197,7 +196,6 @@ const MyPage = () => {
                 <form onSubmit={handleDonSubmit}>
                   <input
                     type="text"
-                    placeholder="수정금액"
                     value={don}
                     required
                     onChange={(e) => setDon(parseInt(e.target.value))}
@@ -210,6 +208,15 @@ const MyPage = () => {
             </div>
           </div>
           <form onSubmit={handleSubmit}>
+            <button
+              type="submit"
+              className="mb-[15px] w-[180px] h-[36px] text-xs font-medium"
+              onClick={(e) => {
+                nicknameEd();
+              }}
+            >
+              닉네임 수정
+            </button>
             <input
               type="text"
               id="nickname"
@@ -218,8 +225,17 @@ const MyPage = () => {
               onChange={handleChange}
             />
             <span className="err text-xs">{Err.nickname}</span>
+            <button
+              type="submit"
+              className="mb-[15px] w-[180px] h-[36px] text-xs font-medium"
+              onClick={(e) => {
+                pwEd(e);
+              }}
+            >
+              비밀번호 수정
+            </button>
             <input
-              type="text"
+              type="password"
               id="nowPassword"
               name="nowPassword"
               placeholder="현재 비밀번호를 입력하세요"
@@ -227,7 +243,7 @@ const MyPage = () => {
             />
             <span className="err text-xs">{Err.nowPassword}</span>
             <input
-              type="text"
+              type="password"
               id="password"
               name="password"
               placeholder="수정 할 비밀번호를 입력하세요"
@@ -242,12 +258,8 @@ const MyPage = () => {
               onChange={handleChange}
             />
             <span className="err text-xs">{Err.password2}</span>
-            <button onClick={(e) => pwEd()}>비밀번호수정</button>
           </form>
           <div className="flex justify-between">
-            <button type="submit" onClick={handleSubmit} value="SUBMIT">
-              정보수정
-            </button>
             <button
               type="button"
               onClick={(e) => {
