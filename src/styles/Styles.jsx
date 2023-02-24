@@ -479,3 +479,22 @@ export const Detaillist = styled.div`
     }
   }
 `;
+// ChartCate
+export const Chart =styled.div`
+.chart-inner {
+  width: 100%;
+  padding: 0 20px;
+  .scrbar2 {
+    width: 100%;
+    height: calc(800px - 180px - 250px);
+    margin: 25px 0;
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    &::-webkit-scrollbar {
+      display: none; /* Chrome , Safari , Opera */
+    }
+  }
+}
+
+`
