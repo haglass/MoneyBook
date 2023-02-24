@@ -210,7 +210,7 @@ const MyPage = () => {
           <form onSubmit={handleSubmit}>
             <button
               type="submit"
-              className="mb-[15px] w-[180px] h-[36px] text-xs font-medium"
+              className="mb-[15px] w-[140px] h-[36px] text-xs font-medium"
               onClick={(e) => {
                 nicknameEd();
               }}
@@ -227,7 +227,7 @@ const MyPage = () => {
             <span className="err text-xs">{Err.nickname}</span>
             <button
               type="submit"
-              className="mb-[15px] w-[180px] h-[36px] text-xs font-medium"
+              className="mb-[15px] w-[160px] h-[36px] text-xs font-medium"
               onClick={(e) => {
                 pwEd(e);
               }}

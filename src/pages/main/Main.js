@@ -51,13 +51,13 @@ const Main = () => {
       <div className="flex flex-col justify-center items-center mt-40 relative">
         {user.miTargetAmount < 1 ? (
           <>
+            <img
+              src="/images/chart.png"
+              alt="kakao"
+              className="absolute bottom-[190px] w-[340px] "
+            />
             <div>
-              <img
-                src="/images/chart.png"
-                alt="kakao"
-                className="absolute bottom-[230px] left-[50px]  object-fill h-80 w-80"
-              />
-              <div className=" absolute bottom-[320px] left-[120px]">
+              <div className=" absolute bottom-[290px] left-[120px]">
                 <span>현재 목표 금액이 없습니다.</span>
                 <br />
                 <MainEdit

@@ -175,7 +175,7 @@ export const MyPageDiv = styled.div`
     form {
       display: flex;
       flex-direction: column;
-      margin-top: 50px;
+      margin-top: 20px;
       input {
         background-color: whitesmoke;
         outline: none;
