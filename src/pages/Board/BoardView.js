@@ -118,13 +118,17 @@ const BoardView = () => {
         console.log(err);
       });
   };
+  const mounted = useRef(false);
 
   useEffect(() => {
-    boardConents();
+    if (!mounted.current) {
+      mounted.current = true;
+    } else {
+      boardConents();
+      boardComment();
+    }
   }, []);
 
-
-  
   return (
     <div>
       <css.View>
@@ -178,8 +182,7 @@ const BoardView = () => {
               onChange={(e) => setContent(e.target.value)}
               placeholder="댓글을 써주세요"
             />
-            <button onClick={commentWrite} className="ml-20">댓글쓰기</button>
-            
+            <button onClick={commentWrite}>댓글쓰기</button>
           </div>
         </div>
       </css.View>
