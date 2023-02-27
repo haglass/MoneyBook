@@ -173,29 +173,13 @@ const BoardView = () => {
               </Button>
               <span className="ml-44">조회수 : {boardDetail.view}</span>
             </div>
-            {/* 요기 div 맵돌리기~ */}
-            {/* {comment.map((item, index) => (
-              <div
-                className="mt-9"
-                key={item.ciSeq}
-                value={1}
-                onClick={(e) => console.log(e.target.value)}
-              >
-                <span className="text-main">{item.nickName}</span>
-                <span className="ml-3 text-[14px]">
-                  {moment(item.ciRegDt).format("YYYY-MM-DD")}
-                </span>
-                <br />
-                <span className="ml-4">{item.ciContent}</span>
-              </div>
-            ))} */}
-            
+            <Comment seq={seq} />
             <input
               onChange={(e) => setContent(e.target.value)}
               placeholder="댓글을 써주세요"
             />
             <button onClick={commentWrite} className="ml-20">댓글쓰기</button>
-            <Comment seq={seq} />
+            
           </div>
         </div>
       </css.View>

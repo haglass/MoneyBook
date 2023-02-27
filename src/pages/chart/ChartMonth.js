@@ -14,6 +14,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 // 정보를 redux 에서 업데이트 할 때 사용 코드
 import { useDispatch } from "react-redux";
+
 const ChartMonth = () => {
   const [month, setMonth] = useState([]);
   const user = useSelector((state) => state.user);
@@ -46,7 +47,8 @@ const ChartMonth = () => {
   const chartm = async () => {
     try {
       const res = await axios.get(
-        `http://192.168.0.151:9898/expenses/month/${user.miSeq}`
+        // `http://192.168.0.151:9898/expenses/month/${user.miSeq}`
+        `http://192.168.0.151:9898/expenses/month/${user.miSeq}?year=2023`
       );
       setMonth(res.data);
       console.log("받아온데이터 res.data", res.data);
@@ -76,7 +78,10 @@ const ChartMonth = () => {
     }
     return null;
   };
-
+  function priceToString(price) {
+    if (price === undefined || price === null) return;
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
   return (
     <div>
       <Header>
@@ -108,21 +113,21 @@ const ChartMonth = () => {
         {month.maxDay && (
           <div className="px-4">
             <div className="flex justify-between items-center mb-3">
-              <h1 className="text-l font-bold text-main">가장 많이 쓴날</h1>
+              <h1 className="text-l font-bold text-main">가장 많이 쓴 금액</h1>
               <span className="text-sm font-bold text-sub2">
                 {moment(month.maxDay.date).format("MM월 DD일")}
               </span>
               <span className="text-sm font-bold text-sub">
-                {month.maxDay.price}원
+                {priceToString(month.maxDay.price)}원
               </span>
             </div>
             <div className="flex justify-between items-center">
-              <h1 className="text-l font-bold text-main">가장 적게 쓴날</h1>
+              <h1 className="text-l font-bold text-main">가장 적게 쓴 금액</h1>
               <span className="text-sm font-bold text-sub2">
                 {moment(month.minDay.date).format("MM월 DD일")}
               </span>
               <span className="text-sm font-bold text-sub">
-                {month.minDay.price}원
+                {priceToString(month.minDay.price)}원
               </span>
             </div>
           </div>

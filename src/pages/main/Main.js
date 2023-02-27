@@ -44,7 +44,7 @@ const Main = () => {
 
   return (
     <div>
-      <span className="absolute font-medium text-main text-[24px] right-[162px] top-[220px]">
+      <span className="absolute font-medium text-main text-[24px] right-[162px] top-[230px]">
         남은 예산
       </span>
 
@@ -53,33 +53,29 @@ const Main = () => {
           <>
             <img
               src="/images/chart.png"
-              alt="kakao"
-              className="absolute bottom-[190px] w-[340px] "
+              alt="chart"
+              className="absolute bottom-[200px] w-[342px] "
             />
-            <div>
-              <div className=" absolute bottom-[290px] left-[120px]">
-                <span>현재 목표 금액이 없습니다.</span>
-                <br />
-                <MainEdit
-                  className="ml-10 mt-4"
-                  onClick={(e) => {
-                    cashBt();
-                  }}
-                >
-                  목표금액 설정
-                </MainEdit>
-              </div>
-            </div>
+            <span className=" absolute bottom-[320px] left-[50%] -translate-x-2/4">
+              현재 목표 금액이 없습니다.
+            </span>
+            <br />
+            <MainEdit
+              onClick={(e) => {
+                cashBt();
+              }}
+            >
+              목표금액 설정
+            </MainEdit>
             {/* <MainChart expenses={expenses} /> */}
           </>
         ) : (
           <>
-            <span className=" absolute bottom-[320px] left-[150px] ">
+            <span className=" absolute bottom-[320px] left-[50%] -translate-x-2/4">
               예산 진행률 {Math.floor(expenses.remainingRete)}%
             </span>
             <br />
             <MainEdit
-              className=""
               onClick={(e) => {
                 cashBt();
               }}
@@ -98,13 +94,12 @@ const Main = () => {
           </div>
         </div>
 
-        <div className="flex flex-col gap-5 ">
-          <MainChart expenses={expenses} className="" />
-
-          <Link to="/MainAddDetail" className="ml-3">
+        <div className="flex flex-col gap-5 items-center">
+          <MainChart expenses={expenses} />
+          <Link to="/MainAddDetail">
             <MainBt>내역추가</MainBt>
           </Link>
-          <Link to="/MainDetail" className="ml-3">
+          <Link to="/MainDetail">
             <MainBt>상세내역</MainBt>
           </Link>
         </div>
@@ -124,26 +119,17 @@ font-bold
 text-sub
 mb-2
 `;
-const MainSpan = tw.span`
-absolute
-font-medium
-text-main
-text-[24px]
-`;
 
 const MainEdit = tw.button`
 absolute
 border
 border-main
 text-sub
-
 w-[100px]
 h-[30px]
-rounded-full
+rounded-xl
 text-xs
-
 font-bold
-
 z-10
 `;
 
