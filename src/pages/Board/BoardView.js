@@ -189,12 +189,13 @@ const BoardView = () => {
                 <span className="ml-4">{item.ciContent}</span>
               </div>
             ))} */}
-            <Comment seq={seq} />
+            
             <input
               onChange={(e) => setContent(e.target.value)}
               placeholder="댓글을 써주세요"
             />
-            <button onClick={commentWrite}>댓글쓰기</button>
+            <button onClick={commentWrite} className="ml-20">댓글쓰기</button>
+            <Comment seq={seq} />
           </div>
         </div>
       </css.View>
