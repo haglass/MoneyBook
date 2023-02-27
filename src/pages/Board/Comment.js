@@ -7,7 +7,6 @@ const Comment = ({ seq }) => {
   const [comment, setComment] = useState([]);
   // 게시글 댓글 데이터 호출
 
-  
   const boardComment = () => {
     axios
       .get(`http://192.168.0.151:9898/comment/list/${seq}`)
@@ -26,7 +25,7 @@ const Comment = ({ seq }) => {
   return (
     <div>
       {comment.map((item, index) => (
-        <div className="">
+        <div className="" key={index}>
           <div
             className="mt-9 flex justify-between mb-2"
             key={item.ciSeq}
@@ -39,8 +38,8 @@ const Comment = ({ seq }) => {
               </span>
             </div>
             <div className="flex">
-              <Button className="">수정</Button>
-              <Button className="ml-2 ">삭제</Button>
+              <Button className="text-sm">수정</Button>
+              <Button className="ml-2 text-sm">삭제</Button>
             </div>
           </div>
 
