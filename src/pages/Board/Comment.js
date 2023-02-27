@@ -11,6 +11,7 @@ const Comment = ({ seq }) => {
       .get(`http://192.168.0.151:9898/comment/list/${seq}`)
       .then((res) => {
         setComment(res.data);
+        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -18,16 +19,12 @@ const Comment = ({ seq }) => {
   };
   useEffect(() => {
     boardComment();
-  }, [comment.ciSeq]);
+  }, [setComment]);
+
   return (
     <div>
       {comment.map((item, index) => (
-        <div
-          className="mt-9"
-          key={item.ciSeq}
-          value={1}
-          onClick={(e) => console.log(e.target.value)}
-        >
+        <div className="mt-9" key={item.ciSeq} value={item.ciSeq}>
           <span className="text-main">{item.nickName}</span>
           <span className="ml-3 text-[14px]">
             {moment(item.ciRegDt).format("YYYY-MM-DD")}
