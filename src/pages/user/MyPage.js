@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-
 import { Link, useNavigate } from "react-router-dom";
 import * as css from "../../styles/Styles";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import tw from "tailwind-styled-components";
-
 import axios from "axios";
 // 정보를 redux 에서 참조할 때 사용 코드
 import { useSelector } from "react-redux";

@@ -24,7 +24,7 @@ const BoardList = ({ search, onChange }) => {
       );
       setpostList(res.data.content);
       setData(res.data);
-      console.log(res.data.totalElements);
+      // console.log(res.data.totalElements);
     } catch (err) {
       console.log(err);
     }
@@ -40,7 +40,7 @@ const BoardList = ({ search, onChange }) => {
   };
 
   useEffect(() => {
-    console.log("변경 현재페이지: ", page);
+    // console.log("변경 현재페이지: ", page);
     post();
   }, [page]);
 
@@ -59,7 +59,8 @@ const BoardList = ({ search, onChange }) => {
             className="post"
             key={index}
             onClick={() => {
-              navigate("/BoardView");
+              navigate("/BoardView", { state: { seq: item.seq } });
+              console.log(item.seq);
             }}
           >
             <p>{item.title}</p>

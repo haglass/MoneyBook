@@ -8,14 +8,78 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { BiCategory } from "react-icons/bi";
 const MainAddD = () => {
+  // 저장된 유저 정보
   const user = useSelector((state) => state.user);
+
   const navigate = useNavigate();
+
+  //
   const [won, setWon] = useState("");
   const [history, setHistory] = useState("");
   const [day, setDay] = useState("");
+  const [pay, setPay] = useState("");
+
+  // 카테고리 정보
   const [category, setCategory] = useState([]);
+
+  // 선택된 카테고리
   const [selected, setSelected] = useState(1);
+  const [paySelected, setPaySeleted] = useState(1);
+
+  // 현월 탑 3
   const [top, setTop] = useState([]);
+
+  // 결제수단
+  const [payment, setPayment] = useState([]);
+  console.log(payment);
+
+  // 콤마처리
+  function priceToString(price) {
+    if (price === undefined || price === null) return;
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  // 카테고리 데이터
+  const cate = () => {
+    axios
+      .get("http://192.168.0.151:9898/expenses/categoryList")
+      .then((res) => {
+        setCategory(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  // 최근 사용 3개 데이터
+  const monthTop = () => {
+    axios
+      .get(`http://192.168.0.151:9898/expenses/NmonthTop3/${user.miSeq}`)
+      .then((res) => {
+        setTop(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  // 결제수단 데이터
+  const payList = () => {
+    axios
+      .get("http://192.168.0.151:9898/expenses/paymentList")
+      .then((res) => {
+        setPayment(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    cate();
+    monthTop();
+    payList();
+  }, []);
 
   // 에러 정보 관리 객체let
   const initVal = {
@@ -55,6 +119,7 @@ const MainAddD = () => {
     }
     return errs;
   };
+
   const expenditure = (e) => {
     e.preventDefault();
     setErr(check(val));
@@ -66,6 +131,7 @@ const MainAddD = () => {
         cateSeq: selected,
         edDate: val.day,
         edAmont: val.won,
+        piSeq: paySelected,
       };
       // console.log(body);
       axios
@@ -73,7 +139,7 @@ const MainAddD = () => {
         .then((res) => {
           console.log(res.data);
           if (res.data.status) {
-          alert("추가 되었습니다");
+            alert("추가 되었습니다");
             navigate("/maindetail");
           } else {
             console.log("항목을 채워주세요.");
@@ -86,31 +152,6 @@ const MainAddD = () => {
     }
   };
 
-  const cate = async () => {
-    try {
-      const res = await axios.get(
-        "http://192.168.0.151:9898/expenses/categoryList"
-      );
-      setCategory(res.data);
-      // console.log(res.data.map((item) => item.cateSeq));
-      const res2 = await axios.get(
-        `http://192.168.0.151:9898/expenses/NmonthTop3/${user.miSeq}`
-      );
-      setTop(res2.data);
-      console.log(res2.data.map((item) => item.edSeq));
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  useEffect(() => {
-    cate();
-  }, []);
-
-  function priceToString(price) {
-    if (price === undefined || price === null) return;
-    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  }
   return (
     <div>
       <Header>
@@ -121,15 +162,32 @@ const MainAddD = () => {
       </Header>
       <div className="px-5">
         <div className="flex flex-col gap-2 py-8 pb-20">
-          <input
-            className="outline-none py-2 px-4 border-main border rounded-xl"
-            placeholder="지출 금액                                    -                     원"
-            name="won"
-            onChange={handleChange}
-          />
-          <span className="err text-xs">{Err.won}</span>
+          {/* 결제수단/비용 */}
           <div className="flex items-center border border-main text-sub py-2 px-2 rounded-xl">
             <select
+              className="w-[100px]"
+              onChange={(e) => {
+                setPaySeleted(e.target.value);
+              }}
+            >
+              {payment.map((item, index) => (
+                <option key={index} value={item.piSeq}>
+                  {item.piName}
+                </option>
+              ))}
+            </select>
+            <input
+              placeholder="지출 금액"
+              className="ml-5 outline-none px-4"
+              name="won"
+              onChange={handleChange}
+            />
+          </div>
+          <span className="err text-xs">{Err.won}</span>
+          {/* 내용입력 */}
+          <div className="flex items-center border border-main text-sub py-2 px-2 rounded-xl">
+            <select
+              className="w-[100px]"
               onChange={(e) => {
                 setSelected(e.target.value);
               }}
