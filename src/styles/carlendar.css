@@ -102,13 +102,11 @@
 .calCss select,
 .calCss textarea {
   font-size: 12px;
-
   padding: 10px 6.6667px;
-  margin-top: 20px ;
+  margin-top: 20px;
 }
 .react-calendar__tile:disabled {
   border-radius: 50%;
-
   color: white;
   background: #ad5299;
 }
