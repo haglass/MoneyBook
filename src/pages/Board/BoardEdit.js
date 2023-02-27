@@ -1,18 +1,24 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import * as css from "../../styles/Styles";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import tw from "tailwind-styled-components";
 import { useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import moment from "moment";
 
-const BoardWrite = () => {
+const BoardEdit = () => {
+  // 게시글 정보 받아오기
+  const location = useLocation();
+  // 상세 게시글에서 받아온 게시글 정보
+  const boardDetail = location.state;
+
   const user = useSelector((state) => state.user);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [image, setImage] = useState("");
-  const navigate = useNavigate();
+
   const saveFileImage = (e) => {
     setImage(URL.createObjectURL(e.target.files[0]));
   };
@@ -63,16 +69,16 @@ const BoardWrite = () => {
           <Link to={"/board"}>
             <MdOutlineKeyboardArrowLeft className="text-sub text-5xl font-bold" />
           </Link>
-          <h1 className="text-xl font-bold text-main">글쓰기</h1>
+          <h1 className="text-xl font-bold text-main">글수정</h1>
         </Header>
         <div className="write-inner">
           <form onSubmit={handleSubmit}>
             <input
               type="text"
-              placeholder="제목"
               className="writetitle"
               id="title"
               name="title"
+              placeholder={boardDetail.title}
               value={title}
               onChange={handleTitleChange}
             />
@@ -81,7 +87,7 @@ const BoardWrite = () => {
               rows="10"
               id="detail"
               name="detail"
-              placeholder="내용"
+              placeholder={boardDetail.detail}
               value={content}
               onChange={handleContentChange}
             ></textarea>
@@ -101,7 +107,7 @@ const BoardWrite = () => {
             <button
               type="submit"
               className="btsunmit"
-              onClick={(e) => navigate("/board")}
+              onClick={(e) => Navigate("/board")}
             >
               등록
             </button>
@@ -111,7 +117,8 @@ const BoardWrite = () => {
     </div>
   );
 };
-export default BoardWrite;
+
+export default BoardEdit;
 
 const Header = tw.div`
 flex

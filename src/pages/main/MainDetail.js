@@ -13,6 +13,8 @@ const MainDetail = () => {
   const [month, setMonth] = useState([]);
   const [top, setTop] = useState([]);
   const [total, setTotal] = useState([]);
+
+  
   const monthList = async () => {
     try {
       const res = await axios.get(

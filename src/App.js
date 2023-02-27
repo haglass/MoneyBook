@@ -16,6 +16,8 @@ import ChartMonth from "./pages/chart/ChartMonth";
 import ChartYear from "./pages/chart/ChartYear";
 import MyPage from "./pages/user/MyPage";
 import MainPage from "./pages/main/MainPage";
+import BoardEdit from "./pages/Board/BoardEdit";
+import Comment from "./pages/Board/Comment";
 
 // 정보를 redux 에서 참조할 때 사용 코드
 import { useSelector } from "react-redux";
@@ -37,6 +39,7 @@ const App = () => {
           <Route path="/join" element={<Join />} />
           <Route path="/chart" element={<Chart />} />
           <Route path="/board" element={<Board />} />
+          <Route path="/comment" element={<Comment />} />
           <Route path="/boardwrite" element={<BoardWrite />} />
           <Route path="/boardview" element={<BoardView />} />
           <Route path="/mainadddetail" element={<MainAddDetail />} />
@@ -45,6 +48,7 @@ const App = () => {
           <Route path="/chartmonth" element={<ChartMonth />} />
           <Route path="/chartYear" element={<ChartYear />} />
           <Route path="/myPage" element={<MyPage />} />
+          <Route path="/boardedit" element={<BoardEdit />} />
         </Routes>
         {user.miEmail !== "" ? <Nav /> : null}
       </div>
