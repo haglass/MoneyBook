@@ -37,7 +37,6 @@ const Main = () => {
   useEffect(() => {
     eData();
   }, []);
-
   function priceToString(price) {
     if (price === undefined || price === null) return;
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -48,48 +47,64 @@ const Main = () => {
       <span className="absolute font-medium text-main text-[24px] right-[162px] top-[220px]">
         남은 예산
       </span>
-      <div className="flex flex-col justify-center items-center mt-40 relative">
-        <span className="absolute font-medium text-sub text-[16px] top-[210px]">
-          {user.miTargetAmount < 1 ? (
-            <>
-              <span>현재 목표 금액이 없습니다.</span>
-              <br />
-              <MainEdit
-                onClick={(e) => {
-                  cashBt();
-                }}
-              >
-                목표금액 설정
-              </MainEdit>
-            </>
-          ) : (
-            <>
-              <span>예산 진행률 {Math.floor(expenses.remainingRete)}%</span>
-              <br />
-              <MainEdit
-                onClick={(e) => {
-                  cashBt();
-                }}
-              >
-                목표금액 수정
-              </MainEdit>
-            </>
-          )}
-        </span>
 
-        <div className="absolute top-[100px] z-1">
+      <div className="flex flex-col justify-center items-center mt-40 relative">
+        {user.miTargetAmount < 1 ? (
+          <>
+            <img
+              src="/images/chart.png"
+              alt="kakao"
+              className="absolute bottom-[190px] w-[340px] "
+            />
+            <div>
+              <div className=" absolute bottom-[290px] left-[120px]">
+                <span>현재 목표 금액이 없습니다.</span>
+                <br />
+                <MainEdit
+                  className="ml-10 mt-4"
+                  onClick={(e) => {
+                    cashBt();
+                  }}
+                >
+                  목표금액 설정
+                </MainEdit>
+              </div>
+            </div>
+            {/* <MainChart expenses={expenses} /> */}
+          </>
+        ) : (
+          <>
+            <span className=" absolute bottom-[320px] left-[150px] ">
+              예산 진행률 {Math.floor(expenses.remainingRete)}%
+            </span>
+            <br />
+            <MainEdit
+              className=""
+              onClick={(e) => {
+                cashBt();
+              }}
+            >
+              목표금액 수정
+            </MainEdit>
+          </>
+        )}
+        <span className="absolute font-medium text-sub text-[16px] top-[210px]"></span>
+
+        <div className="absolute top-[110px] z-1">
           <div className="flex flex-col items-center ">
             {/* 소비된 금액을 userSlice.js 에서 추가할 필요성 있을까? */}
             <MainText>{priceToString(expenses.remaining)}원</MainText>
             <MainText2>/ {priceToString(expenses.target)}원</MainText2>
           </div>
         </div>
-        <MainChart expenses={expenses} />
-        <div className="flex flex-col gap-7">
-          <Link to="/MainAddDetail">
+
+        <div className="flex flex-col gap-5 ">
+          <MainChart expenses={expenses} className="" />
+
+          <Link to="/MainAddDetail" className="ml-3">
             <MainBt>내역추가</MainBt>
           </Link>
-          <Link to="/MainDetail">
+          <Link to="/MainDetail" className="ml-3">
             <MainBt>상세내역</MainBt>
           </Link>
         </div>

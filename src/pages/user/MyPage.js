@@ -22,12 +22,14 @@ const MyPage = () => {
     password2: "",
   };
   const [val, setVal] = useState(initVal);
+
   let body = {
     miPwd: val.nowPassword,
     miUpdatePwd: val.password,
     miCheckUpdatePwd: val.password2,
     miNickname: val.nickname,
   };
+
   // 설정 금액
   const cash = () => {
     // console.log("예산: ", don);
@@ -61,6 +63,7 @@ const MyPage = () => {
   useEffect(() => {
     setDon(user.miTargetAmount);
   }, []);
+
   // 예산을 수정시 항목 체크
   const handleDonSubmit = (e) => {
     e.preventDefault();
@@ -74,12 +77,14 @@ const MyPage = () => {
     const { name, value } = e.target;
     setVal({ ...val, [name]: value });
   };
+
   const [pwErr, setPwErr] = useState([]);
   const pwEd = (e) => {
     console.log("마지막 처리");
     // body = {
     //   miUpdatePwd: val.password,
     // };
+
     axios
       .post(`http://192.168.0.151:9898/member/update/pwd/${user.miSeq}`, body)
       .then((res) => {
@@ -98,6 +103,7 @@ const MyPage = () => {
     if (!_val.nowPassword) {
       errs.nowPassword = "현재 비밀번호를 입력하세요.";
     }
+
     // 비밀번호
     const eng = /[a-zA-Z]/;
     const num = /[0-9]/;
@@ -118,6 +124,7 @@ const MyPage = () => {
     if (_val.password !== _val.password2 || !_val.password2) {
       errs.password2 = "비밀번호를 동일하게 입력해주세요.";
     }
+
     if (Object.keys(Err).length === 0) {
       errCheck.current = false;
     } else {
@@ -125,6 +132,7 @@ const MyPage = () => {
     }
     return errs;
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setErr(check(val));
@@ -166,6 +174,7 @@ const MyPage = () => {
       )
       .then((res) => {
         alert("수정되었습니다.");
+
         const userInfo = {
           miSeq: user.miSeq,
           // 닌네임을 update 합니다.
@@ -183,6 +192,7 @@ const MyPage = () => {
         setNickErr(err.response.data.message);
       });
   };
+
   function priceToString(price) {
     if (price === undefined || price === null) return;
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
