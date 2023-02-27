@@ -118,17 +118,13 @@ const BoardView = () => {
         console.log(err);
       });
   };
-  const mounted = useRef(false);
 
   useEffect(() => {
-    if (!mounted.current) {
-      mounted.current = true;
-    } else {
-      boardConents();
-      boardComment();
-    }
+    boardConents();
   }, []);
 
+
+  
   return (
     <div>
       <css.View>

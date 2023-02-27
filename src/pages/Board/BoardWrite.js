@@ -94,14 +94,14 @@ const BoardWrite = () => {
                   id="image"
                   name="image"
                 />
-                <button onClick={() => deleteFileImage()}>초기화</button>
+                {/* <button onClick={() => deleteFileImage()}>초기화</button> */}
                 {image && <img src={image} alt="preview-img" />}
               </div>
             </div>
             <button
               type="submit"
               className="btsunmit"
-              onClick={(e) => navigate("/board")}
+              // onClick={(e) => navigate("/board")}
             >
               등록
             </button>
