@@ -1,26 +1,52 @@
 import axios from "axios";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router";
 
 import tw from "tailwind-styled-components";
 const Comment = ({ seq }) => {
   const [comment, setComment] = useState([]);
-  // 게시글 댓글 데이터 호출
 
-  const boardComment = () => {
-    axios
-      .get(`http://192.168.0.151:9898/comment/list/${seq}`)
-      .then((res) => {
-        setComment(res.data);
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const user = useSelector((state) => state.user);
+  // 댓글 삭제
+  const deleteBt = (e) => {
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+      axios
+        .delete(`http://192.168.0.151:9898/board/delete/${user.miSeq}/${seq}`)
+        .then((res) => {
+          console.log(res);
+          alert("삭제 되었습니다.");
+        })
+        .catch((err) => {
+          console.log(err);
+          alert(err.response.data.message);
+        });
+      // navigate("/board");
+    } else {
+      alert("삭제 되었습니다.");
+    }
   };
-  useEffect(() => {
-    boardComment();
-  }, [setComment]);
+  // 댓글 수정
+  const reWriteBt = (e) => {
+    if (window.confirm("정말 수정하시겠습니까?")) {
+      axios
+        .post(
+          `http://192.168.0.151:9898//comment/update/${user.miSeq}/${seq}`
+        )
+        .then((res) => {
+          console.log(res);
+          alert("수정 되었습니다.");
+        })
+        .catch((err) => {
+          console.log(err);
+          alert(err.response.data.message);
+        });
+      // navigate("/board");
+    } else {
+      alert("수정 되었습니다.");
+    }
+  };
 
   return (
     <div>
@@ -38,8 +64,15 @@ const Comment = ({ seq }) => {
               </span>
             </div>
             <div className="flex">
-              <Button className="">수정</Button>
-              <Button className="ml-2 ">삭제</Button>
+              <Button onClick={(e) => reWriteBt()}>수정</Button>
+              <Button
+                className="ml-2 "
+                onClick={(e) => {
+                  deleteBt();
+                }}
+              >
+                삭제
+              </Button>
             </div>
           </div>
 
