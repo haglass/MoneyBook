@@ -49,6 +49,11 @@ const ChartCate = () => {
     cateData();
   }, []);
 
+  function priceToString(price) {
+    if (price === undefined || price === null) return;
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
   return (
     <>
       <css.Chart>
@@ -106,11 +111,11 @@ const ChartCate = () => {
               />
             </div>
           </div>
-          <div className="scrbar2   mt-[70px] gap-y-8 mx-10 ">
+          <div className="scrbar2">
             {category.map((item, index) => (
-              <div className="flex justify-between gap-[20px] mb-3" key={index}>
-                <MainBt>{item.cate}원</MainBt>
-                <Won className="mt-2">{item.price}원</Won>
+              <div className="flex justify-around gap-[95px] mb-3" key={index}>
+                <MainBt>{item.cate}</MainBt>
+                <Won className="mt-2">{priceToString(item.price)} 원</Won>
               </div>
             ))}
           </div>
@@ -138,7 +143,6 @@ const MainBt = tw.button`
 bg-main
 text-white
 text-sm
-font-bold
 rounded-xl
 w-[100px]
 h-10
