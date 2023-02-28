@@ -24,6 +24,7 @@ const ChartCate = () => {
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
   const [category, setCategory] = useState([]);
+  
   const cateData = async () => {
     try {
       const res = await axios.get(
