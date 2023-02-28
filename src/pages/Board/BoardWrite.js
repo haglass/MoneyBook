@@ -11,10 +11,18 @@ const BoardWrite = () => {
   const user = useSelector((state) => state.user);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState([]);
   const navigate = useNavigate();
+
+  console.log(image);
   const saveFileImage = (e) => {
-    setImage(URL.createObjectURL(e.target.files[0]));
+    const nowSelectList = e.target.file;
+    const nowImageURLList = [...image];
+    for (let i = 0; i < nowSelectList.length; i += 1) {
+      const nowImageUrl = URL.createObjectURL(nowSelectList[i]);
+      nowImageURLList.push(nowImageUrl);
+    }
+    setImage(nowImageURLList);
   };
   const deleteFileImage = () => {
     URL.revokeObjectURL(image);
@@ -51,6 +59,7 @@ const BoardWrite = () => {
         }
       );
       console.log(response);
+      // navigate("/board");
     } catch (error) {
       console.log(error);
     }
@@ -89,12 +98,13 @@ const BoardWrite = () => {
               <div className="filebox">
                 <input
                   type="file"
+                  multiple="multiple"
                   accept="image/*"
                   onChange={(handleImageChange, saveFileImage)}
                   id="image"
                   name="image"
                 />
-                {/* <button onClick={() => deleteFileImage()}>초기화</button> */}
+                <button onClick={() => deleteFileImage()}>초기화</button>
                 {image && <img src={image} alt="preview-img" />}
               </div>
             </div>

@@ -12,7 +12,8 @@ const BoardEdit = () => {
   // 게시글 정보 받아오기
   const location = useLocation();
   // 상세 게시글에서 받아온 게시글 정보
-  const boardDetail = location.state;
+  const boardData = location.state;
+  console.log(boardData.boardDetail.uri);
 
   const user = useSelector((state) => state.user);
   const [title, setTitle] = useState("");
@@ -20,7 +21,7 @@ const BoardEdit = () => {
   const [image, setImage] = useState("");
 
   const saveFileImage = (e) => {
-    setImage(URL.createObjectURL(e.target.files[0]));
+    setImage(e.target.files[0]);
   };
   const deleteFileImage = () => {
     URL.revokeObjectURL(image);
@@ -44,11 +45,12 @@ const BoardEdit = () => {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("detail", content);
+    formData.delete("imgSeq", 0);
     formData.append("img", image);
 
     try {
       const response = await axios.post(
-        `http://192.168.0.151:9898/board/add/${user.miSeq}`,
+        `http://192.168.0.151:9898/board/update/${user.miSeq}}/${boardData.seq}`,
         formData,
         {
           headers: {
@@ -78,7 +80,7 @@ const BoardEdit = () => {
               className="writetitle"
               id="title"
               name="title"
-              placeholder={boardDetail.title}
+              placeholder={boardData.boardDetail.title}
               value={title}
               onChange={handleTitleChange}
             />
@@ -87,7 +89,7 @@ const BoardEdit = () => {
               rows="10"
               id="detail"
               name="detail"
-              placeholder={boardDetail.detail}
+              placeholder={boardData.boardDetail.detail}
               value={content}
               onChange={handleContentChange}
             ></textarea>

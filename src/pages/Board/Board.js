@@ -6,6 +6,7 @@ import { BiSearchAlt } from "react-icons/bi";
 import tw from "tailwind-styled-components";
 import BoardList from "./BoardList";
 import { useState } from "react";
+import axios from "axios";
 
 const Board = (props) => {
   const navigate = useNavigate();
@@ -14,7 +15,16 @@ const Board = (props) => {
   const onChange = (e) => {
     setSearch(e.target.value);
   };
-
+  // const searchBar = (e) => {
+  //   axios
+  //     .get(
+  //       `http://192.168.0.151:9898/board/search/list/161?page=${page}&size=8&keyword=${sss}`
+  //     )
+  //     .then((res) => {})
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
   return (
     <div>
       <css.BoardDiv>
