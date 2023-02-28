@@ -29,12 +29,13 @@ const BoardList = ({ search, onChange }) => {
       console.log(err);
     }
   };
+
   const handlePageChange = (count) => {
     let tempPage = count - 1;
     if (tempPage < 0) {
       tempPage = 0;
     }
-    console.log(tempPage);
+    // console.log(tempPage);
     setPage(tempPage);
     // console.log(page);
   };

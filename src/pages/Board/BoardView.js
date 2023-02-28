@@ -14,47 +14,12 @@ import Comment from "./Comment";
 const BoardView = () => {
   // 게시글 번호 받아오기
   const location = useLocation();
-
   // 목록에서 클릭해서 받아온 게시글 번호
   const { seq } = location.state;
   // console.log(seq);
-
   const navigate = useNavigate();
-
-  const path = process.env.PUBLIC_URL;
-
   // 유저 정보
   const user = useSelector((state) => state.user);
-
-  // 상세글 내용 저장
-  const [boardDetail, setBoardDetail] = useState([]);
-  // 댓글 내용 저장
-  const [comment, setComment] = useState([]);
-
-  // 게시글 내용 데이터 호출
-  const boardConents = () => {
-    axios
-      .get(`http://192.168.0.151:9898/board/show/detail/${user.miSeq}/${seq}`)
-      .then((res) => {
-        setBoardDetail(res.data.data);
-        // console.log(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  // 게시글 댓글 데이터 호출
-  const boardComment = () => {
-    axios
-      .get(`http://192.168.0.151:9898/comment/list/${seq}`)
-      .then((res) => {
-        setComment(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   // 게시글 삭제
   const deleteBt = (e) => {
@@ -68,7 +33,7 @@ const BoardView = () => {
           console.log(err);
           alert(err.response.data.message);
         });
-      // navigate("/board");
+      navigate("/board");
     } else {
       alert("취소 되었습니다.");
     }
@@ -120,14 +85,25 @@ const BoardView = () => {
   };
   const mounted = useRef(false);
 
+  // 상세글 내용 저장
+  const [boardDetail, setBoardDetail] = useState([]);
+
+  console.log(boardDetail.uri && boardDetail.uri.map((item) => item.file));
+
   useEffect(() => {
-    if (!mounted.current) {
-      mounted.current = true;
-    } else {
-      boardConents();
-      boardComment();
-    }
-  }, []);
+
+    const boardContens = async () => {
+      try {
+        const res = await axios.get(
+          `http://192.168.0.151:9898/board/show/detail/${user.miSeq}/${seq}`
+        );
+        setBoardDetail(res.data.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    boardContens();
+ }, []);
 
   return (
     <div>
@@ -143,7 +119,9 @@ const BoardView = () => {
           <div className="flex justify-end items-center gap-3">
             <Button
               className="text-sm"
-              onClick={(e) => navigate("/boardedit", { state: boardDetail })}
+              onClick={(e) =>
+                navigate("/boardedit", { state: { boardDetail, seq } })
+              }
             >
               수정
             </Button>
@@ -163,11 +141,16 @@ const BoardView = () => {
             <div className="bg-[whitesmoke] rounded-xl py-2 px-4 w-full h-[200px]">
               {boardDetail.detail}
             </div>
-            <img
-              src={`${path}/images/starbucks.png`}
-              alt="boardView"
-              className="w-full h-40 align-middle object-cover mt-5"
-            />
+            {boardDetail.uri &&
+              boardDetail.uri.map((item, i) => (
+                <div key={i}>
+                  <img
+                    src={`http://192.168.0.151:9898/images/${item.file}`}
+                    alt="boardView"
+                    className="w-full h-40 align-middle object-cover mt-5"
+                  />
+                </div>
+              ))}
             <div className="flex items-center gap-3 mt-7 mb-3">
               <Button>
                 <GoThumbsup onClick={likeBt} />
@@ -177,6 +160,9 @@ const BoardView = () => {
               </Button>
               <span className="ml-44">조회수 : {boardDetail.view}</span>
             </div>
+
+            <Comment seq={seq} />
+
             <input
               onChange={(e) => setContent(e.target.value)}
               placeholder="댓글을 써주세요"

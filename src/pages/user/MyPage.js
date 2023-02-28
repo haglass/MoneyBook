@@ -20,6 +20,8 @@ const MyPage = () => {
   let initVal = {
     password: "",
     password2: "",
+    nowPassword: "",
+    nickname: "",
   };
   const [val, setVal] = useState(initVal);
 
@@ -166,6 +168,7 @@ const MyPage = () => {
     }
   };
   const [nickErr, setNickErr] = useState([]);
+
   const nicknameEd = (e) => {
     axios
       .post(
@@ -185,6 +188,7 @@ const MyPage = () => {
           miStatus: user.miStatus,
           miSnsType: user.miSnsType,
         };
+        
         dispatch(loginUser(userInfo));
       })
       .catch((err) => {
@@ -255,9 +259,12 @@ const MyPage = () => {
               placeholder="닉네임을 입력하세요."
               onChange={handleChange}
             />
+
+            <span>{nickErr}</span>
             <span className="err text-xs">{Err.nickname}</span>
           </form>
           <form onSubmit={handleSubmit}>
+
             <button
               type="submit"
               className="mb-[15px] w-[180px] h-[36px] text-xs font-medium"
