@@ -183,7 +183,7 @@ const MainAddD = () => {
               onChange={handleChange}
             />
           </div>
-          <span className="err text-xs">{Err.won}</span>
+          <span className="err text-xs text-red-500 ml-2">{Err.won}</span>
           {/* 내용입력 */}
           <div className="flex items-center border border-main text-sub py-2 px-2 rounded-xl">
             <select
@@ -205,14 +205,14 @@ const MainAddD = () => {
               onChange={handleChange}
             />
           </div>
-          <span className="err text-xs">{Err.history}</span>
+          <span className="err text-xs text-red-500 ml-2">{Err.history}</span>
           <input
             type="date"
             className="outline-none py-2 px-4 text-sub border-main border rounded-xl cursor-pointer"
             name="day"
             onChange={handleChange}
           />
-          <span className="err text-xs">{Err.day}</span>
+          <span className="err text-xs text-red-500 ml-2">{Err.day}</span>
         </div>
         <div>
           <h1 className="text-xl  text-main mb-5">최근 소비</h1>

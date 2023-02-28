@@ -18,11 +18,12 @@ const BoardList = ({ search, onChange }) => {
   const [postlist, setpostList] = useState([]);
   const [data, setData] = useState([]);
   const [page, setPage] = useState(0);
+  const user = useSelector((state) => state.user);
 
   const post = async () => {
     try {
       const res = await axios.get(
-        `http://192.168.0.151:9898/board/show/list/${user.miSeq}?page=${page}`
+        `http://192.168.0.151:9898/board/show/list/${user.miSeq}?page=${page}&size=8`
       );
       setpostList(res.data.content);
       setData(res.data);

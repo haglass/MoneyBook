@@ -39,7 +39,6 @@ export const NavStyle = styled(NavLink)`
     color: #ad5299;
   }
 `;
-
 //Login
 export const LoginDiv = styled.div`
   .login-inner {
@@ -130,25 +129,7 @@ export const LoginDiv = styled.div`
 `;
 // MyPage
 export const MyPageDiv = styled.div`
-  .myPage-inner {
-    width: 100%;
-    padding: 0 20px;
-    .editdon {
-      form {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 10px;
-        input {
-          margin-bottom: 0;
-          width: 75%;
-        }
-        button {
-          margin: 0;
-        }
-      }
-    }
+  form {
     input {
       background-color: whitesmoke;
       outline: none;
@@ -156,58 +137,14 @@ export const MyPageDiv = styled.div`
       border-radius: 20px;
       padding: 5px 10px;
       color: #ad5299;
-      // &:first-child {
-      //   margin-bottom: 15px;
-      // }
+      margin-top: 15px;
       &:focus {
         background-color: #fff;
       }
     }
-
-    .rewrite {
-      padding: 7px 15px;
-      border: 1px solid #ad5299;
-      border-radius: 20px;
-      font-size: 14px;
-      text-align: center;
-      margin-top: 5px;
-    }
-    form {
-      display: flex;
-      flex-direction: column;
-      margin-top: 20px;
-      input {
-        background-color: whitesmoke;
-        outline: none;
-        border: 1px solid #ad5299;
-        border-radius: 20px;
-        padding: 5px 10px;
-        color: #ad5299;
-        margin-bottom: 10px;
-        &:focus {
-          background-color: #fff;
-        }
-      }
-      span {
-        display: block;
-        margin-left: 10px;
-        color: red;
-        margin-bottom: 10px;
-      }
-    }
-    button {
-      display: block;
-      padding: 5px 20px;
-      border: 1px solid #ad5299;
-      border-radius: 15px;
-      color: #ad5299;
-      font-weight: 500;
-      font-size: 1.2rem;
-      margin-top: 40px;
-    }
   }
 `;
-//SighUp
+//join
 export const SignUpDiv = styled.div`
   .signup-inner {
     width: 100%;
@@ -258,7 +195,6 @@ export const SignUpDiv = styled.div`
     }
   }
 `;
-
 //Board
 export const BoardDiv = styled.div`
   .board-inner {
@@ -304,6 +240,7 @@ export const BoardList = styled.div`
       border-bottom: 1px solid #ad5299;
       padding-bottom: 10px;
       margin-bottom: 15px;
+      cursor: pointer;
       p {
         padding-bottom: 10px;
       }
@@ -430,7 +367,6 @@ export const write = styled.div`
       padding: 5px 10px;
       border: 1px solid #ad5299;
       border-radius: 15px;
-
       &:hover {
         background-color: #ad5299;
         color: #fff;
@@ -460,7 +396,6 @@ export const View = styled.div`
     }
   }
 `;
-
 //MainDetail
 export const Detaillist = styled.div`
   .detaillist-inner {
