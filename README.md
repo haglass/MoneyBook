@@ -11,10 +11,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 React 활용 및 데이터 연동
 백엔드와의 협업을 통한 실무 흐름 파악
 
-## 일정 정리
-노션
-https://brass-pressure-5fc.notion.site/59c5ec12acf94132a2dbd9cf533e1d53
-
 ## 프로젝트 ui
 
 [figma](https://www.figma.com/file/ZXKIBZRTshLbK6PgOmWgIK/%EA%B0%80%EA%B3%84%EB%B6%80-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8?node-id=0%3A1&t=zEnPqhTKdhCc98SZ-1) 로 페이지 레이아웃 작업
