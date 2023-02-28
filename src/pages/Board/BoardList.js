@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 // http://192.168.0.151:9898/swagger-ui/index.html#/
 
 const BoardList = ({ search, onChange }) => {
+  const user = useSelector((state) => state.user);
   const navigate = useNavigate();
   const [postlist, setpostList] = useState([]);
   const [data, setData] = useState([]);
@@ -26,7 +27,7 @@ const BoardList = ({ search, onChange }) => {
       );
       setpostList(res.data.content);
       setData(res.data);
-      // console.log(res.data.totalElements);
+      console.log(res.data);
     } catch (err) {
       console.log(err);
     }
