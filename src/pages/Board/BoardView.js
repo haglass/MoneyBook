@@ -141,7 +141,7 @@ const BoardView = () => {
             </div>
             {boardDetail.uri &&
               boardDetail.uri.map((item, i) => (
-                <div key={i}>
+                <div key={item.seq}>
                   <img
                     src={`http://192.168.0.151:9898/images/${item.file}`}
                     alt="boardView"

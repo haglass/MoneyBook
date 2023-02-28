@@ -83,9 +83,6 @@ const MyPage = () => {
   const [pwErr, setPwErr] = useState([]);
   const pwEd = (e) => {
     console.log("마지막 처리");
-    // body = {
-    //   miUpdatePwd: val.password,
-    // };
 
     axios
       .post(`http://192.168.0.151:9898/member/update/pwd/${user.miSeq}`, body)
@@ -102,6 +99,7 @@ const MyPage = () => {
   const errCheck = useRef(true);
   const check = (_val) => {
     const errs = {};
+
     if (!_val.nowPassword) {
       errs.nowPassword = "현재 비밀번호를 입력하세요.";
     }
@@ -144,6 +142,7 @@ const MyPage = () => {
       pwEd();
     }
   };
+
   // 디버깅용
   useEffect(() => {
     console.log(val);
@@ -167,8 +166,8 @@ const MyPage = () => {
       alert("취소 되었습니다.");
     }
   };
-  const [nickErr, setNickErr] = useState([]);
 
+  const [nickErr, setNickErr] = useState([]);
   const nicknameEd = (e) => {
     axios
       .post(
@@ -188,7 +187,6 @@ const MyPage = () => {
           miStatus: user.miStatus,
           miSnsType: user.miSnsType,
         };
-        
         dispatch(loginUser(userInfo));
       })
       .catch((err) => {
@@ -220,38 +218,28 @@ const MyPage = () => {
           </Link>
           <h1 className="text-xl font-bold text-main">마이페이지</h1>
         </Header>
-        <div className="myPage-inner">
-          <div>
-            <h1 className="tex-2xl text-sub text-2xl font-bold">
-              {user.miNickname} <span className=" text-main text-lg">님</span>
-            </h1>
-            <div className=" mt-5">
-              <span className=" text-main text-xl font-bold ">예산</span>
-              <div className="editdon">
-                <form onSubmit={handleDonSubmit}>
-                  <input
-                    type="text"
-                    value={don}
-                    required
-                    onChange={(e) => setDon(inputPriceFormat(e.target.value))}
-                  />
-                  <button type="submit" className="rewrite">
-                    수 정
-                  </button>
-                </form>
-              </div>
-            </div>
-          </div>
-          <form>
-            <button
-              type="submit"
-              className="mb-[15px] w-[180px] h-[36px] text-xs font-medium"
-              onClick={(e) => {
-                nicknameEd();
-              }}
+        <div className="w-full px-5 myPage-inner">
+          <h1 className="tex-2xl text-sub text-2xl font-bold">
+            {user.miNickname} <span className=" text-main text-lg">님</span>
+          </h1>
+          <div className=" mt-5">
+            <span className=" text-main text-xl font-bold ">예산</span>
+            <form
+              onSubmit={handleDonSubmit}
+              className="flex flex-row justify-between items-center mt-2"
             >
-              닉네임 수정
-            </button>
+              <input
+                type="text"
+                value={don}
+                required
+                onChange={(e) => setDon(inputPriceFormat(e.target.value))}
+                className="w-3/4"
+              />
+              <Button type="submit">수 정</Button>
+            </form>
+          </div>
+
+          <form className="flex flex-col mt-14">
             <input
               type="text"
               id="nickname"
@@ -259,21 +247,19 @@ const MyPage = () => {
               placeholder="닉네임을 입력하세요."
               onChange={handleChange}
             />
-
-            <span>{nickErr}</span>
-            <span className="err text-xs">{Err.nickname}</span>
-          </form>
-          <form onSubmit={handleSubmit}>
-
-            <button
+            <Errspan>{Err.nickname}</Errspan>
+            <Button
               type="submit"
-              className="mb-[15px] w-[180px] h-[36px] text-xs font-medium"
-              // onClick={(e) => {
-              //   pwEd(e);
-              // }}
+              onClick={(e) => {
+                nicknameEd();
+              }}
+              className="w-[40%] ml-[230px]"
             >
-              비밀번호 수정
-            </button>
+              닉네임 수정
+            </Button>
+          </form>
+
+          <form onSubmit={handleSubmit} className="flex flex-col mt-14">
             <input
               type="password"
               id="nowPassword"
@@ -281,7 +267,7 @@ const MyPage = () => {
               placeholder="비밀번호를 입력하세요"
               onChange={handleChange}
             />
-            <span className="err text-xs">{Err.nowPassword}</span>
+            <Errspan className="err text-xs">{Err.nowPassword}</Errspan>
             <input
               type="password"
               id="password"
@@ -289,7 +275,7 @@ const MyPage = () => {
               placeholder="수정 할 비밀번호를 입력하세요"
               onChange={handleChange}
             />
-            <span className="err text-xs">{Err.password}</span>
+            <Errspan className="err text-xs">{Err.password}</Errspan>
             <input
               type="password"
               id="password2"
@@ -297,26 +283,31 @@ const MyPage = () => {
               placeholder="비밀번호 확인을 입력하세요"
               onChange={handleChange}
             />
-            <span className="err text-xs">{Err.password2}</span>
+            <Errspan className="err text-xs">{Err.password2}</Errspan>
+            <Button type="submit" className="w-[40%] ml-[230px]">
+              비밀번호 수정
+            </Button>
           </form>
-          <div className="flex justify-between">
-            <button
+
+          <div className="flex justify-between mt-12">
+            <Button
               type="button"
               onClick={(e) => {
                 userDeleteBt();
               }}
             >
               회원탈퇴
-            </button>
-            <button
+            </Button>
+            <Button
               type="button"
               onClick={(e) => {
                 dispatch(clearUser());
                 navigate("/");
               }}
+              className="bg-main text-white"
             >
               로그아웃
-            </button>
+            </Button>
           </div>
         </div>
       </css.MyPageDiv>
@@ -328,5 +319,24 @@ flex
 items-center
 w-full
 h-20
+`;
+
+const Errspan = tw.span`
+block
+ml-[10px]
+mt-[5px]
+text-red-500
+`;
+
+const Button = tw.button`
+block
+py-[5px]
+px-[15px]
+border
+border-main
+rounded-[20px]
+text-main
+font-medium
+mt-[15px]
 `;
 export default MyPage;

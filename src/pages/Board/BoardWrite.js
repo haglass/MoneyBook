@@ -16,7 +16,8 @@ const BoardWrite = () => {
   const navigate = useNavigate();
 
   const deleteFileImage = () => {
-    setImageList([]);
+    URL.revokeObjectURL(showImages);
+    setShowImages([]);
   };
 
   const handleTitleChange = (event) => {
