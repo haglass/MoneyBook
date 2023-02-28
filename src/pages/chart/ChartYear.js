@@ -25,12 +25,13 @@ const ChartYear = () => {
         console.log(one);
         let two = Object.values(newData[1]).reduce((acc, curr) => acc + curr);
         console.log(two);
+        let total = two + one;
+        console.log(total);
       })
       .catch((err) => {
         console.log(err);
       });
   };
-  console.log(year);
 
   const chartData = year.map((item) => {
     let yData = {

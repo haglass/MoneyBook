@@ -17,12 +17,14 @@ const MyPage = () => {
   // console.log(user.miSeq);
   // 정보를 redux 에서 업데이트 할 때 사용 코드
   const dispatch = useDispatch();
+
   let initVal = {
     password: "",
     password2: "",
     nowPassword: "",
     nickname: "",
   };
+  
   const [val, setVal] = useState(initVal);
 
   let body = {

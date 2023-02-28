@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import * as css from "../../styles/Styles";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
@@ -15,7 +14,9 @@ const BoardWrite = () => {
   const [showImages, setShowImages] = useState([]);
   const navigate = useNavigate();
 
-  const deleteFileImage = () => {
+  const deleteFileImage = (e) => {
+    URL.revokeObjectURL(showImages);
+    setShowImages([]);
     setImageList([]);
   };
 
@@ -109,17 +110,18 @@ const BoardWrite = () => {
                   type="file"
                   multiple="multiple"
                   accept="image/*"
-                  onChange={(handleImageChange, handleAddImages)}
+                  onChange={handleImageChange}
                   id="image"
                   name="image"
                 />
-                <button onClick={() => deleteFileImage()}>초기화</button>
+                <button type="button" onClick={(e) => deleteFileImage()}>
+                  초기화
+                </button>
                 {showImages.map((image, id) => (
                   <div key={id}>
                     <img src={image} alt={`${image}-${id}`} />
                   </div>
                 ))}
-                <div className="imgBox"></div>
               </div>
             </div>
             <button type="submit" className="btsunmit">

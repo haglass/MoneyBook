@@ -87,8 +87,8 @@ const BoardView = () => {
   // 상세글 내용 저장
   const [boardDetail, setBoardDetail] = useState([]);
 
-  console.log(boardDetail.uri && boardDetail.uri.map((item) => item.file));
-
+  // console.log(boardDetail.uri && boardDetail.uri.map((item) => item.seq));
+  console.log(boardDetail);
   useEffect(() => {
     const boardContens = async () => {
       try {
@@ -141,7 +141,7 @@ const BoardView = () => {
             </div>
             {boardDetail.uri &&
               boardDetail.uri.map((item, i) => (
-                <div key={i}>
+                <div key={item.seq}>
                   <img
                     src={`http://192.168.0.151:9898/images/${item.file}`}
                     alt="boardView"
