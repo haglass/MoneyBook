@@ -83,6 +83,7 @@ const BoardView = () => {
         console.log(err);
       });
   };
+  const mounted = useRef(false);
 
   // 상세글 내용 저장
   const [boardDetail, setBoardDetail] = useState([]);
@@ -90,6 +91,7 @@ const BoardView = () => {
   console.log(boardDetail.uri && boardDetail.uri.map((item) => item.file));
 
   useEffect(() => {
+
     const boardContens = async () => {
       try {
         const res = await axios.get(
@@ -101,7 +103,7 @@ const BoardView = () => {
       }
     };
     boardContens();
-  }, []);
+ }, []);
 
   return (
     <div>
@@ -158,12 +160,17 @@ const BoardView = () => {
               </Button>
               <span className="ml-44">조회수 : {boardDetail.view}</span>
             </div>
+
             <Comment seq={seq} />
+
             <input
               onChange={(e) => setContent(e.target.value)}
               placeholder="댓글을 써주세요"
             />
-            <button onClick={commentWrite}>댓글쓰기</button>
+            <button onClick={commentWrite} className="ml-20">
+              댓글쓰기
+            </button>
+            <Comment seq={seq} />
           </div>
         </div>
       </css.View>

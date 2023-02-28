@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { clearUser, loginUser } from "../../reducer/userSlice";
 import { type } from "@testing-library/user-event/dist/type";
-// 회원테스트 정보 : aaa1@aaa.net    QWERt12!
+// 회원테스트 정보 : aaa8@aaa.net    QWERt12!
 const MyPage = () => {
   // 정보를 redux 에서 참조할 때 사용 코드
   const user = useSelector((state) => state.user);
@@ -38,7 +38,7 @@ const MyPage = () => {
     // console.log("user: ", user);
     // console.log("user.miSeq: ", user.miSeq);
     let body = {
-      miTargetAmount: don,
+      miTargetAmount: don.split(",").reduce((curr, acc) => curr + acc, ""),
     };
     axios
       .post(`http://192.168.0.151:9898/member/updatemoney/${user.miSeq}`, body)
@@ -180,7 +180,7 @@ const MyPage = () => {
 
         const userInfo = {
           miSeq: user.miSeq,
-          // 닌네임을 update 합니다.
+          // 닉네임을 update 합니다.
           miNickname: val.nickname,
           miEmail: user.miEmail,
           miTargetAmount: don,
@@ -197,10 +197,20 @@ const MyPage = () => {
       });
   };
 
-  function priceToString(price) {
-    if (price === undefined || price === null) return;
-    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  }
+  //input  comma
+  const inputPriceFormat = (str) => {
+    console.log("s", str);
+    const comma = (str) => {
+      str = String(str);
+      return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, "$1,");
+    };
+    const uncomma = (str) => {
+      str = String(str);
+      return str.replace(/[^\d]+/g, "");
+    };
+    return comma(uncomma(str));
+  };
+
   return (
     <div>
       <css.MyPageDiv>
@@ -223,7 +233,7 @@ const MyPage = () => {
                     type="text"
                     value={don}
                     required
-                    onChange={(e) => setDon(parseInt(e.target.value))}
+                    onChange={(e) => setDon(inputPriceFormat(e.target.value))}
                   />
                   <button type="submit" className="rewrite">
                     수 정
@@ -249,7 +259,12 @@ const MyPage = () => {
               placeholder="닉네임을 입력하세요."
               onChange={handleChange}
             />
+
             <span>{nickErr}</span>
+            <span className="err text-xs">{Err.nickname}</span>
+          </form>
+          <form onSubmit={handleSubmit}>
+
             <button
               type="submit"
               className="mb-[15px] w-[180px] h-[36px] text-xs font-medium"
