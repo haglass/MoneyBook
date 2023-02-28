@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-### 프로젝트 주제
+## 프로젝트 주제
 
 지출 가계부 개발
 
