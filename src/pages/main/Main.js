@@ -41,9 +41,22 @@ const Main = () => {
     if (price === undefined || price === null) return;
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
-
   return (
     <div>
+      <div className="absolute left-4 top-10">
+        <h1
+          className=" font-medium text-sub text-[17px] 
+         "
+        >
+          잘 살아보기
+        </h1>{" "}
+        <h1
+          className="font-bold text-main text-[30px] ml-3
+      "
+        >
+          나의 텅장
+        </h1>
+      </div>
       <span className="absolute font-medium text-main text-[24px] right-[162px] top-[230px]">
         남은 예산
       </span>
