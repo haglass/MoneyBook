@@ -1,3 +1,4 @@
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import * as css from "../../styles/Styles";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
@@ -10,14 +11,22 @@ const BoardWrite = () => {
   const user = useSelector((state) => state.user);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [imageList, setImageList] = useState([]);
-  const [showImages, setShowImages] = useState([]);
+  const [image, setImage] = useState([]);
   const navigate = useNavigate();
 
-  const deleteFileImage = (e) => {
-    URL.revokeObjectURL(showImages);
-    setShowImages([]);
-    setImageList([]);
+  console.log(image);
+  const saveFileImage = (e) => {
+    const nowSelectList = e.target.file;
+    const nowImageURLList = [...image];
+    for (let i = 0; i < nowSelectList.length; i += 1) {
+      const nowImageUrl = URL.createObjectURL(nowSelectList[i]);
+      nowImageURLList.push(nowImageUrl);
+    }
+    setImage(nowImageURLList);
+  };
+  const deleteFileImage = () => {
+    URL.revokeObjectURL(image);
+    setImage("");
   };
 
   const handleTitleChange = (event) => {
@@ -28,35 +37,16 @@ const BoardWrite = () => {
     setContent(event.target.value);
   };
 
-  const handleImageChange = (e) => {
-    setImageList([...imageList, ...e.target.files]);
+  const handleImageChange = (event) => {
+    setImage(event.target.files[0]);
   };
 
-  const handleAddImages = (e) => {
-    const imageLists = e.target.files;
-    let imageUrlLists = [...showImages];
-
-    for (let i = 0; i < imageLists.length; i++) {
-      const currentImageUrl = URL.createObjectURL(imageLists[i]);
-      imageUrlLists.push(currentImageUrl);
-    }
-
-    if (imageUrlLists.length > 10) {
-      imageUrlLists = imageUrlLists.slice(0, 10);
-    }
-
-    setShowImages(imageUrlLists);
-  };
-
-  // 글등록 기능
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
     formData.append("title", title);
     formData.append("detail", content);
-    imageList.forEach((image) => {
-      formData.append("img", image);
-    });
+    formData.append("img", image);
 
     try {
       const response = await axios.post(
@@ -69,8 +59,10 @@ const BoardWrite = () => {
         }
       );
       console.log(response);
+
       alert("게시글을 등록하였습니다.");
-      // navigate("/board"); // 나중에 살리기
+      // navigate("/board");
+      
     } catch (error) {
       console.log(error);
     }
@@ -111,21 +103,19 @@ const BoardWrite = () => {
                   type="file"
                   multiple="multiple"
                   accept="image/*"
-                  onChange={handleImageChange}
+                  onChange={(handleImageChange, saveFileImage)}
                   id="image"
                   name="image"
                 />
-                <button type="button" onClick={(e) => deleteFileImage()}>
-                  초기화
-                </button>
-                {showImages.map((image, id) => (
-                  <div key={id}>
-                    <img src={image} alt={`${image}-${id}`} />
-                  </div>
-                ))}
+                <button onClick={() => deleteFileImage()}>초기화</button>
+                {image && <img src={image} alt="preview-img" />}
               </div>
             </div>
-            <button type="submit" className="btsunmit">
+            <button
+              type="submit"
+              className="btsunmit"
+              // onClick={(e) => navigate("/board")}
+            >
               등록
             </button>
           </form>
