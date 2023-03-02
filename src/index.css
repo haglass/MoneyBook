@@ -22,4 +22,9 @@ img {
 }
 body {
   font-family: "Noto Sans KR", sans-serif;
+  background-image: url("../public/images/mockup.png");
+  background-repeat: no-repeat;
+  background-size: 66%;
+  background-position: 50% 46%;
+  margin-top: 20px;
 }
