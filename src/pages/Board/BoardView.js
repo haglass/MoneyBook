@@ -110,7 +110,7 @@ const BoardView = () => {
           <Link to={"/board"}>
             <MdOutlineKeyboardArrowLeft className="text-sub text-5xl font-bold" />
           </Link>
-          {/* <h1 className="text-xl font-bold text-main"></h1> */}
+          <h1 className="text-xl font-bold text-main">게시글</h1>
         </Header>
         <div className="view-inner">
           <p>{moment(boardDetail.regDt).format("YYYY-MM-DD")}</p>
@@ -160,14 +160,19 @@ const BoardView = () => {
             </div>
 
             <Comment seq={seq} />
-
-            <input
-              onChange={(e) => setContent(e.target.value)}
-              placeholder="댓글을 써주세요"
-            />
-            <button onClick={commentWrite} className="ml-20">
-              댓글쓰기
-            </button>
+            <div className="mt-5 py-3 border-t-[1px]">
+              <input
+                onChange={(e) => setContent(e.target.value)}
+                placeholder="댓글을 써주세요"
+                className="bg-[whitesmoke] pl-[5px] rounded-[15px] outline-none w-3/4"
+              />
+              <button
+                onClick={commentWrite}
+                className="ml-5 border border-main px-1 rounded-[15px]"
+              >
+                댓글쓰기
+              </button>
+            </div>
           </div>
         </div>
       </css.View>

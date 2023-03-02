@@ -69,6 +69,7 @@ const BoardWrite = () => {
         }
       );
       console.log(response);
+      alert("게시글을 등록하였습니다.");
       // navigate("/board"); // 나중에 살리기
     } catch (error) {
       console.log(error);
