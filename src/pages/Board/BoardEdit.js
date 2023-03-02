@@ -13,20 +13,19 @@ const BoardEdit = () => {
   const location = useLocation();
   // 상세 게시글에서 받아온 게시글 정보
   const boardData = location.state;
-  console.log(boardData.boardDetail);
-  console.log(boardData.seq);
-  console.log(boardData.boardDetail.uri.map((item, i) => item.seq));
+  console.log(boardData.boardDetail.uri);
 
   const user = useSelector((state) => state.user);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [imageList, setImageList] = useState([]);
-  const [showImages, setShowImages] = useState([]);
+  const [image, setImage] = useState("");
 
+  const saveFileImage = (e) => {
+    setImage(e.target.files[0]);
+  };
   const deleteFileImage = () => {
-    URL.revokeObjectURL(showImages);
-    setShowImages([]);
-    setImageList([]);
+    URL.revokeObjectURL(image);
+    setImage("");
   };
 
   const handleTitleChange = (event) => {
@@ -37,40 +36,21 @@ const BoardEdit = () => {
     setContent(event.target.value);
   };
 
-  const handleImageChange = (e) => {
-    setImageList([...imageList, ...e.target.files]);
+  const handleImageChange = (event) => {
+    setImage(event.target.files[0]);
   };
 
-  const handleAddImages = (e) => {
-    const imageLists = e.target.files;
-    let imageUrlLists = [...showImages];
-
-    for (let i = 0; i < imageLists.length; i++) {
-      const currentImageUrl = URL.createObjectURL(imageLists[i]);
-      imageUrlLists.push(currentImageUrl);
-    }
-
-    if (imageUrlLists.length > 10) {
-      imageUrlLists = imageUrlLists.slice(0, 10);
-    }
-
-    setShowImages(imageUrlLists);
-  };
-
-  // 글등록 기능
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
     formData.append("title", title);
     formData.append("detail", content);
-    imageList.forEach((image) => {
-      formData.append("img", image);
-    });
-    formData.delete("imgseq");
+    formData.delete("imgSeq", 0);
+    formData.append("img", image);
 
     try {
       const response = await axios.post(
-        `http://192.168.0.151:9898/board/add/${user.miSeq}`,
+        `http://192.168.0.151:9898/board/update/${user.miSeq}}/${boardData.seq}`,
         formData,
         {
           headers: {
@@ -79,7 +59,6 @@ const BoardEdit = () => {
         }
       );
       console.log(response);
-      // navigate("/board"); // 나중에 살리기
     } catch (error) {
       console.log(error);
     }
@@ -101,8 +80,8 @@ const BoardEdit = () => {
               className="writetitle"
               id="title"
               name="title"
-              value={title}
               placeholder={boardData.boardDetail.title}
+              value={title}
               onChange={handleTitleChange}
             />
             <textarea
@@ -118,23 +97,20 @@ const BoardEdit = () => {
               <div className="filebox">
                 <input
                   type="file"
-                  multiple="multiple"
                   accept="image/*"
-                  onChange={(handleImageChange, handleAddImages)}
+                  onChange={(handleImageChange, saveFileImage)}
                   id="image"
                   name="image"
                 />
-                <button type="button" onClick={() => deleteFileImage()}>
-                  초기화
-                </button>
-                {showImages.map((image, id) => (
-                  <div key={id}>
-                    <img src={image} alt={`${image}-${id}`} />
-                  </div>
-                ))}
+                <button onClick={() => deleteFileImage()}>초기화</button>
+                {image && <img src={image} alt="preview-img" />}
               </div>
             </div>
-            <button type="submit" className="btsunmit">
+            <button
+              type="submit"
+              className="btsunmit"
+              onClick={(e) => Navigate("/board")}
+            >
               등록
             </button>
           </form>
