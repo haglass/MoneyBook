@@ -23,7 +23,7 @@ const BoardEdit = () => {
   const [imageList, setImageList] = useState([]);
   const [showImages, setShowImages] = useState([]);
 
-  const deleteFileImage = () => {
+  const deleteFileImage = (e) => {
     URL.revokeObjectURL(showImages);
     setShowImages([]);
     setImageList([]);
@@ -124,7 +124,7 @@ const BoardEdit = () => {
                   id="image"
                   name="image"
                 />
-                <button type="button" onClick={() => deleteFileImage()}>
+                <button type="button" onClick={(e) => deleteFileImage()}>
                   초기화
                 </button>
                 {showImages.map((image, id) => (

@@ -8,6 +8,8 @@ import axios from "axios";
 const ChartYear = () => {
   const user = useSelector((state) => state.user);
   const [year, setYear] = useState([]);
+  const [per, setPer] = useState("");
+  const [minus, setMinus] = useState("");
 
   const yearData = () => {
     axios
@@ -20,13 +22,27 @@ const ChartYear = () => {
           const { year, ...rest } = obj;
           return rest;
         });
+        // (14000 - 2000) / 2000 x 100 = 600
 
-        let one = Object.values(newData[0]).reduce((acc, curr) => acc + curr);
-        console.log(one);
-        let two = Object.values(newData[1]).reduce((acc, curr) => acc + curr);
-        console.log(two);
-        let total = two + one;
-        console.log(total);
+        const lastYear = Object.values(newData[0]).reduce(
+          (acc, curr) => acc + curr
+        );
+        const thisYear = Object.values(newData[1]).reduce(
+          (acc, curr) => acc + curr
+        );
+
+        function calculateGrowthRate(lastYear, thisYear) {
+          // 전년 대비 올해 증감율 계산
+          const growthRate = ((thisYear - lastYear) / lastYear) * 100;
+
+          // 소수점 두 자리까지만 반환
+          return parseFloat(Math.round(growthRate));
+        }
+        const growthRate = calculateGrowthRate(lastYear, thisYear);
+        setPer(growthRate);
+        setMinus(thisYear - lastYear);
+        console.log(thisYear - lastYear);
+        console.log(growthRate);
       })
       .catch((err) => {
         console.log(err);
@@ -164,8 +180,9 @@ const ChartYear = () => {
         </div>
         <div className="my-20 text-center">
           <h1 className="text-sub text-2xl mb-2 font-bold">전년대비</h1>
-          <span className="text-main text-5xl  font-bold">70% 더</span>
+          <span className="text-main text-5xl  font-bold">{per}% 더</span>
           <p className="text-sub2 text-2xl mt-3 font-bold">사용 하였습니다!</p>
+          <span>{minus}</span>
         </div>
       </div>
     </div>
