@@ -43,19 +43,23 @@ const Main = () => {
   }
   return (
     <div>
-      <div className="absolute left-4 top-10">
+      
+      <div className="absolute left-4 top-2">
+      <img src="/images/money.png" alt="money" className="scale-[10%] absolute left-[35px] top-200 " />
         <h1
           className=" font-medium text-sub text-[17px] 
          "
         >
           잘 살아보기
         </h1>{" "}
+        
         <h1
           className="font-bold text-main text-[30px] ml-3
       "
         >
           나의 텅장
         </h1>
+        
       </div>
       <span className="absolute font-medium text-main text-[24px] right-[162px] top-[230px]">
         남은 예산
