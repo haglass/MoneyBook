@@ -8,12 +8,10 @@ import { useEffect } from "react";
 import axios from "axios";
 import Pagination from "react-js-pagination";
 import { useNavigate } from "react-router";
-import { useSelector } from "react-redux";
 
 // http://192.168.0.151:9898/swagger-ui/index.html#/
 
 const BoardList = ({ search, onChange }) => {
-  const user = useSelector((state) => state.user);
   const navigate = useNavigate();
   const [postlist, setpostList] = useState([]);
   const [data, setData] = useState([]);
@@ -22,11 +20,11 @@ const BoardList = ({ search, onChange }) => {
   const post = async () => {
     try {
       const res = await axios.get(
-        `http://192.168.0.151:9898/board/show/list/${user.miSeq}?page=${page}&size=8`
+        `http://192.168.0.151:9898/board/show/list/1?page=${page}&size=8`
       );
       setpostList(res.data.content);
       setData(res.data);
-      console.log(res.data);
+      // console.log(res.data.totalElements);
     } catch (err) {
       console.log(err);
     }

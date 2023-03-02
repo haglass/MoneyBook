@@ -83,13 +83,15 @@ const BoardView = () => {
         console.log(err);
       });
   };
+  const mounted = useRef(false);
 
   // 상세글 내용 저장
   const [boardDetail, setBoardDetail] = useState([]);
 
-  // console.log(boardDetail.uri && boardDetail.uri.map((item) => item.seq));
-  console.log(boardDetail);
+  console.log(boardDetail.uri && boardDetail.uri.map((item) => item.file));
+
   useEffect(() => {
+
     const boardContens = async () => {
       try {
         const res = await axios.get(
@@ -101,7 +103,7 @@ const BoardView = () => {
       }
     };
     boardContens();
-  }, []);
+ }, []);
 
   return (
     <div>
@@ -141,7 +143,7 @@ const BoardView = () => {
             </div>
             {boardDetail.uri &&
               boardDetail.uri.map((item, i) => (
-                <div key={item.seq}>
+                <div key={i}>
                   <img
                     src={`http://192.168.0.151:9898/images/${item.file}`}
                     alt="boardView"
@@ -168,6 +170,7 @@ const BoardView = () => {
             <button onClick={commentWrite} className="ml-20">
               댓글쓰기
             </button>
+            <Comment seq={seq} />
           </div>
         </div>
       </css.View>
