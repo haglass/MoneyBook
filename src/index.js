@@ -19,7 +19,7 @@ root.render(
   // Provider 필수 store={store}
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-      <App />
+      <App/>
     </PersistGate>
   </Provider>
 );
