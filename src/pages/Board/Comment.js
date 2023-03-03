@@ -16,6 +16,7 @@ const Comment = ({ seq }) => {
         });
         const result = rr.filter((value) => value.viewStatus === true);
         setComment(result);
+        boardComment();
       })
       .catch((err) => {
         console.log(err);
@@ -38,6 +39,7 @@ const Comment = ({ seq }) => {
         )
         .then((res) => {
           alert("삭제 되었습니다.");
+          boardComment();
         })
         .catch((err) => {
           console.log(err);
@@ -48,7 +50,6 @@ const Comment = ({ seq }) => {
     }
   };
 
-
   const [isEdit, setIsEdit] = useState(false);
   const onClickIsEdit = (event) => {
     console.log(event.target.id);
@@ -57,8 +58,6 @@ const Comment = ({ seq }) => {
     console.log(aaa);
     setIsEdit([...aaa]);
   };
-
- 
 
   return (
     <div>
