@@ -12,13 +12,14 @@ import { useSelector } from "react-redux";
 
 // http://192.168.0.151:9898/swagger-ui/index.html#/
 
-const BoardList = ({ search, onChange }) => {
+const BoardList = ({ searchWord }) => {
   const navigate = useNavigate();
   const [postlist, setpostList] = useState([]);
   const [data, setData] = useState([]);
   const [page, setPage] = useState(0);
   const user = useSelector((state) => state.user);
 
+  // 일반목록
   const post = async () => {
     try {
       const res = await axios.get(
@@ -32,6 +33,30 @@ const BoardList = ({ search, onChange }) => {
     }
   };
 
+  // 검색목록
+  const searchPost = async () => {
+    try {
+      const res = await axios.get(
+        `http://192.168.0.151:9898/board/search/list/${user.miSeq}?page=${page}&size=8&keyword=${searchWord}`
+      );
+      console.log("뭐지", res.data);
+      if (res.data) {
+        setpostList(res.data.content);
+        setData(res.data);
+      } else {
+        alert("자료가 없습니다.");
+      }
+      // console.log(res.data.totalElements);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    console.log(searchWord);
+    searchPost();
+  }, [searchWord]);
+
   const handlePageChange = (count) => {
     let tempPage = count - 1;
     if (tempPage < 0) {
@@ -42,10 +67,10 @@ const BoardList = ({ search, onChange }) => {
     // console.log(page);
   };
 
-  // useEffect(() => {
-  //   // console.log("변경 현재페이지: ", page);
-  //   post();
-  // }, [page]);
+  useEffect(() => {
+    // console.log("변경 현재페이지: ", page);
+    post();
+  }, [page]);
 
   return (
     <css.BoardList>

@@ -57,6 +57,7 @@ const MyPage = () => {
           miSnsType: user.miSnsType,
         };
         dispatch(loginUser(userInfo));
+        alert("수정 되었습니다.");
         navigate("/main");
       })
       .catch((err) => {
@@ -170,31 +171,37 @@ const MyPage = () => {
   };
 
   const [nickErr, setNickErr] = useState([]);
-  const nicknameEd = (e) => {
-    axios
-      .post(
-        `http://192.168.0.151:9898/member/update/nickname/${user.miSeq}`,
-        body
-      )
-      .then((res) => {
-        alert("수정되었습니다.");
 
-        const userInfo = {
-          miSeq: user.miSeq,
-          // 닉네임을 update 합니다.
-          miNickname: val.nickname,
-          miEmail: user.miEmail,
-          miTargetAmount: don,
-          miGen: user.miGen,
-          miStatus: user.miStatus,
-          miSnsType: user.miSnsType,
-        };
-        dispatch(loginUser(userInfo));
-      })
-      .catch((err) => {
-        console.log(err);
-        setNickErr(err.response.data.message);
-      });
+  const handleNickSubmit = (e) => {
+    e.preventDefault();
+    if (window.confirm("정말 수정하겠습니까?")) {
+      axios
+        .post(
+          `http://192.168.0.151:9898/member/update/nickname/${user.miSeq}`,
+          body
+        )
+        .then((res) => {
+          alert("수정 되었습니다.");
+
+          const userInfo = {
+            miSeq: user.miSeq,
+            // 닉네임을 update 합니다.
+            miNickname: val.nickname,
+            miEmail: user.miEmail,
+            miTargetAmount: don,
+            miGen: user.miGen,
+            miStatus: user.miStatus,
+            miSnsType: user.miSnsType,
+          };
+          dispatch(loginUser(userInfo));
+        })
+        .catch((err) => {
+          console.log(err);
+          setNickErr(err.response.data.message);
+        });
+    } else {
+      alert("취소 되었습니다");
+    }
   };
 
   //input  comma
@@ -241,7 +248,7 @@ const MyPage = () => {
             </form>
           </div>
 
-          <form className="flex flex-col mt-14">
+          <form className="flex flex-col mt-14" onSubmit={handleNickSubmit}>
             <input
               type="text"
               id="nickname"
@@ -249,14 +256,8 @@ const MyPage = () => {
               placeholder="닉네임을 입력하세요."
               onChange={handleChange}
             />
-            <Errspan>{Err.nickname}</Errspan>
-            <Button
-              type="submit"
-              onClick={(e) => {
-                nicknameEd();
-              }}
-              className="w-[40%] ml-[230px]"
-            >
+            <Errspan>{nickErr}</Errspan>
+            <Button type="submit" className="w-[40%] ml-[230px]">
               닉네임 수정
             </Button>
           </form>
