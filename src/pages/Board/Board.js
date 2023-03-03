@@ -7,7 +7,12 @@ import tw from "tailwind-styled-components";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { FaRegThumbsUp } from "react-icons/fa";
+import { FaRegComment } from "react-icons/fa";
+import moment from "moment/moment";
+import Pagination from "react-js-pagination";
 import BoardList from "./BoardList";
+
 const Board = (props) => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
@@ -18,36 +23,7 @@ const Board = (props) => {
   const [btState, setBtState] = useState(false);
   const [searchList, setSearchList] = useState([]);
   const [searchData, setSearchData] = useState([]);
-  const onChange = (e) => {
-    setSearch(e.target.value);
-  };
-  useEffect(() => {
-    if (search === "") {
-      axios
-        .get(
-          `http://192.168.0.151:9898/board/show/list/${user.miSeq}?page=${page}`
-        )
-        .then((res) => {
-          setpostList(res.data.content);
-          setData(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-      axios
-        .get(
-          `http://192.168.0.151:9898/board/search/list/${user.miSeq}?page=${page}&size=8&keyword=${search}`
-        )
-        .then((res) => {
-          setSearchList(res.data.content);
-          setSearchData(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  }, [search]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
@@ -62,15 +38,14 @@ const Board = (props) => {
         console.log(err);
       });
   };
-  // 페이지 체인지
-  const handlePageChange = (count) => {
-    let tempPage = count - 1;
-    if (tempPage < 0) {
-      tempPage = 0;
+
+  const [searchWord, setSearchWord] = useState("");
+  const handleKeyUp = (e) => {
+    // console.log(e.keyCode);
+    if (e.keyCode === 13) {
+      setSearchWord(search);
+
     }
-    // console.log(tempPage);
-    setPage(tempPage);
-    // console.log(page);
   };
   return (
     <div>
@@ -95,6 +70,7 @@ const Board = (props) => {
                 placeholder="검색"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
+                onKeyUp={handleKeyUp}
               />
               <button type="submit">
                 <BiSearchAlt
@@ -108,7 +84,7 @@ const Board = (props) => {
             </form>
           </div>
           {/* 보드리스트 */}
-          <BoardList />
+          <BoardList searchWord={searchWord} />
         </div>
       </css.BoardDiv>
     </div>
