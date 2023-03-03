@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import Pagination from "react-js-pagination";
 import { useNavigate } from "react-router";
+import { useSelector } from "react-redux";
 
 // http://192.168.0.151:9898/swagger-ui/index.html#/
 
@@ -16,11 +17,12 @@ const BoardList = ({ search, onChange }) => {
   const [postlist, setpostList] = useState([]);
   const [data, setData] = useState([]);
   const [page, setPage] = useState(0);
+  const user = useSelector((state) => state.user);
 
   const post = async () => {
     try {
       const res = await axios.get(
-        `http://192.168.0.151:9898/board/show/list/1?page=${page}&size=8`
+        `http://192.168.0.151:9898/board/show/list/${user.miSeq}?page=${page}&size=8`
       );
       setpostList(res.data.content);
       setData(res.data);
@@ -40,22 +42,15 @@ const BoardList = ({ search, onChange }) => {
     // console.log(page);
   };
 
-  useEffect(() => {
-    // console.log("변경 현재페이지: ", page);
-    post();
-  }, [page]);
-
-  const filterPost = postlist.filter((item) => {
-    return item.title
-      .replace(" ", "")
-      .toLocaleLowerCase()
-      .includes(search.toLocaleLowerCase());
-  });
+  // useEffect(() => {
+  //   // console.log("변경 현재페이지: ", page);
+  //   post();
+  // }, [page]);
 
   return (
     <css.BoardList>
       <div className="postList">
-        {filterPost.map((item, index) => (
+        {postlist.map((item, index) => (
           <div
             className="post"
             key={index}
