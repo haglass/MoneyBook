@@ -8,31 +8,41 @@ import axios from "axios";
 const ChartYear = () => {
   const user = useSelector((state) => state.user);
   const [year, setYear] = useState([]);
-
+  const [per, setPer] = useState("");
+  const [minus, setMinus] = useState("");
   const yearData = () => {
     axios
       .get(`http://192.168.0.151:9898/expenses/year/${user.miSeq}`)
       .then((res) => {
         setYear(res.data);
         // console.log(res.data);
-
         const newData = res.data.map((obj) => {
           const { year, ...rest } = obj;
           return rest;
         });
-
-        let one = Object.values(newData[0]).reduce((acc, curr) => acc + curr);
-        console.log(one);
-        let two = Object.values(newData[1]).reduce((acc, curr) => acc + curr);
-        console.log(two);
-        let total = two + one;
-        console.log(total);
+        // (14000 - 2000) / 2000 x 100 = 600
+        const lastYear = Object.values(newData[0]).reduce(
+          (acc, curr) => acc + curr
+        );
+        const thisYear = Object.values(newData[1]).reduce(
+          (acc, curr) => acc + curr
+        );
+        function calculateGrowthRate(lastYear, thisYear) {
+          // 전년 대비 올해 증감율 계산
+          const growthRate = ((thisYear - lastYear) / lastYear) * 100;
+          // 소수점 두 자리까지만 반환
+          return parseFloat(Math.round(growthRate));
+        }
+        const growthRate = calculateGrowthRate(lastYear, thisYear);
+        setPer(growthRate);
+        setMinus(thisYear - lastYear);
+        console.log(thisYear - lastYear);
+        console.log(growthRate);
       })
       .catch((err) => {
         console.log(err);
       });
   };
-
   const chartData = year.map((item) => {
     let yData = {
       year: item.year,
@@ -51,11 +61,9 @@ const ChartYear = () => {
     };
     return yData;
   });
-
   useEffect(() => {
     yearData();
   }, []);
-
   return (
     <div>
       <Header>
@@ -94,7 +102,7 @@ const ChartYear = () => {
                 id: "dots",
                 type: "patternDots",
                 background: "inherit",
-                color: "#38bcb2",
+                color: "#38BCB2",
                 size: 4,
                 padding: 1,
                 stagger: true,
@@ -103,7 +111,7 @@ const ChartYear = () => {
                 id: "lines",
                 type: "patternLines",
                 background: "inherit",
-                color: "#eed312",
+                color: "#EED312",
                 rotation: -45,
                 lineWidth: 6,
                 spacing: 10,
@@ -164,7 +172,7 @@ const ChartYear = () => {
         </div>
         <div className="my-20 text-center">
           <h1 className="text-sub text-2xl mb-2 font-bold">전년대비</h1>
-          <span className="text-main text-5xl  font-bold">70% 더</span>
+          <span className="text-main text-5xl  font-bold">{per}%</span>
           <p className="text-sub2 text-2xl mt-3 font-bold">사용 하였습니다!</p>
         </div>
       </div>
@@ -177,5 +185,4 @@ items-center
 w-full
 h-20
 `;
-
 export default ChartYear;

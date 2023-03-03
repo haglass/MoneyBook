@@ -8,27 +8,18 @@ import * as css from "../../styles/Styles";
 // tailwind
 import tw from "tailwind-styled-components";
 
-// ReactIcon
-import { FaCapsules } from "react-icons/fa";
-import { FaCarSide } from "react-icons/fa";
-import { FaTicketAlt } from "react-icons/fa";
-import { FaShoppingBag } from "react-icons/fa";
-import { FaUtensils } from "react-icons/fa";
-import { FaThumbtack } from "react-icons/fa";
-import { FaCoins } from "react-icons/fa";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { BiCategory } from "react-icons/bi";
 
 const ChartCate = () => {
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
   const [category, setCategory] = useState([]);
-  
+
   const cateData = async () => {
     try {
       const res = await axios.get(
-        `http://192.168.0.151:9898/expenses/cate/${user.miSeq}`
+        `http://192.168.0.151:9898/expenses/cate/${user.miSeq}?year=2023&month=02`
       );
       setCategory(res.data);
       console.log(res.data);

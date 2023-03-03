@@ -91,7 +91,6 @@ const BoardView = () => {
   console.log(boardDetail.uri && boardDetail.uri.map((item) => item.file));
 
   useEffect(() => {
-
     const boardContens = async () => {
       try {
         const res = await axios.get(
@@ -103,7 +102,7 @@ const BoardView = () => {
       }
     };
     boardContens();
- }, []);
+}, []);
 
   return (
     <div>
