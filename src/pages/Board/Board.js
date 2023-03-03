@@ -24,34 +24,6 @@ const Board = (props) => {
   const [searchList, setSearchList] = useState([]);
   const [searchData, setSearchData] = useState([]);
 
-  // useEffect(() => {
-  //   if (search === "") {
-  //     axios
-  //       .get(
-  //         `http://192.168.0.151:9898/board/show/list/${user.miSeq}?page=${page}`
-  //       )
-  //       .then((res) => {
-  //         setpostList(res.data.content);
-  //         setData(res.data);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   } else {
-  //     axios
-  //       .get(
-  //         `http://192.168.0.151:9898/board/search/list/${user.miSeq}?page=${page}&size=8&keyword=${search}`
-  //       )
-  //       .then((res) => {
-  //         setSearchList(res.data.content);
-  //         setSearchData(res.data);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   }
-  // }, [search]);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
@@ -66,11 +38,13 @@ const Board = (props) => {
         console.log(err);
       });
   };
+
   const [searchWord, setSearchWord] = useState("");
   const handleKeyUp = (e) => {
     // console.log(e.keyCode);
     if (e.keyCode === 13) {
       setSearchWord(search);
+
     }
   };
   return (
@@ -116,12 +90,10 @@ const Board = (props) => {
     </div>
   );
 };
-
 const Header = tw.div`
 flex
 items-center
 w-full
 h-20
 `;
-
 export default Board;

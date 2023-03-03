@@ -9,7 +9,6 @@ import { useSelector } from "react-redux";
 // 정보를 redux 에서 업데이트 할 때 사용 코드
 import { useDispatch } from "react-redux";
 import { clearUser, loginUser } from "../../reducer/userSlice";
-import { type } from "@testing-library/user-event/dist/type";
 // 회원테스트 정보 : aaa8@aaa.net    QWERt12!
 const MyPage = () => {
   // 정보를 redux 에서 참조할 때 사용 코드
@@ -17,23 +16,19 @@ const MyPage = () => {
   // console.log(user.miSeq);
   // 정보를 redux 에서 업데이트 할 때 사용 코드
   const dispatch = useDispatch();
-
   let initVal = {
     password: "",
     password2: "",
     nowPassword: "",
     nickname: "",
   };
-
   const [val, setVal] = useState(initVal);
-
   let body = {
     miPwd: val.nowPassword,
     miUpdatePwd: val.password,
     miCheckUpdatePwd: val.password2,
     miNickname: val.nickname,
   };
-
   // 설정 금액
   const cash = () => {
     // console.log("예산: ", don);
@@ -68,7 +63,6 @@ const MyPage = () => {
   useEffect(() => {
     setDon(user.miTargetAmount);
   }, []);
-
   // 예산을 수정시 항목 체크
   const handleDonSubmit = (e) => {
     e.preventDefault();
@@ -86,7 +80,6 @@ const MyPage = () => {
   const [pwErr, setPwErr] = useState([]);
   const pwEd = (e) => {
     console.log("마지막 처리");
-
     axios
       .post(`http://192.168.0.151:9898/member/update/pwd/${user.miSeq}`, body)
       .then((res) => {
@@ -102,11 +95,9 @@ const MyPage = () => {
   const errCheck = useRef(true);
   const check = (_val) => {
     const errs = {};
-
     if (!_val.nowPassword) {
       errs.nowPassword = "현재 비밀번호를 입력하세요.";
     }
-
     // 비밀번호
     const eng = /[a-zA-Z]/;
     const num = /[0-9]/;
@@ -127,7 +118,6 @@ const MyPage = () => {
     if (_val.password !== _val.password2 || !_val.password2) {
       errs.password2 = "비밀번호를 동일하게 입력해주세요.";
     }
-
     if (Object.keys(Err).length === 0) {
       errCheck.current = false;
     } else {
@@ -135,7 +125,6 @@ const MyPage = () => {
     }
     return errs;
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setErr(check(val));
@@ -145,7 +134,6 @@ const MyPage = () => {
       pwEd();
     }
   };
-
   // 디버깅용
   useEffect(() => {
     console.log(val);
@@ -169,7 +157,6 @@ const MyPage = () => {
       alert("취소 되었습니다.");
     }
   };
-
   const [nickErr, setNickErr] = useState([]);
 
   const handleNickSubmit = (e) => {
@@ -181,8 +168,8 @@ const MyPage = () => {
           body
         )
         .then((res) => {
-          alert("수정 되었습니다.");
-
+          alert("수정되었습니다.");
+          
           const userInfo = {
             miSeq: user.miSeq,
             // 닉네임을 update 합니다.
@@ -203,7 +190,6 @@ const MyPage = () => {
       alert("취소 되었습니다");
     }
   };
-
   //input  comma
   const inputPriceFormat = (str) => {
     console.log("s", str);
@@ -217,7 +203,6 @@ const MyPage = () => {
     };
     return comma(uncomma(str));
   };
-
   return (
     <div>
       <css.MyPageDiv>
@@ -256,12 +241,13 @@ const MyPage = () => {
               placeholder="닉네임을 입력하세요."
               onChange={handleChange}
             />
+
             <Errspan>{nickErr}</Errspan>
+
             <Button type="submit" className="w-[40%] ml-[230px]">
               닉네임 수정
             </Button>
           </form>
-
           <form onSubmit={handleSubmit} className="flex flex-col mt-14">
             <input
               type="password"
@@ -291,7 +277,6 @@ const MyPage = () => {
               비밀번호 수정
             </Button>
           </form>
-
           <div className="flex justify-between mt-12">
             <Button
               type="button"
@@ -323,14 +308,12 @@ items-center
 w-full
 h-20
 `;
-
 const Errspan = tw.span`
 block
 ml-[10px]
 mt-[5px]
 text-red-500
 `;
-
 const Button = tw.button`
 block
 py-[5px]

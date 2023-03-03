@@ -29,7 +29,7 @@ const ChartYear = () => {
         const thisYear = Object.values(newData[1]).reduce(
           (acc, curr) => acc + curr
         );
-        
+
         function calculateGrowthRate(lastYear, thisYear) {
           // 전년 대비 올해 증감율 계산
           const growthRate = ((thisYear - lastYear) / lastYear) * 100;
@@ -174,7 +174,7 @@ const ChartYear = () => {
           />
         </div>
         <div className="my-20 text-center">
-          <h1 className="text-sub text-2xl mb-2 font-bold">전년대비</h1>
+          <h1 className="text-sub text-2xl mb-2 font-bold">전년 기준</h1>
           <span className="text-main text-5xl  font-bold">{per}%</span>
           <p className="text-sub2 text-2xl mt-3 font-bold">사용 하였습니다!</p>
         </div>

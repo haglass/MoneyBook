@@ -9,10 +9,10 @@ import axios from "axios";
 import Pagination from "react-js-pagination";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
-
 // http://192.168.0.151:9898/swagger-ui/index.html#/
 
 const BoardList = ({ searchWord }) => {
+
   const navigate = useNavigate();
   const [postlist, setpostList] = useState([]);
   const [data, setData] = useState([]);
@@ -32,7 +32,6 @@ const BoardList = ({ searchWord }) => {
       console.log(err);
     }
   };
-
   // 검색목록
   const searchPost = async () => {
     try {
@@ -111,5 +110,4 @@ const BoardList = ({ searchWord }) => {
     </css.BoardList>
   );
 };
-
 export default BoardList;
