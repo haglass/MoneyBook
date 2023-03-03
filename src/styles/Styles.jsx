@@ -363,7 +363,7 @@ export const write = styled.div`
     .btsunmit {
       position: absolute;
       bottom: 170px;
-      right: 50px;
+      right: 22px;
       padding: 5px 10px;
       border: 1px solid #ad5299;
       border-radius: 15px;

@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import * as css from "../../styles/Styles";
-import { FaCapsules } from "react-icons/fa";
-
 import tw from "tailwind-styled-components";
 import axios from "axios";
 import { useSelector } from "react-redux";
@@ -11,10 +9,8 @@ import { useSelector } from "react-redux";
 const MainDetail = () => {
   const user = useSelector((state) => state.user);
   const [month, setMonth] = useState([]);
-  const [top, setTop] = useState([]);
   const [total, setTotal] = useState([]);
 
-  
   const monthList = async () => {
     try {
       const res = await axios.get(

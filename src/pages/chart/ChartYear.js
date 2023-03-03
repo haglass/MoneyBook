@@ -17,7 +17,6 @@ const ChartYear = () => {
       .then((res) => {
         setYear(res.data);
         // console.log(res.data);
-
         const newData = res.data.map((obj) => {
           const { year, ...rest } = obj;
           return rest;
@@ -30,11 +29,10 @@ const ChartYear = () => {
         const thisYear = Object.values(newData[1]).reduce(
           (acc, curr) => acc + curr
         );
-
+        
         function calculateGrowthRate(lastYear, thisYear) {
           // 전년 대비 올해 증감율 계산
           const growthRate = ((thisYear - lastYear) / lastYear) * 100;
-
           // 소수점 두 자리까지만 반환
           return parseFloat(Math.round(growthRate));
         }
@@ -48,7 +46,6 @@ const ChartYear = () => {
         console.log(err);
       });
   };
-
   const chartData = year.map((item) => {
     let yData = {
       year: item.year,
@@ -67,11 +64,9 @@ const ChartYear = () => {
     };
     return yData;
   });
-
   useEffect(() => {
     yearData();
   }, []);
-
   return (
     <div>
       <Header>
@@ -110,7 +105,7 @@ const ChartYear = () => {
                 id: "dots",
                 type: "patternDots",
                 background: "inherit",
-                color: "#38bcb2",
+                color: "#38BCB2",
                 size: 4,
                 padding: 1,
                 stagger: true,
@@ -119,7 +114,7 @@ const ChartYear = () => {
                 id: "lines",
                 type: "patternLines",
                 background: "inherit",
-                color: "#eed312",
+                color: "#EED312",
                 rotation: -45,
                 lineWidth: 6,
                 spacing: 10,
@@ -193,5 +188,4 @@ items-center
 w-full
 h-20
 `;
-
 export default ChartYear;

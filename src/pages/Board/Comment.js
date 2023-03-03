@@ -48,6 +48,7 @@ const Comment = ({ seq }) => {
     }
   };
 
+
   const [isEdit, setIsEdit] = useState(false);
   const onClickIsEdit = (event) => {
     console.log(event.target.id);

@@ -47,7 +47,6 @@ const ChartMonth = () => {
   const chartm = async () => {
     try {
       const res = await axios.get(
-        // `http://192.168.0.151:9898/expenses/month/${user.miSeq}`
         `http://192.168.0.151:9898/expenses/month/${user.miSeq}?year=2023`
       );
       setMonth(res.data);
