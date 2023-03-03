@@ -35,7 +35,6 @@ const BoardWrite = () => {
   const handleAddImages = (e) => {
     const imageLists = e.target.files;
     let imageUrlLists = [...showImages];
-
     for (let i = 0; i < imageLists.length; i++) {
       const currentImageUrl = URL.createObjectURL(imageLists[i]);
       imageUrlLists.push(currentImageUrl);
@@ -69,7 +68,7 @@ const BoardWrite = () => {
         }
       );
       console.log(response);
-      navigate("/board"); // 나중에 살리기
+      navigate("/board");
     } catch (error) {
       console.log(error);
     }

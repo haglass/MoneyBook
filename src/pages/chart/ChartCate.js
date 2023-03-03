@@ -19,7 +19,7 @@ const ChartCate = () => {
   const cateData = async () => {
     try {
       const res = await axios.get(
-        `http://192.168.0.151:9898/expenses/cate/${user.miSeq}?year=2023&month=02`
+        `http://192.168.0.151:9898/expenses/cate/${user.miSeq}?year=2023&month=03`
       );
       setCategory(res.data);
       console.log(res.data);

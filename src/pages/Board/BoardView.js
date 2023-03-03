@@ -143,7 +143,7 @@ const BoardView = () => {
                   <img
                     src={`http://192.168.0.151:9898/images/${item.file}`}
                     alt="boardView"
-                    className="w-full h-40 align-middle object-cover mt-5"
+                    className="w-full h-60 align-middle object-contain mt-5"
                   />
                 </div>
               ))}

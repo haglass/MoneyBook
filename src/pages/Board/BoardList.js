@@ -9,16 +9,13 @@ import axios from "axios";
 import Pagination from "react-js-pagination";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
-
 // http://192.168.0.151:9898/swagger-ui/index.html#/
-
 const BoardList = ({ search, onChange }) => {
   const navigate = useNavigate();
   const [postlist, setpostList] = useState([]);
   const [data, setData] = useState([]);
   const [page, setPage] = useState(0);
   const user = useSelector((state) => state.user);
-
   const post = async () => {
     try {
       const res = await axios.get(
@@ -31,7 +28,6 @@ const BoardList = ({ search, onChange }) => {
       console.log(err);
     }
   };
-
   const handlePageChange = (count) => {
     let tempPage = count - 1;
     if (tempPage < 0) {
@@ -41,12 +37,10 @@ const BoardList = ({ search, onChange }) => {
     setPage(tempPage);
     // console.log(page);
   };
-
-  // useEffect(() => {
-  //   // console.log("변경 현재페이지: ", page);
-  //   post();
-  // }, [page]);
-
+  useEffect(() => {
+    // console.log("변경 현재페이지: ", page);
+    post();
+  }, [page]);
   return (
     <css.BoardList>
       <div className="postList">
@@ -86,5 +80,4 @@ const BoardList = ({ search, onChange }) => {
     </css.BoardList>
   );
 };
-
 export default BoardList;

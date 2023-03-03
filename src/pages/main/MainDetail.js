@@ -14,7 +14,7 @@ const MainDetail = () => {
   const monthList = async () => {
     try {
       const res = await axios.get(
-        `http://192.168.0.151:9898/expenses/monthList/${user.miSeq}?year=2023&month=02`
+        `http://192.168.0.151:9898/expenses/monthList/${user.miSeq}?year=2023&month=03`
       );
       setMonth(res.data);
       setTotal(res.data.map((item) => item.edAmount));
