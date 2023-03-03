@@ -6,28 +6,64 @@ import tw from "tailwind-styled-components";
 
 const Comment = ({ seq }) => {
   // 게시글 댓글 데이터 호출
+  const [comment, setComment] = useState([]);
   const boardComment = () => {
     axios
       .get(`http://192.168.0.151:9898/comment/list/${seq}`)
       .then((res) => {
-        setComment(res.data);
-        // console.log(res.data);
+        const rr = res.data.map((item) => {
+          return item;
+        });
+        const result = rr.filter((value) => value.viewStatus === true);
+        setComment(result);
       })
       .catch((err) => {
         console.log(err);
       });
   };
-  const [comment, setComment] = useState([]);
+
   useEffect(() => {
     boardComment();
   }, []);
 
+  const [commentSeq, setCommentSeq] = useState("");
+  //댓글 삭제
+  const user = useSelector((state) => state.user);
 
+  const commentDelete = (ciSeq) => {
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+      axios
+        .delete(
+          `http://192.168.0.151:9898/comment/delete/${user.miSeq}/${ciSeq}`
+        )
+        .then((res) => {
+          alert("삭제 되었습니다.");
+        })
+        .catch((err) => {
+          console.log(err);
+          alert(err.response.data.message);
+        });
+    } else {
+      alert("취소 되었습니다.");
+    }
+  };
+
+
+  const [isEdit, setIsEdit] = useState(false);
+  const onClickIsEdit = (event) => {
+    console.log(event.target.id);
+    const aaa = isEdit;
+    aaa[event.target.id] = true;
+    console.log(aaa);
+    setIsEdit([...aaa]);
+  };
+
+ 
 
   return (
     <div>
       {comment.map((item, index) => (
-        <div className="" key={index}>
+        <div key={index}>
           <div
             className="mt-4 flex justify-between mb-2"
             key={item.ciSeq}
@@ -40,8 +76,20 @@ const Comment = ({ seq }) => {
               </span>
             </div>
             <div className="flex">
-              <Button className="text-sm">수정</Button>
-              <Button className="ml-2 text-sm">
+              <Button
+                className="text-sm"
+                onClick={(e) => {
+                  onClickIsEdit();
+                }}
+              >
+                수정
+              </Button>
+              <Button
+                className="ml-2 text-sm"
+                onClick={(e) => {
+                  commentDelete(item.ciSeq);
+                }}
+              >
                 삭제
               </Button>
             </div>
@@ -53,7 +101,7 @@ const Comment = ({ seq }) => {
   );
 };
 
-const Button = tw.div`
+const Button = tw.button`
 border
 border-main
 rounded-xl

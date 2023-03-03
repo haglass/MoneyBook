@@ -83,12 +83,9 @@ const BoardView = () => {
         console.log(err);
       });
   };
-  const mounted = useRef(false);
 
   // 상세글 내용 저장
   const [boardDetail, setBoardDetail] = useState([]);
-
-  console.log(boardDetail.uri && boardDetail.uri.map((item) => item.file));
 
   useEffect(() => {
     const boardContens = async () => {
@@ -102,7 +99,7 @@ const BoardView = () => {
       }
     };
     boardContens();
-}, []);
+  }, []);
 
   return (
     <div>
@@ -189,7 +186,7 @@ w-full
 h-20
 `;
 
-const Button = tw.div`
+const Button = tw.button`
 border
 border-main
 rounded-xl

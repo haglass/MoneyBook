@@ -24,7 +24,7 @@ const MyPage = () => {
     nowPassword: "",
     nickname: "",
   };
-  
+
   const [val, setVal] = useState(initVal);
 
   let body = {
@@ -81,7 +81,7 @@ const MyPage = () => {
     const { name, value } = e.target;
     setVal({ ...val, [name]: value });
   };
-
+  console.log(val);
   const [pwErr, setPwErr] = useState([]);
   const pwEd = (e) => {
     console.log("마지막 처리");

@@ -10,6 +10,7 @@ const ChartYear = () => {
   const [year, setYear] = useState([]);
   const [per, setPer] = useState("");
   const [minus, setMinus] = useState("");
+
   const yearData = () => {
     axios
       .get(`http://192.168.0.151:9898/expenses/year/${user.miSeq}`)
@@ -21,12 +22,14 @@ const ChartYear = () => {
           return rest;
         });
         // (14000 - 2000) / 2000 x 100 = 600
+
         const lastYear = Object.values(newData[0]).reduce(
           (acc, curr) => acc + curr
         );
         const thisYear = Object.values(newData[1]).reduce(
           (acc, curr) => acc + curr
         );
+        
         function calculateGrowthRate(lastYear, thisYear) {
           // 전년 대비 올해 증감율 계산
           const growthRate = ((thisYear - lastYear) / lastYear) * 100;
