@@ -30,6 +30,7 @@ const Join = () => {
     setVal({ ...val, [name]: value });
     setSelected(e.target.value);
   };
+  const [joinErr, setJoinErr] = useState("");
 
   const handleChange = (e) => {
     // console.log(e.target); // tag = {name:"userid", value:"123"}
@@ -57,6 +58,8 @@ const Join = () => {
       })
       .catch((err) => {
         console.log(err);
+        setJoinErr(err.response.data.message);
+
         // setBtFlag(false);
       });
   };
@@ -66,7 +69,7 @@ const Join = () => {
     const errs = {};
     // 아이디 체크
     if (_val.nickName.length < 3) {
-      errs.nickName = "아이디를 3글자 이상 입력해주세요.";
+      errs.nickName = "닉네임를 3글자 이상 입력해주세요.";
     }
     // 이메일 체크/이메일 정규표현식 이용한 처리
     if (_val.email.length < 8 || !/@/.test(_val.email)) {
@@ -153,7 +156,10 @@ const Join = () => {
               placeholder="이메일 주소를 입력해주세요."
               onChange={handleChange}
             />
-            <span className="err text-xs">{Err.email}</span>
+            <span className="err text-xs">
+              {Err.email}
+              {joinErr}
+            </span>
             <input
               required
               type="password"
