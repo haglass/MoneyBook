@@ -5,12 +5,10 @@ import * as css from "../../styles/Styles";
 import tw from "tailwind-styled-components";
 import axios from "axios";
 import { useSelector } from "react-redux";
-
 const MainDetail = () => {
   const user = useSelector((state) => state.user);
   const [month, setMonth] = useState([]);
   const [total, setTotal] = useState([]);
-
   const monthList = async () => {
     try {
       const res = await axios.get(
@@ -22,22 +20,34 @@ const MainDetail = () => {
       console.log(err);
     }
   };
-
   const initialValue = 0;
   const sumWithInitial = total.reduce(
     (accumulator, currentValue) => accumulator + currentValue,
     initialValue
   );
 
+  const deleteBt = (edSeq) => {
+    axios
+      .delete(
+        `http://192.168.0.151:9898/expenses/delete/${user.miSeq}/${edSeq}`
+      )
+      .then((res) => {
+        console.log(res.data);
+        alert(res.data.message);
+        monthList();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     monthList();
   }, []);
-
   function priceToString(price) {
     if (price === undefined || price === null) return;
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
-
   return (
     <div>
       <css.Detaillist>
@@ -65,14 +75,26 @@ const MainDetail = () => {
                   {item.edDate}
                 </span>
                 <div className="flex justify-between mb-3">
-                  <span className="text-main text-m font-bold ">
-                    {item.edCateName}{" "}
-                    <span className="text-sub font-medium">{item.edTitle}</span>
-                  </span>
-                  <span className="text-m   text-sub font-bold">
-                    {" "}
-                    -{priceToString(item.edAmount)}원
-                  </span>
+                  <div className="flex justify-between w-[90%]">
+                    <span className="text-main text-m font-bold ">
+                      {item.edCateName}{" "}
+                      <span className="text-sub font-medium">
+                        {item.edTitle}
+                      </span>
+                    </span>
+                    <span className="text-m   text-sub font-bold">
+                      {" "}
+                      -{priceToString(item.edAmount)}원
+                    </span>
+                  </div>
+                  <button
+                    className="text-sub text-sm"
+                    onClick={(e) => {
+                      deleteBt(item.edSeq);
+                    }}
+                  >
+                    X
+                  </button>
                 </div>
               </div>
             ))}
@@ -88,7 +110,6 @@ items-center
 w-full
 h-20
 `;
-
 const MainBt = tw.button`
 bg-main
 text-white
@@ -98,7 +119,5 @@ rounded-xl
 w-20
 h-10
 py-2
-
 `;
-
 export default MainDetail;

@@ -34,6 +34,7 @@ const BoardView = () => {
           alert(err.response.data.message);
         });
       navigate("/board");
+      boardContens();
     } else {
       alert("취소 되었습니다.");
     }
@@ -83,21 +84,20 @@ const BoardView = () => {
         console.log(err);
       });
   };
-
+  const boardContens = async () => {
+    try {
+      const res = await axios.get(
+        `http://192.168.0.151:9898/board/show/detail/${user.miSeq}/${seq}`
+      );
+      setBoardDetail(res.data.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   // 상세글 내용 저장
   const [boardDetail, setBoardDetail] = useState([]);
 
   useEffect(() => {
-    const boardContens = async () => {
-      try {
-        const res = await axios.get(
-          `http://192.168.0.151:9898/board/show/detail/${user.miSeq}/${seq}`
-        );
-        setBoardDetail(res.data.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
     boardContens();
   }, []);
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import * as css from "../../styles/Styles";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
@@ -7,23 +7,14 @@ import tw from "tailwind-styled-components";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import { FaRegThumbsUp } from "react-icons/fa";
-import { FaRegComment } from "react-icons/fa";
-import moment from "moment/moment";
-import Pagination from "react-js-pagination";
 import BoardList from "./BoardList";
-
-const Board = (props) => {
+const Board = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
-  const [postlist, setpostList] = useState([]);
-  const [data, setData] = useState([]);
   const [page, setPage] = useState(0);
   const [search, setSearch] = useState("");
-  const [btState, setBtState] = useState(false);
   const [searchList, setSearchList] = useState([]);
   const [searchData, setSearchData] = useState([]);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
@@ -38,13 +29,11 @@ const Board = (props) => {
         console.log(err);
       });
   };
-
   const [searchWord, setSearchWord] = useState("");
   const handleKeyUp = (e) => {
     // console.log(e.keyCode);
     if (e.keyCode === 13) {
       setSearchWord(search);
-
     }
   };
   return (
@@ -76,9 +65,6 @@ const Board = (props) => {
                 <BiSearchAlt
                   className="text-sub text-3xl font-bold "
                   type="submit"
-                  onClick={(e) => {
-                    setBtState(true);
-                  }}
                 />
               </button>
             </form>
